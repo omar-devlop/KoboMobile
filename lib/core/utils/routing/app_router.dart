@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
+import 'package:kobo/logic/cubits/form_assets/form_asset_cubit.dart';
 import 'package:kobo/logic/cubits/form_content/form_content_cubit.dart';
 import 'package:kobo/logic/cubits/form_data/form_data_cubit.dart';
 import 'package:kobo/logic/cubits/kobo_forms/kobo_forms_cubit.dart';
 import 'package:kobo/presentation/screens/empty/empty_screen.dart';
-import 'package:kobo/presentation/screens/form/kobo_form_content_screen.dart';
-import 'package:kobo/presentation/screens/form/kobo_form_data_screen.dart';
-import 'package:kobo/presentation/screens/form/kobo_form_screen.dart';
+import 'package:kobo/presentation/screens/form/details/content_screen.dart';
+import 'package:kobo/presentation/screens/form/details/data_screen.dart';
+import 'package:kobo/presentation/screens/form/form_screen.dart';
+import 'package:kobo/presentation/screens/form/details/table_data_screen.dart';
 import 'package:kobo/presentation/screens/home_screen.dart';
 
 class AppRouter {
@@ -33,25 +35,42 @@ class AppRouter {
       case Routes.formScreen:
         KoboForm kForm = arguments as KoboForm;
         return MaterialPageRoute(
-          builder: (_) => KoboFormScreen(kForm: kForm),
+          builder: (_) => FormScreen(kForm: kForm),
         );
 
-      case Routes.formDataScreen:
+      case Routes.dataScreen:
         KoboForm kForm = arguments as KoboForm;
 
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => FormDataCubit(kForm.uid),
-            child: KoboFormDataScreen(kForm: kForm),
+            child: DataScreen(kForm: kForm),
           ),
         );
 
-      case Routes.formContentScreen:
+      case Routes.tableDataScreen:
+        KoboForm kForm = arguments as KoboForm;
+
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => FormDataCubit(kForm.uid),
+              ),
+              BlocProvider(
+                create: (context) => FormAssetCubit(kForm.uid),
+              ),
+            ],
+            child: TableDataScreen(kForm: kForm),
+          ),
+        );
+
+      case Routes.contentScreen:
         KoboForm kForm = arguments as KoboForm;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => FormContentCubit(kForm.uid),
-            child: KoboFormContentScreen(kForm: kForm),
+            child: ContentScreen(kForm: kForm),
           ),
         );
 

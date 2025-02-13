@@ -3,9 +3,9 @@ import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
 
-class KoboFormScreen extends StatelessWidget {
+class FormScreen extends StatelessWidget {
   final KoboForm kForm;
-  const KoboFormScreen({
+  const FormScreen({
     super.key,
     required this.kForm,
   });
@@ -43,7 +43,7 @@ class KoboFormScreen extends StatelessWidget {
             ),
             title: Text('Content'),
             onTap: () =>
-                context.pushNamed(Routes.formContentScreen, arguments: kForm),
+                context.pushNamed(Routes.contentScreen, arguments: kForm),
           ),
           ListTile(
             shape: RoundedRectangleBorder(
@@ -52,8 +52,17 @@ class KoboFormScreen extends StatelessWidget {
             ),
             enabled: kForm.hasDeployment,
             title: Text('Data'),
+            onTap: () => context.pushNamed(Routes.dataScreen, arguments: kForm),
+          ),
+          ListTile(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              side: BorderSide(color: Colors.grey.shade300, width: 1.0),
+            ),
+            enabled: kForm.hasDeployment,
+            title: Text('Table Data'),
             onTap: () =>
-                context.pushNamed(Routes.formDataScreen, arguments: kForm),
+                context.pushNamed(Routes.tableDataScreen, arguments: kForm),
           ),
         ],
       ),

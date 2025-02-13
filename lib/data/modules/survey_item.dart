@@ -1,23 +1,44 @@
 class SurveyItem {
-  String? name;
+  late String name;
   late String type;
   late String kuid;
   String? qpath;
   String? xpath;
+  String? autoname;
+  late List<String> label;
+  late bool isRequired;
+  String? selectFromListName;
 
   SurveyItem({
-    this.name,
+    required this.name,
     required this.type,
     required this.kuid,
     this.qpath,
     this.xpath,
+    this.autoname,
+    required this.label,
+    required this.isRequired,
+    this.selectFromListName,
   });
 
   SurveyItem.fromJson(Map<String, dynamic> json) {
-    name = json['name'] ?? "";
+    name = json['name'] ?? json['\$kuid'];
     type = json['type'].split(' ')[0];
     kuid = json['\$kuid'];
     qpath = json['\$qpath'] ?? "";
     xpath = json['\$xpath'] ?? "";
+    autoname = json['\$autoname'] ?? "";
+    label = json['label'] is List
+        ? [
+            json['name'] ?? "",
+            ...(json['label'] as List).whereType<String>().cast<String>()
+          ]
+        : [json['name'] ?? ""];
+    isRequired = json['required'] == null
+        ? false
+        : json['required'] == 'true'
+            ? true
+            : false;
+    selectFromListName = json['select_from_list_name'] ?? "";
   }
 }

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
-import 'package:kobo/logic/cubits/form_data/form_data_cubit.dart';
-import 'package:kobo/presentation/widgets/form_data_submissions_list.dart';
+import 'package:kobo/logic/cubits/form_content/form_content_cubit.dart';
 
-class KoboFormDataScreen extends StatelessWidget {
+class ContentScreen extends StatelessWidget {
   final KoboForm kForm;
-  const KoboFormDataScreen({
+  const ContentScreen({
     super.key,
     required this.kForm,
   });
@@ -15,9 +14,9 @@ class KoboFormDataScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${kForm.name} - Data'),
+        title: Text('${kForm.name} - Content'),
       ),
-      body: BlocBuilder<FormDataCubit, FormDataState>(
+      body: BlocBuilder<FormContentCubit, FormContentState>(
         builder: (context, state) {
           return state.when(
             initial: () => Center(
@@ -27,15 +26,18 @@ class KoboFormDataScreen extends StatelessWidget {
                 ],
               ),
             ),
-            loading: (data) {
-              if (data.isEmpty) return const LinearProgressIndicator();
-              return FormDataSubmissionsList(data: data, isLoading: true);
-            },
+            loading: () => const LinearProgressIndicator(),
             success: (data) {
-              return FormDataSubmissionsList(
-                data: data,
-                loadMore: () => BlocProvider.of<FormDataCubit>(context)
-                    .fetchMoreData(kForm.uid),
+              return ListView.builder(
+                itemCount: data.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                      data[index].name,
+                    ),
+                    subtitle: Text("${data[index].type} (${data[index].kuid})"),
+                  );
+                },
               );
             },
             error: (error) => Text('Error: $error'),

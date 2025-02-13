@@ -4,6 +4,7 @@ class Routes {
   static const String emptyScreen = '/emptyScreen';
   static const String homeScreen = '/homeScreen';
   static const String formScreen = '/formScreen';
-  static const String formDataScreen = '/formDataScreen';
-  static const String formContentScreen = '/formContentScreen';
+  static const String contentScreen = '/contentScreen';
+  static const String dataScreen = '/dataScreen';
+  static const String tableDataScreen = '/tableDataScreen';
 }

@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:kobo/core/helpers/constants.dart';
+import 'package:kobo/data/modules/choices_item.dart';
 import 'package:kobo/data/modules/form_data.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
+import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
 
 class KoboService {
@@ -26,6 +28,31 @@ class KoboService {
     }
 
     return [];
+  }
+
+  Future<SurveyData?> fetchFormAsset({required String uid}) async {
+    var response = await _dio.get(
+      '/api/v2/assets/$uid',
+      queryParameters: {
+        'format': 'json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      List<SurveyItem> surveyData = response.data["content"]["survey"]
+          .map<SurveyItem>((json) => SurveyItem.fromJson(json))
+          .toList();
+      List<ChoicesItem> choicesData = response.data["content"]["choices"]
+          .map<ChoicesItem>((json) => ChoicesItem.fromJson(json))
+          .toList();
+      // print(choicesData.length);
+      return SurveyData(
+        survey: surveyData,
+        choices: choicesData,
+      );
+    }
+
+    return null;
   }
 
   Future<List<SurveyItem>> fetchFormContent({required String uid}) async {

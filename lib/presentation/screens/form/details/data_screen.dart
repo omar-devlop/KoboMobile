@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
-import 'package:kobo/logic/cubits/form_content/form_content_cubit.dart';
+import 'package:kobo/logic/cubits/form_data/form_data_cubit.dart';
+import 'package:kobo/presentation/widgets/form_data_submissions_list.dart';
 
-class KoboFormContentScreen extends StatelessWidget {
+class DataScreen extends StatelessWidget {
   final KoboForm kForm;
-  const KoboFormContentScreen({
+  const DataScreen({
     super.key,
     required this.kForm,
   });
@@ -14,9 +15,9 @@ class KoboFormContentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${kForm.name} - Content'),
+        title: Text('${kForm.name} - Data'),
       ),
-      body: BlocBuilder<FormContentCubit, FormContentState>(
+      body: BlocBuilder<FormDataCubit, FormDataState>(
         builder: (context, state) {
           return state.when(
             initial: () => Center(
@@ -26,18 +27,15 @@ class KoboFormContentScreen extends StatelessWidget {
                 ],
               ),
             ),
-            loading: () => const LinearProgressIndicator(),
+            loading: (data) {
+              if (data.isEmpty) return const LinearProgressIndicator();
+              return FormDataSubmissionsList(data: data, isLoading: true);
+            },
             success: (data) {
-              return ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(
-                      "${data[index].name}",
-                    ),
-                    subtitle: Text("${data[index].type} (${data[index].kuid})"),
-                  );
-                },
+              return FormDataSubmissionsList(
+                data: data,
+                loadMore: () => BlocProvider.of<FormDataCubit>(context)
+                    .fetchMoreData(kForm.uid),
               );
             },
             error: (error) => Text('Error: $error'),

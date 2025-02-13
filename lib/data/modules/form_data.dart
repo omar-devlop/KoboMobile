@@ -12,6 +12,7 @@ class SubmissionBasicData {
   late String submissionTime;
   late String submittedBy;
   ValidationStatus? validationStatus;
+  late Map<String, String> data;
 
   SubmissionBasicData({
     required this.id,
@@ -25,6 +26,7 @@ class SubmissionBasicData {
     required this.submissionTime,
     required this.submittedBy,
     this.validationStatus,
+    required this.data,
   });
 
   SubmissionBasicData.fromJson(Map<String, dynamic> json) {
@@ -41,5 +43,14 @@ class SubmissionBasicData {
     validationStatus = json['_validation_status'] != null
         ? ValidationStatus.fromJson(json['_validation_status'])
         : null;
+    data = {};
+    json.forEach(
+      (key, value) => data.addAll(
+        {
+          key.split('/').last: value
+              .toString(), // Split key to remve the group path name and get the key name only
+        },
+      ),
+    );
   }
 }
