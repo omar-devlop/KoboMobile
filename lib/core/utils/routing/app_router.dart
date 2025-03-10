@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
+import 'package:kobo/logic/cubits/data_table/data_table_cubit.dart';
 import 'package:kobo/logic/cubits/form_assets/form_asset_cubit.dart';
 import 'package:kobo/logic/cubits/form_content/form_content_cubit.dart';
 import 'package:kobo/logic/cubits/form_data/form_data_cubit.dart';
@@ -59,6 +60,9 @@ class AppRouter {
               ),
               BlocProvider(
                 create: (context) => FormAssetCubit(kForm.uid),
+              ),
+              BlocProvider(
+                create: (context) => DataTableCubit(kForm.uid),
               ),
             ],
             child: TableDataScreen(kForm: kForm),

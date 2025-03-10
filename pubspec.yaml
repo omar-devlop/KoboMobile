@@ -1,10 +1,10 @@
 name: kobo
 description: "A new Flutter project."
-publish_to: "none"
+publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: ^3.6.0
+  sdk: ^3.7.0
 
 dependencies:
   flutter:
@@ -17,7 +17,7 @@ dependencies:
   intl: ^0.19.0
   pretty_dio_logger: ^1.4.0
   pluto_grid: ^8.0.0
-
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

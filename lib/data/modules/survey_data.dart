@@ -1,12 +1,17 @@
 import 'package:kobo/data/modules/choices_item.dart';
+import 'package:kobo/data/modules/form_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
 
 class SurveyData {
-  late List<SurveyItem> survey;
-  late List<ChoicesItem> choices;
+  List<SurveyItem> survey;
+  List<ChoicesItem> choices;
+  List<SubmissionBasicData> data;
+  List<String> languages = [];
 
   SurveyData({
-    required this.survey,
-    required this.choices,
+    this.survey = const [],
+    this.choices = const [],
+    this.data = const [],
+    this.languages = const [],
   });
 }

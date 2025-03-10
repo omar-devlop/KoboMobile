@@ -18,16 +18,24 @@ class TableView extends StatelessWidget {
       rows: rows,
       configuration: PlutoGridConfiguration(
         style: PlutoGridStyleConfig(
+          rowColor: Colors.transparent,
+          gridBackgroundColor: Colors.transparent,
+          // borderColor: Colors.black12,
+          // oddRowColor: Colors.grey.shade100.withAlpha(150),
+          evenRowColor: Colors.grey.shade50.withAlpha(150),
           rowHeight: 28,
           columnHeight: 28,
-          cellTextStyle: const TextStyle(fontSize: 10),
-          columnTextStyle: const TextStyle(fontSize: 12),
-          defaultCellPadding:
-              const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-          defaultColumnTitlePadding:
-              const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+          cellTextStyle: const TextStyle(color: Colors.black, fontSize: 10),
+          // columnTextStyle: const TextStyle(fontSize: 12),
+          // defaultCellPadding:
+          //     const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+          // defaultColumnTitlePadding:
+          //     const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
         ),
       ),
+      onLoaded: (PlutoGridOnLoadedEvent event) {
+        // pState = event.stateManager;
+      },
     );
   }
 }
