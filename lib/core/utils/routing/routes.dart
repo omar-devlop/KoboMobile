@@ -7,4 +7,5 @@ class Routes {
   static const String contentScreen = '/contentScreen';
   static const String dataScreen = '/dataScreen';
   static const String tableDataScreen = '/tableDataScreen';
+  static const String sTableDataScreen = '/sTableDataScreen';
 }

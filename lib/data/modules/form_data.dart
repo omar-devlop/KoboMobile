@@ -40,17 +40,17 @@ class SubmissionBasicData {
     status = json['_status'] ?? "";
     submissionTime = json['_submission_time'] ?? "";
     submittedBy = json['_submitted_by'] ?? "";
-    validationStatus = json['_validation_status'] != null
-        ? ValidationStatus.fromJson(json['_validation_status'])
-        : null;
+    validationStatus =
+        json['_validation_status'] != null
+            ? ValidationStatus.fromJson(json['_validation_status'])
+            : null;
     data = {};
     json.forEach(
-      (key, value) => data.addAll(
-        {
-          key.split('/').last: value
-              .toString(), // Split key to remve the group path name and get the key name only
-        },
-      ),
+      (key, value) => data.addAll({
+        key.split('/').last:
+            value
+                .toString(), // Split key to remve the group path name and get the key name only
+      }),
     );
   }
 }

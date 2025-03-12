@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'form_asset_cubit.dart';
+part of 's_data_table_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -16,25 +16,25 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$FormAssetState {
+mixin _$SDataTableState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(String msg) loading,
     required TResult Function(SurveyData data) success,
     required TResult Function(String error) error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(String msg)? loading,
     TResult? Function(SurveyData data)? success,
     TResult? Function(String error)? error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(String msg)? loading,
     TResult Function(SurveyData data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -64,24 +64,24 @@ mixin _$FormAssetState {
 }
 
 /// @nodoc
-abstract class $FormAssetStateCopyWith<$Res> {
-  factory $FormAssetStateCopyWith(
-    FormAssetState value,
-    $Res Function(FormAssetState) then,
-  ) = _$FormAssetStateCopyWithImpl<$Res, FormAssetState>;
+abstract class $SDataTableStateCopyWith<$Res> {
+  factory $SDataTableStateCopyWith(
+    SDataTableState value,
+    $Res Function(SDataTableState) then,
+  ) = _$SDataTableStateCopyWithImpl<$Res, SDataTableState>;
 }
 
 /// @nodoc
-class _$FormAssetStateCopyWithImpl<$Res, $Val extends FormAssetState>
-    implements $FormAssetStateCopyWith<$Res> {
-  _$FormAssetStateCopyWithImpl(this._value, this._then);
+class _$SDataTableStateCopyWithImpl<$Res, $Val extends SDataTableState>
+    implements $SDataTableStateCopyWith<$Res> {
+  _$SDataTableStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of FormAssetState
+  /// Create a copy of SDataTableState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -95,14 +95,14 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$FormAssetStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$SDataTableStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
     _$InitialImpl _value,
     $Res Function(_$InitialImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of FormAssetState
+  /// Create a copy of SDataTableState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -113,7 +113,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'FormAssetState.initial()';
+    return 'SDataTableState.initial()';
   }
 
   @override
@@ -129,7 +129,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(String msg) loading,
     required TResult Function(SurveyData data) success,
     required TResult Function(String error) error,
   }) {
@@ -140,7 +140,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(String msg)? loading,
     TResult? Function(SurveyData data)? success,
     TResult? Function(String error)? error,
   }) {
@@ -151,7 +151,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(String msg)? loading,
     TResult Function(SurveyData data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -200,7 +200,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements FormAssetState {
+abstract class _Initial implements SDataTableState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -210,73 +210,101 @@ abstract class _$$LoadingImplCopyWith<$Res> {
     _$LoadingImpl value,
     $Res Function(_$LoadingImpl) then,
   ) = __$$LoadingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String msg});
 }
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$FormAssetStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$SDataTableStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
     _$LoadingImpl _value,
     $Res Function(_$LoadingImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of FormAssetState
+  /// Create a copy of SDataTableState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? msg = null}) {
+    return _then(
+      _$LoadingImpl(
+        msg:
+            null == msg
+                ? _value.msg
+                : msg // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 
 class _$LoadingImpl implements Loading {
-  const _$LoadingImpl();
+  const _$LoadingImpl({required this.msg});
+
+  @override
+  final String msg;
 
   @override
   String toString() {
-    return 'FormAssetState.loading()';
+    return 'SDataTableState.loading(msg: $msg)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadingImpl &&
+            (identical(other.msg, msg) || other.msg == msg));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, msg);
+
+  /// Create a copy of SDataTableState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      __$$LoadingImplCopyWithImpl<_$LoadingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(String msg) loading,
     required TResult Function(SurveyData data) success,
     required TResult Function(String error) error,
   }) {
-    return loading();
+    return loading(msg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(String msg)? loading,
     TResult? Function(SurveyData data)? success,
     TResult? Function(String error)? error,
   }) {
-    return loading?.call();
+    return loading?.call(msg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(String msg)? loading,
     TResult Function(SurveyData data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(msg);
     }
     return orElse();
   }
@@ -319,8 +347,16 @@ class _$LoadingImpl implements Loading {
   }
 }
 
-abstract class Loading implements FormAssetState {
-  const factory Loading() = _$LoadingImpl;
+abstract class Loading implements SDataTableState {
+  const factory Loading({required final String msg}) = _$LoadingImpl;
+
+  String get msg;
+
+  /// Create a copy of SDataTableState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -335,14 +371,14 @@ abstract class _$$SuccessImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$FormAssetStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$SDataTableStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
     _$SuccessImpl _value,
     $Res Function(_$SuccessImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of FormAssetState
+  /// Create a copy of SDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -368,7 +404,7 @@ class _$SuccessImpl implements Success {
 
   @override
   String toString() {
-    return 'FormAssetState.success(data: $data)';
+    return 'SDataTableState.success(data: $data)';
   }
 
   @override
@@ -382,7 +418,7 @@ class _$SuccessImpl implements Success {
   @override
   int get hashCode => Object.hash(runtimeType, data);
 
-  /// Create a copy of FormAssetState
+  /// Create a copy of SDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -394,7 +430,7 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(String msg) loading,
     required TResult Function(SurveyData data) success,
     required TResult Function(String error) error,
   }) {
@@ -405,7 +441,7 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(String msg)? loading,
     TResult? Function(SurveyData data)? success,
     TResult? Function(String error)? error,
   }) {
@@ -416,7 +452,7 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(String msg)? loading,
     TResult Function(SurveyData data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -465,12 +501,12 @@ class _$SuccessImpl implements Success {
   }
 }
 
-abstract class Success implements FormAssetState {
+abstract class Success implements SDataTableState {
   const factory Success(final SurveyData data) = _$SuccessImpl;
 
   SurveyData get data;
 
-  /// Create a copy of FormAssetState
+  /// Create a copy of SDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -489,14 +525,14 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$FormAssetStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$SDataTableStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
     _$ErrorImpl _value,
     $Res Function(_$ErrorImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of FormAssetState
+  /// Create a copy of SDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -523,7 +559,7 @@ class _$ErrorImpl implements Error {
 
   @override
   String toString() {
-    return 'FormAssetState.error(error: $error)';
+    return 'SDataTableState.error(error: $error)';
   }
 
   @override
@@ -537,7 +573,7 @@ class _$ErrorImpl implements Error {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  /// Create a copy of FormAssetState
+  /// Create a copy of SDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -549,7 +585,7 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(String msg) loading,
     required TResult Function(SurveyData data) success,
     required TResult Function(String error) error,
   }) {
@@ -560,7 +596,7 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(String msg)? loading,
     TResult? Function(SurveyData data)? success,
     TResult? Function(String error)? error,
   }) {
@@ -571,7 +607,7 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(String msg)? loading,
     TResult Function(SurveyData data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -620,12 +656,12 @@ class _$ErrorImpl implements Error {
   }
 }
 
-abstract class Error implements FormAssetState {
+abstract class Error implements SDataTableState {
   const factory Error({required final String error}) = _$ErrorImpl;
 
   String get error;
 
-  /// Create a copy of FormAssetState
+  /// Create a copy of SDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>

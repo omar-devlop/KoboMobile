@@ -5,11 +5,7 @@ class TableView extends StatelessWidget {
   final List<PlutoColumn> columns;
   final List<PlutoRow> rows;
 
-  const TableView({
-    super.key,
-    required this.columns,
-    this.rows = const [],
-  });
+  const TableView({super.key, required this.columns, this.rows = const []});
 
   @override
   Widget build(BuildContext context) {
