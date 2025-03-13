@@ -13,7 +13,11 @@ class STableDataScreen extends StatelessWidget {
     return BlocBuilder<SDataTableCubit, SDataTableState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(title: Text('${kForm.name} - S Table Data')),
+          appBar: state.whenOrNull(
+            initial: () => AppBar(),
+            loading: (_) => AppBar(),
+            error: (_) => AppBar(),
+          ),
           body: state.when(
             initial: () => LinearProgressIndicator(),
             loading:

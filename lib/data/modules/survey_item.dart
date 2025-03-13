@@ -5,7 +5,7 @@ class SurveyItem {
   String? qpath;
   String? xpath;
   String? autoname;
-  late List<String> label;
+  late List<String> labels;
   late bool isRequired;
   String? selectFromListName;
 
@@ -16,7 +16,7 @@ class SurveyItem {
     this.qpath,
     this.xpath,
     this.autoname,
-    required this.label,
+    required this.labels,
     required this.isRequired,
     this.selectFromListName,
   });
@@ -28,7 +28,7 @@ class SurveyItem {
     qpath = json['\$qpath'] ?? "";
     xpath = json['\$xpath'] ?? "";
     autoname = json['\$autoname'] ?? "";
-    label = json['label'] is List
+    labels = json['label'] is List
         ? [
             json['name'] ?? "",
             ...(json['label'] as List).whereType<String>().cast<String>()

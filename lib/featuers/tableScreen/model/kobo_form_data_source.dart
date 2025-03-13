@@ -1,57 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:kobo/data/modules/form_data.dart';
-import 'package:kobo/data/modules/survey_item.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-/// An object to set the employee collection data source to the datagrid. This
-/// is used to map the employee data to the datagrid widget.
 class KoboFormDataSource extends DataGridSource {
-  /// Creates the employee data source class with required details.
   KoboFormDataSource({
-    required List<SurveyItem> formColumns,
+    required List<GridColumn> gridColumns,
     required List<SubmissionBasicData> koboData,
-  }) {
-    List<DataGridCell<dynamic>> getCells(SubmissionBasicData item) {
-      List<DataGridCell<dynamic>> cells = [];
-      for (var column in formColumns) {
-        if (column.type.contains('group') || column.type.contains('repeat')) {
-          continue;
-        }
-        cells.add(
-          DataGridCell<String>(
-            columnName: column.name,
-            value: item.data[column.name] ?? '',
-          ),
-        );
-      }
-
-      return cells;
-    }
-
-    _employeeData =
-        koboData
-            .map<DataGridRow>((item) => DataGridRow(cells: getCells(item)))
-            .toList();
+  }) : _gridColumns = gridColumns,
+       _koboDataList = koboData {
+    buildDataGridRows();
   }
 
-  List<DataGridRow> _employeeData = [];
+  List<GridColumn> _gridColumns;
+  List<SubmissionBasicData> _koboDataList;
+  List<DataGridRow> _koboDataRows = [];
+
+  void buildDataGridRows() {
+    _koboDataRows =
+        _koboDataList.asMap().entries.map((entry) {
+          final index = entry.key + 1; // Generate row number
+          final item = entry.value;
+
+          final cells =
+              _gridColumns.map<DataGridCell<dynamic>>((column) {
+                if (column.columnName == '#') {
+                  return DataGridCell<int>(columnName: '#', value: index);
+                }
+                return DataGridCell<String>(
+                  columnName: column.columnName,
+                  value: item.data[column.columnName] ?? '',
+                );
+              }).toList();
+
+          return DataGridRow(cells: cells);
+        }).toList();
+  }
 
   @override
-  List<DataGridRow> get rows => _employeeData;
+  List<DataGridRow> get rows => _koboDataRows;
 
   @override
   DataGridRowAdapter buildRow(DataGridRow row) {
-    // final int index = effectiveRows.indexOf(row);
     return DataGridRowAdapter(
-      // color: index % 2 != 0 ? Colors.black12.withAlpha(10) : Colors.transparent,
       cells:
           row.getCells().map<Widget>((e) {
             return Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.all(8.0),
               child: Text(e.value.toString(), overflow: TextOverflow.ellipsis),
             );
           }).toList(),
     );
+  }
+
+  // Call this when columns or data changes
+  void refreshDataGrid({
+    List<GridColumn>? newColumns,
+    List<SubmissionBasicData>? newData,
+  }) {
+    if (newColumns != null) _gridColumns = newColumns;
+    if (newData != null) _koboDataList = newData;
+    buildDataGridRows();
+    notifyListeners();
   }
 }

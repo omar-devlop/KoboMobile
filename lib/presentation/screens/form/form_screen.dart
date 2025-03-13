@@ -5,26 +5,34 @@ import 'package:kobo/data/modules/kobo_form.dart';
 
 class FormScreen extends StatelessWidget {
   final KoboForm kForm;
-  const FormScreen({
-    super.key,
-    required this.kForm,
-  });
+  const FormScreen({super.key, required this.kForm});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(kForm.name),
-      ),
+      appBar: AppBar(title: Text(kForm.name)),
       body: GridView(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: MediaQuery.of(context).size.width < 800 ? 2 : 6,
           childAspectRatio: 2,
           crossAxisSpacing: 8.0,
           mainAxisSpacing: 8.0,
         ),
         children: [
+          ListTile(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              side: BorderSide(color: Colors.grey.shade300, width: 1.0),
+            ),
+            enabled: kForm.hasDeployment,
+            title: Text('S Table Data'),
+            onTap:
+                () => context.pushNamed(
+                  Routes.sTableDataScreen,
+                  arguments: kForm,
+                ),
+          ),
           ListTile(
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,16 +42,16 @@ class FormScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(),
           // ---------------------------------
+          SizedBox(),
           ListTile(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
               side: BorderSide(color: Colors.grey.shade300, width: 1.0),
             ),
             title: Text('Content'),
-            onTap: () =>
-                context.pushNamed(Routes.contentScreen, arguments: kForm),
+            onTap:
+                () => context.pushNamed(Routes.contentScreen, arguments: kForm),
           ),
           ListTile(
             shape: RoundedRectangleBorder(
@@ -61,18 +69,9 @@ class FormScreen extends StatelessWidget {
             ),
             enabled: kForm.hasDeployment,
             title: Text('Table Data'),
-            onTap: () =>
-                context.pushNamed(Routes.tableDataScreen, arguments: kForm),
-          ),
-          ListTile(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              side: BorderSide(color: Colors.grey.shade300, width: 1.0),
-            ),
-            enabled: kForm.hasDeployment,
-            title: Text('S Table Data'),
-            onTap: () =>
-                context.pushNamed(Routes.sTableDataScreen, arguments: kForm),
+            onTap:
+                () =>
+                    context.pushNamed(Routes.tableDataScreen, arguments: kForm),
           ),
         ],
       ),

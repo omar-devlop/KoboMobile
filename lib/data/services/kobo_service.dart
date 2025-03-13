@@ -13,16 +13,14 @@ class KoboService {
   Future<List<KoboForm>> fetchForms() async {
     var response = await _dio.get(
       '/api/v2/assets',
-      queryParameters: {
-        'format': 'json',
-        'q': 'asset_type:survey',
-      },
+      queryParameters: {'format': 'json', 'q': 'asset_type:survey'},
     );
 
     if (response.statusCode == 200) {
-      List<KoboForm> forms = response.data["results"]
-          .map<KoboForm>((json) => KoboForm.fromJson(json))
-          .toList();
+      List<KoboForm> forms =
+          response.data["results"]
+              .map<KoboForm>((json) => KoboForm.fromJson(json))
+              .toList();
 
       return forms;
     }
@@ -33,9 +31,7 @@ class KoboService {
   Future<SurveyData> fetchFormAsset({required String uid}) async {
     var response = await _dio.get(
       '/api/v2/assets/$uid',
-      queryParameters: {
-        'format': 'json',
-      },
+      queryParameters: {'format': 'json'},
     );
 
     if (response.statusCode == 200) {
@@ -45,25 +41,33 @@ class KoboService {
 
       List<SurveyItem> surveyQuestions = [];
       List<ChoicesItem> choicesData = [];
-      List<String> surveyLanguages = [];
+      List<String> surveyLanguages = ["XML Values"];
 
       if (responseContentSurvey != null) {
-        surveyQuestions = responseContentSurvey
-            .map<SurveyItem>((json) => SurveyItem.fromJson(json))
-            .toList();
+        surveyQuestions =
+            responseContentSurvey
+                .map<SurveyItem>((json) => SurveyItem.fromJson(json))
+                .toList();
       }
       if (responseContentChoices != null) {
-        choicesData = responseContentChoices
-            .map<ChoicesItem>((json) => ChoicesItem.fromJson(json))
-            .toList();
+        choicesData =
+            responseContentChoices
+                .map<ChoicesItem>((json) => ChoicesItem.fromJson(json))
+                .toList();
       }
       if (responseSummaryLanguages != null) {
-        surveyLanguages = [
-          "XML Values",
-          ...responseSummaryLanguages.where((item) => item is String).toList()
-        ];
+        if (responseSummaryLanguages.isEmpty) {
+          surveyLanguages.add("Default Labels");
+        } else {
+          responseSummaryLanguages
+              .where((item) => item is String)
+              .forEach((item) => surveyLanguages.add(item));
+        }
       }
+      String formName = response.data["name"] ?? '';
+
       return SurveyData(
+        formName: formName,
         survey: surveyQuestions,
         choices: choicesData,
         languages: surveyLanguages,
@@ -76,15 +80,14 @@ class KoboService {
   Future<List<SurveyItem>> fetchFormContent({required String uid}) async {
     var response = await _dio.get(
       '/api/v2/assets/$uid/content',
-      queryParameters: {
-        'format': 'json',
-      },
+      queryParameters: {'format': 'json'},
     );
 
     if (response.statusCode == 200) {
-      List<SurveyItem> data = response.data["data"]["survey"]
-          .map<SurveyItem>((json) => SurveyItem.fromJson(json))
-          .toList();
+      List<SurveyItem> data =
+          response.data["data"]["survey"]
+              .map<SurveyItem>((json) => SurveyItem.fromJson(json))
+              .toList();
 
       return data;
     }
@@ -113,10 +116,12 @@ class KoboService {
     );
 
     if (response.statusCode == 200) {
-      List<SubmissionBasicData> data = response.data["results"]
-          .map<SubmissionBasicData>(
-              (json) => SubmissionBasicData.fromJson(json))
-          .toList();
+      List<SubmissionBasicData> data =
+          response.data["results"]
+              .map<SubmissionBasicData>(
+                (json) => SubmissionBasicData.fromJson(json),
+              )
+              .toList();
 
       return data;
     }

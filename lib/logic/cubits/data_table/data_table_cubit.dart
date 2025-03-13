@@ -118,7 +118,7 @@ class DataTableCubit extends Cubit<DataTableState> {
 
       newColumns.add(
         PlutoColumn(
-          title: sItem.label.getIndexOrFirst(labelIndex), // sItem.type,
+          title: sItem.labels.getIndexOrFirst(labelIndex), // sItem.type,
           field: sItem.name,
           type: PlutoColumnType.text(),
           readOnly: true,
