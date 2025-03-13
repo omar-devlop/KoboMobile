@@ -32,7 +32,7 @@ class _STableViewState extends State<STableView> {
       minimumWidth: 100,
       columnName: columnName,
       label: Container(
-        padding: const EdgeInsets.all(16.0),
+        // padding: const EdgeInsets.all(16.0),
         alignment: Alignment.center,
         child: Text(columnLabel ?? columnName),
       ),
@@ -98,6 +98,14 @@ class _STableViewState extends State<STableView> {
       appBar: AppBar(
         title: Text(' ${surveyData.formName} - S Table Data'),
         actions: [
+          IconButton(
+            onPressed: () {
+              if (koboDataSource.sortedColumns.isEmpty) return;
+              koboDataSource.sortedColumns.clear();
+              koboDataSource.notifyListeners();
+            },
+            icon: Icon(Icons.filter_list_off),
+          ),
           PopupMenuButton<int>(
             icon: Icon(Icons.translate),
             initialValue: selectedLangIndex,
@@ -129,8 +137,8 @@ class _STableViewState extends State<STableView> {
       body: SfDataGridTheme(
         data: SfDataGridThemeData(
           // rowHoverColor: Colors.green.shade50,
-          // filterIconColor: Theme.of(context).primaryColor,
-          // sortIconColor: Theme.of(context).primaryColor,
+          // filterIconColor: theme.primaryColor,
+          // sortIconColor: theme.primaryColor,
         ),
 
         child: SfDataGrid(
@@ -138,10 +146,12 @@ class _STableViewState extends State<STableView> {
           headerGridLinesVisibility: GridLinesVisibility.both,
           allowFiltering: true,
           allowSorting: true,
+          
           isScrollbarAlwaysShown: true,
           columnWidthMode: ColumnWidthMode.auto,
           showColumnHeaderIconOnHover: true,
-          rowHeight: 35,
+          rowHeight: 30,
+          headerRowHeight: 40,
 
           allowColumnsResizing: true,
           onColumnResizeUpdate: (ColumnResizeUpdateDetails details) {
