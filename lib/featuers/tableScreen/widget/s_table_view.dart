@@ -17,10 +17,11 @@ class STableView extends StatefulWidget {
 
 class _STableViewState extends State<STableView> {
   late KoboFormDataSource koboDataSource;
+  late Map<String, double> columnWidths = {};
+  late SurveyData surveyData;
   List<SubmissionBasicData> submissionData = <SubmissionBasicData>[];
   List<SurveyItem> formColumns = <SurveyItem>[];
   List<GridColumn> columns = <GridColumn>[];
-  late Map<String, double> columnWidths = {};
   List<String> languages = <String>[];
   int selectedLangIndex = 1;
 
@@ -79,13 +80,14 @@ class _STableViewState extends State<STableView> {
   @override
   void initState() {
     super.initState();
-    submissionData = widget.surveyData.data;
-    formColumns = widget.surveyData.survey;
-    languages = widget.surveyData.languages;
+    surveyData = widget.surveyData;
+    submissionData = surveyData.data;
+    formColumns = surveyData.survey;
+    languages = surveyData.languages;
     columns = getColumns();
     koboDataSource = KoboFormDataSource(
       gridColumns: columns,
-      koboData: submissionData,
+      surveyData: surveyData,
     );
   }
 
@@ -94,7 +96,7 @@ class _STableViewState extends State<STableView> {
     // ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(' ${widget.surveyData.formName} - S Table Data'),
+        title: Text(' ${surveyData.formName} - S Table Data'),
         actions: [
           PopupMenuButton<int>(
             icon: Icon(Icons.translate),
@@ -114,7 +116,10 @@ class _STableViewState extends State<STableView> {
                 selectedLangIndex = item;
               });
               updateColumns();
-              koboDataSource.refreshDataGrid(newColumns: columns);
+              koboDataSource.refreshDataGrid(
+                newColumns: columns,
+                languageIndex: selectedLangIndex,
+              );
             },
           ),
           SizedBox(width: 10),
@@ -163,8 +168,7 @@ class _STableViewState extends State<STableView> {
               final GridColumn rearrangeColumn = columns[details.from];
               columns.removeAt(details.from);
               columns.insert(details.to!, rearrangeColumn);
-              koboDataSource.buildDataGridRows();
-              koboDataSource.refreshDataGrid();
+              koboDataSource.refreshDataGrid(languageIndex: selectedLangIndex);
             }
             return true;
           },

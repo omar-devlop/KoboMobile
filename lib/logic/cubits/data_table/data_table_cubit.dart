@@ -162,7 +162,7 @@ class DataTableCubit extends Cubit<DataTableState> {
                 .firstWhere(
                   (ChoicesItem element) => (element.name == cellValue),
                 )
-                .label
+                .labels
                 .getIndexOrFirst(labelIndex);
 
             cells[column.field] = PlutoCell(value: newCellValue);
@@ -179,7 +179,7 @@ class DataTableCubit extends Cubit<DataTableState> {
                     .firstWhere(
                       (ChoicesItem element) => element.name == cellValueItem,
                     )
-                    .label
+                    .labels
                     .getIndexOrFirst(labelIndex),
               );
             }
