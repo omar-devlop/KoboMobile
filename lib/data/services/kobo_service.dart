@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:kobo/core/helpers/constants.dart';
 import 'package:kobo/data/modules/choices_item.dart';
-import 'package:kobo/data/modules/form_data.dart';
+import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
@@ -95,7 +95,7 @@ class KoboService {
     return [];
   }
 
-  Future<List<SubmissionBasicData>> fetchFormData({
+  Future<List<SubmissionData>> fetchFormData({
     required String uid,
     Map<String, dynamic>? additionalQuery,
   }) async {
@@ -116,10 +116,10 @@ class KoboService {
     );
 
     if (response.statusCode == 200) {
-      List<SubmissionBasicData> data =
+      List<SubmissionData> data =
           response.data["results"]
-              .map<SubmissionBasicData>(
-                (json) => SubmissionBasicData.fromJson(json),
+              .map<SubmissionData>(
+                (json) => SubmissionData.fromJson(json),
               )
               .toList();
 

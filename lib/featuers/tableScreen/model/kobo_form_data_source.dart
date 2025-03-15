@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kobo/core/kobo_utils/safe_index.dart';
 import 'package:kobo/data/modules/choices_item.dart';
-import 'package:kobo/data/modules/form_data.dart';
+import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -16,9 +16,31 @@ class KoboFormDataSource extends DataGridSource {
     buildDataGridRows();
   }
   List<GridColumn> _gridColumns;
-  List<SubmissionBasicData> _koboDataList;
+  List<SubmissionData> _koboDataList;
   final SurveyData _surveyData;
   List<DataGridRow> _koboDataRows = [];
+
+  @override
+  List<DataGridRow> get rows => _koboDataRows;
+
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+      cells:
+          row.getCells().map<Widget>((e) {
+            return Container(
+              alignment: Alignment.center,
+              child: Text(e.value.toString(), overflow: TextOverflow.ellipsis),
+            );
+          }).toList(),
+    );
+  }
+
+  @override
+  Future<bool> handlePageChange(int oldPageIndex, int newPageIndex) async {
+    await Future.delayed(Duration(milliseconds: 1000));
+    return true;
+  }
 
   void buildDataGridRows({int languageIndex = 1}) {
     _koboDataRows =
@@ -63,14 +85,11 @@ class KoboFormDataSource extends DataGridSource {
                           );
                         }
                         cellValue = newCellValues.join(" ");
-
                       } else {
-
                         cellValue = _surveyData.choices
                             .firstWhere((element) => element.name == cellValue)
                             .labels
                             .getIndexOrFirst(languageIndex);
-
                       }
                     }
                   }
@@ -86,26 +105,9 @@ class KoboFormDataSource extends DataGridSource {
         }).toList();
   }
 
-  @override
-  List<DataGridRow> get rows => _koboDataRows;
-
-  @override
-  DataGridRowAdapter buildRow(DataGridRow row) {
-    return DataGridRowAdapter(
-      cells:
-          row.getCells().map<Widget>((e) {
-            return Container(
-              alignment: Alignment.center,
-              child: Text(e.value.toString(), overflow: TextOverflow.ellipsis),
-            );
-          }).toList(),
-    );
-  }
-
-  // Call this when columns or data changes
   void refreshDataGrid({
     List<GridColumn>? newColumns,
-    List<SubmissionBasicData>? newData,
+    List<SubmissionData>? newData,
     int languageIndex = 1,
   }) {
     if (newColumns != null) _gridColumns = newColumns;

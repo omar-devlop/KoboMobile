@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
-import 'package:kobo/data/modules/form_data.dart';
+import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/services/kobo_service.dart';
 
@@ -35,6 +35,6 @@ class SDataTableCubit extends Cubit<SDataTableState> {
   Future<SurveyData> _fetchAsset() async =>
       await getIt<KoboService>().fetchFormAsset(uid: uid);
 
-  Future<List<SubmissionBasicData>> _fetchData() async =>
+  Future<List<SubmissionData>> _fetchData() async =>
       await getIt<KoboService>().fetchFormData(uid: uid);
 }

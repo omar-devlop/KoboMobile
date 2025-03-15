@@ -1,6 +1,6 @@
 import 'package:kobo/data/modules/validation_status.dart';
 
-class SubmissionBasicData {
+class SubmissionData {
   late int id;
   late String formhubUuid;
   late String version;
@@ -14,7 +14,7 @@ class SubmissionBasicData {
   ValidationStatus? validationStatus;
   late Map<String, String> data;
 
-  SubmissionBasicData({
+  SubmissionData({
     required this.id,
     required this.formhubUuid,
     required this.version,
@@ -29,7 +29,7 @@ class SubmissionBasicData {
     required this.data,
   });
 
-  SubmissionBasicData.fromJson(Map<String, dynamic> json) {
+  SubmissionData.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     formhubUuid = json['formhub/uuid'] ?? "";
     version = json['__version__'] ?? "";

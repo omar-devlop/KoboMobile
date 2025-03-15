@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kobo/core/kobo_utils/validation_check.dart';
-import 'package:kobo/data/modules/form_data.dart';
+import 'package:kobo/data/modules/submission_data.dart';
 
 class FormDataSubmissionsList extends StatelessWidget {
-  final List<SubmissionBasicData> data;
+  final List<SubmissionData> data;
   final bool isLoading;
   final VoidCallback? loadMore;
   const FormDataSubmissionsList({
@@ -32,7 +32,7 @@ class FormDataSubmissionsList extends StatelessWidget {
           }
         }
 
-        SubmissionBasicData kSubmission = data[index];
+        SubmissionData kSubmission = data[index];
         return ListTile(
           leading: CircleAvatar(child: Text('${index + 1}')),
           title: Text(kSubmission.metaInstanceName),

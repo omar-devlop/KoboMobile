@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kobo/core/kobo_utils/safe_index.dart';
-import 'package:kobo/data/modules/form_data.dart';
+import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
 import 'package:kobo/featuers/tableScreen/model/kobo_form_data_source.dart';
@@ -19,11 +19,14 @@ class _STableViewState extends State<STableView> {
   late KoboFormDataSource koboDataSource;
   late Map<String, double> columnWidths = {};
   late SurveyData surveyData;
-  List<SubmissionBasicData> submissionData = <SubmissionBasicData>[];
+  List<SubmissionData> submissionData = <SubmissionData>[];
   List<SurveyItem> formColumns = <SurveyItem>[];
   List<GridColumn> columns = <GridColumn>[];
   List<String> languages = <String>[];
   int selectedLangIndex = 1;
+  int _rowsPerPage = 15;
+  static const double _dataPagerHeight = 60;
+  bool showLoadingIndicator = false;
 
   // Kobo Grid Column
   GridColumn koboGridColumn({required String columnName, String? columnLabel}) {
@@ -91,6 +94,94 @@ class _STableViewState extends State<STableView> {
     );
   }
 
+  Widget _buildDataGrid() {
+    return SfDataGridTheme(
+      data: SfDataGridThemeData(
+        // rowHoverColor: Colors.green.shade50,
+        // filterIconColor: theme.primaryColor,
+        // sortIconColor: theme.primaryColor,
+      ),
+
+      child: SfDataGrid(
+        gridLinesVisibility: GridLinesVisibility.both,
+        headerGridLinesVisibility: GridLinesVisibility.both,
+        allowFiltering: true,
+        allowSorting: true,
+        sortingGestureType: SortingGestureType.doubleTap,
+
+        isScrollbarAlwaysShown: true,
+        columnWidthMode: ColumnWidthMode.auto,
+        showColumnHeaderIconOnHover: true,
+        rowHeight: 30,
+        headerRowHeight: 40,
+
+        rowsPerPage: _rowsPerPage,
+
+        allowColumnsResizing: true,
+        onColumnResizeUpdate: (ColumnResizeUpdateDetails details) {
+          int columnIndex = details.columnIndex;
+          String columnName = details.column.columnName;
+          String columnLabel = formColumns
+              .firstWhere((element) => element.name == columnName)
+              .labels
+              .getIndexOrFirst(selectedLangIndex);
+          columnWidths[columnName] = details.width;
+          setState(() {
+            columns[columnIndex] = koboGridColumn(
+              columnName: columnName,
+              columnLabel: columnLabel,
+            );
+          });
+          return true;
+        },
+
+        allowColumnsDragging: true,
+        onColumnDragging: (DataGridColumnDragDetails details) {
+          if (details.action == DataGridColumnDragAction.dropped &&
+              details.to != null) {
+            final GridColumn rearrangeColumn = columns[details.from];
+            columns.removeAt(details.from);
+            columns.insert(details.to!, rearrangeColumn);
+            koboDataSource.refreshDataGrid(languageIndex: selectedLangIndex);
+          }
+          return true;
+        },
+
+        columns: columns,
+        source: koboDataSource,
+      ),
+    );
+  }
+
+  Widget _buildDataPager() {
+    return SfDataPagerTheme(
+      data: SfDataPagerThemeData(
+        selectedItemColor: Theme.of(context).primaryColor,
+      ),
+      child: SfDataPager(
+        delegate: koboDataSource,
+        availableRowsPerPage: const <int>[10, 30, 50, 100, 200, 500],
+        pageCount: koboDataSource.rows.length / _rowsPerPage,
+        onRowsPerPageChanged: (int? rowsPerPage) {
+          setState(() {
+            _rowsPerPage = rowsPerPage!;
+          });
+        },
+
+        onPageNavigationStart: (int pageIndex) {
+          setState(() {
+            showLoadingIndicator = true;
+          });
+        },
+        onPageNavigationEnd: (int pageIndex) {
+          setState(() {
+            showLoadingIndicator = false;
+          });
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // ThemeData theme = Theme.of(context);
@@ -134,58 +225,25 @@ class _STableViewState extends State<STableView> {
         ],
       ),
 
-      body: SfDataGridTheme(
-        data: SfDataGridThemeData(
-          // rowHoverColor: Colors.green.shade50,
-          // filterIconColor: theme.primaryColor,
-          // sortIconColor: theme.primaryColor,
-        ),
-
-        child: SfDataGrid(
-          gridLinesVisibility: GridLinesVisibility.both,
-          headerGridLinesVisibility: GridLinesVisibility.both,
-          allowFiltering: true,
-          allowSorting: true,
-          
-          isScrollbarAlwaysShown: true,
-          columnWidthMode: ColumnWidthMode.auto,
-          showColumnHeaderIconOnHover: true,
-          rowHeight: 30,
-          headerRowHeight: 40,
-
-          allowColumnsResizing: true,
-          onColumnResizeUpdate: (ColumnResizeUpdateDetails details) {
-            int columnIndex = details.columnIndex;
-            String columnName = details.column.columnName;
-            String columnLabel = formColumns
-                .firstWhere((element) => element.name == columnName)
-                .labels
-                .getIndexOrFirst(selectedLangIndex);
-            columnWidths[columnName] = details.width;
-            setState(() {
-              columns[columnIndex] = koboGridColumn(
-                columnName: columnName,
-                columnLabel: columnLabel,
-              );
-            });
-            return true;
-          },
-
-          allowColumnsDragging: true,
-          onColumnDragging: (DataGridColumnDragDetails details) {
-            if (details.action == DataGridColumnDragAction.dropped &&
-                details.to != null) {
-              final GridColumn rearrangeColumn = columns[details.from];
-              columns.removeAt(details.from);
-              columns.insert(details.to!, rearrangeColumn);
-              koboDataSource.refreshDataGrid(languageIndex: selectedLangIndex);
-            }
-            return true;
-          },
-
-          columns: columns,
-          source: koboDataSource,
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Stack(
+              children: [
+                _buildDataGrid(),
+                if (showLoadingIndicator)
+                  Container(
+                    color: Colors.black12,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          SizedBox(height: _dataPagerHeight, child: _buildDataPager()),
+        ],
       ),
     );
   }
