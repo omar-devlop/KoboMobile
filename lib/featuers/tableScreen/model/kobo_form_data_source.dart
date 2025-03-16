@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:kobo/core/helpers/constants.dart';
 import 'package:kobo/core/kobo_utils/safe_index.dart';
+import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/data/modules/choices_item.dart';
+import 'package:kobo/data/modules/response_data.dart';
 import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
+import 'package:kobo/data/services/kobo_service.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class KoboFormDataSource extends DataGridSource {
@@ -11,14 +15,15 @@ class KoboFormDataSource extends DataGridSource {
     required List<GridColumn> gridColumns,
     required SurveyData surveyData,
   }) : _gridColumns = gridColumns,
-       _koboDataList = surveyData.data,
-       _surveyData = surveyData {
-    buildDataGridRows();
-  }
+       _koboDataList = [],
+       _surveyData = surveyData;
   List<GridColumn> _gridColumns;
   List<SubmissionData> _koboDataList;
   final SurveyData _surveyData;
   List<DataGridRow> _koboDataRows = [];
+  bool isFirstCall = true;
+  int pageNumber = 0;
+  int langIndex = 1;
 
   @override
   List<DataGridRow> get rows => _koboDataRows;
@@ -38,11 +43,21 @@ class KoboFormDataSource extends DataGridSource {
 
   @override
   Future<bool> handlePageChange(int oldPageIndex, int newPageIndex) async {
-    await Future.delayed(Duration(milliseconds: 1000));
+    pageNumber = newPageIndex;
+
+    ResponseData newData = await getIt<KoboService>().fetchFormData(
+      uid: _surveyData.uid,
+      start: newPageIndex * Constants.limit,
+    );
+    _koboDataList = newData.results;
+
+    refreshDataGrid();
+
     return true;
   }
 
-  void buildDataGridRows({int languageIndex = 1}) {
+  void buildDataGridRows({int? languageIndex}) {
+    setLanguageIndex(languageIndex);
     _koboDataRows =
         _koboDataList.asMap().entries.map((entry) {
           final index = entry.key + 1; // Generate row number
@@ -54,7 +69,10 @@ class KoboFormDataSource extends DataGridSource {
                 String cellValue = item.data[colName] ?? '';
 
                 if (colName == '#') {
-                  return DataGridCell<int>(columnName: '#', value: index);
+                  return DataGridCell<int>(
+                    columnName: '#',
+                    value: index + (Constants.limit * pageNumber),
+                  );
                 }
 
                 if (cellValue != '') {
@@ -74,22 +92,28 @@ class KoboFormDataSource extends DataGridSource {
                         List<String> newCellValues = [];
 
                         for (String cellValueItem in cellValues) {
-                          newCellValues.add(
-                            _surveyData.choices
-                                .firstWhere(
-                                  (ChoicesItem element) =>
-                                      element.name == cellValueItem,
-                                )
-                                .labels
-                                .getIndexOrFirst(languageIndex),
+                          int choicesItemIndex = _surveyData.choices.indexWhere(
+                            (ChoicesItem element) =>
+                                element.name == cellValueItem,
                           );
+                          choicesItemIndex < 0
+                              ? newCellValues.add(cellValueItem)
+                              : newCellValues.add(
+                                _surveyData.choices[choicesItemIndex].labels
+                                    .getIndexOrFirst(langIndex),
+                              );
                         }
                         cellValue = newCellValues.join(" ");
                       } else {
-                        cellValue = _surveyData.choices
-                            .firstWhere((element) => element.name == cellValue)
-                            .labels
-                            .getIndexOrFirst(languageIndex);
+                        int choicesItemIndex = _surveyData.choices.indexWhere(
+                          (element) => element.name == cellValue,
+                        );
+                        choicesItemIndex < 0
+                            ? cellValue = cellValue
+                            : cellValue = _surveyData
+                                .choices[choicesItemIndex]
+                                .labels
+                                .getIndexOrFirst(langIndex);
                       }
                     }
                   }
@@ -105,10 +129,16 @@ class KoboFormDataSource extends DataGridSource {
         }).toList();
   }
 
+  int setLanguageIndex(int? index) {
+    if (index == null) return langIndex;
+    langIndex = index;
+    return langIndex;
+  }
+
   void refreshDataGrid({
     List<GridColumn>? newColumns,
     List<SubmissionData>? newData,
-    int languageIndex = 1,
+    int? languageIndex,
   }) {
     if (newColumns != null) _gridColumns = newColumns;
     if (newData != null) _koboDataList = newData;

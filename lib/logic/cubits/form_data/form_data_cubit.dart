@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/helpers/constants.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
-import 'package:kobo/data/modules/submission_data.dart';
+import 'package:kobo/data/modules/response_data.dart';
 import 'package:kobo/data/services/kobo_service.dart';
 
 part 'form_data_state.dart';
@@ -14,27 +14,21 @@ class FormDataCubit extends Cubit<FormDataState> {
   }
   void safeEmit(FormDataState state) => !isClosed ? emit(state) : null;
 
-  List<SubmissionData> data = [];
+  late ResponseData data;
 
   void fetchData(String uid) async {
-    safeEmit(FormDataState.loading(data: []));
-    data = await getIt<KoboService>().fetchFormData(
-      uid: uid,
-    );
+    safeEmit(FormDataState.loading(data: data));
+    data = await getIt<KoboService>().fetchFormData(uid: uid);
     safeEmit(FormDataState.success(data));
   }
 
   void fetchMoreData(String uid) async {
     safeEmit(FormDataState.loading(data: data));
-    List<SubmissionData> newData =
-        await getIt<KoboService>().fetchFormData(
+    ResponseData newData = await getIt<KoboService>().fetchFormData(
       uid: uid,
-      additionalQuery: {
-        'start': data.length,
-        'limit': Constants.limit,
-      },
+      additionalQuery: {'start': data.results.length, 'limit': Constants.limit},
     );
-    data.addAll(newData);
+    data.results.addAll(newData.results);
 
     safeEmit(FormDataState.success(data));
   }

@@ -69,13 +69,9 @@ class AppRouter {
 
         return MaterialPageRoute(
           builder:
-              (_) => MultiBlocProvider(
-                providers: [
-                  BlocProvider(create: (context) => FormDataCubit(kForm.uid)),
-                  BlocProvider(create: (context) => FormAssetCubit(kForm.uid)),
-                  BlocProvider(create: (context) => DataTableCubit(kForm.uid)),
-                  BlocProvider(create: (context) => SDataTableCubit(kForm.uid)),
-                ],
+              (_) => BlocProvider(
+                create: (context) => SDataTableCubit(kForm.uid),
+
                 child: STableDataScreen(kForm: kForm),
               ),
         );

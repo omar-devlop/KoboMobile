@@ -28,12 +28,12 @@ class DataScreen extends StatelessWidget {
               ),
             ),
             loading: (data) {
-              if (data.isEmpty) return const LinearProgressIndicator();
-              return FormDataSubmissionsList(data: data, isLoading: true);
+              if (data.results.isEmpty) return const LinearProgressIndicator();
+              return FormDataSubmissionsList(data: data.results, isLoading: true);
             },
             success: (data) {
               return FormDataSubmissionsList(
-                data: data,
+                data: data.results,
                 loadMore: () => BlocProvider.of<FormDataCubit>(context)
                     .fetchMoreData(kForm.uid),
               );

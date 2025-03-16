@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
-import 'package:kobo/data/modules/submission_data.dart';
+import 'package:kobo/data/modules/response_data.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/services/kobo_service.dart';
 
@@ -25,16 +25,25 @@ class SDataTableCubit extends Cubit<SDataTableState> {
 
     surveyData = await _fetchAsset();
 
-    safeEmit(SDataTableState.loading(msg: "Fetching data..."));
+    // safeEmit(SDataTableState.loading(msg: "Fetching data..."));
 
-    surveyData.data = await _fetchData();
+    // surveyData.data = await _fetchData();
 
     safeEmit(SDataTableState.success(surveyData));
+  }
+
+  Future<bool> fetchMoreData() async {
+    ResponseData newData = await _fetchData(
+      start: surveyData.data!.results.length,
+    );
+    surveyData.data!.results.addAll(newData.results);
+    safeEmit(SDataTableState.success(surveyData));
+    return true;
   }
 
   Future<SurveyData> _fetchAsset() async =>
       await getIt<KoboService>().fetchFormAsset(uid: uid);
 
-  Future<List<SubmissionData>> _fetchData() async =>
-      await getIt<KoboService>().fetchFormData(uid: uid);
+  Future<ResponseData> _fetchData({int start = 0}) async =>
+      await getIt<KoboService>().fetchFormData(uid: uid, start: start);
 }

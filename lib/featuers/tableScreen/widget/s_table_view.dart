@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kobo/core/helpers/constants.dart';
 import 'package:kobo/core/kobo_utils/safe_index.dart';
-import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
 import 'package:kobo/featuers/tableScreen/model/kobo_form_data_source.dart';
@@ -19,14 +19,13 @@ class _STableViewState extends State<STableView> {
   late KoboFormDataSource koboDataSource;
   late Map<String, double> columnWidths = {};
   late SurveyData surveyData;
-  List<SubmissionData> submissionData = <SubmissionData>[];
   List<SurveyItem> formColumns = <SurveyItem>[];
   List<GridColumn> columns = <GridColumn>[];
   List<String> languages = <String>[];
   int selectedLangIndex = 1;
-  int _rowsPerPage = 15;
+  final int _rowsPerPage = Constants.limit;
   static const double _dataPagerHeight = 60;
-  bool showLoadingIndicator = false;
+  bool showLoadingIndicator = true;
 
   // Kobo Grid Column
   GridColumn koboGridColumn({required String columnName, String? columnLabel}) {
@@ -84,7 +83,7 @@ class _STableViewState extends State<STableView> {
   void initState() {
     super.initState();
     surveyData = widget.surveyData;
-    submissionData = surveyData.data;
+    // submissionData = surveyData.data!.results;
     formColumns = surveyData.survey;
     languages = surveyData.languages;
     columns = getColumns();
@@ -147,6 +146,10 @@ class _STableViewState extends State<STableView> {
           return true;
         },
 
+        
+        // onQueryRowHeight: (details) {
+        //   return details.getIntrinsicRowHeight(details.rowIndex);
+        // },
         columns: columns,
         source: koboDataSource,
       ),
@@ -154,20 +157,26 @@ class _STableViewState extends State<STableView> {
   }
 
   Widget _buildDataPager() {
+    // debugPrint((surveyData.data!.count / _rowsPerPage).ceil().toString());
     return SfDataPagerTheme(
       data: SfDataPagerThemeData(
         selectedItemColor: Theme.of(context).primaryColor,
       ),
       child: SfDataPager(
         delegate: koboDataSource,
-        availableRowsPerPage: const <int>[10, 30, 50, 100, 200, 500],
-        pageCount: koboDataSource.rows.length / _rowsPerPage,
-        onRowsPerPageChanged: (int? rowsPerPage) {
-          setState(() {
-            _rowsPerPage = rowsPerPage!;
-          });
-        },
+        availableRowsPerPage: const <int>[30, 50, 100, 200, 500],
 
+        // pageCount: (surveyData.data!.count / _rowsPerPage).ceil().toDouble(),
+        pageCount:
+            (surveyData.deploymentSubmissionCount / _rowsPerPage)
+                .ceil()
+                .toDouble(),
+
+        // onRowsPerPageChanged: (int? rowsPerPage) {
+        //   setState(() {
+        //     _rowsPerPage = rowsPerPage!;
+        //   });
+        // },
         onPageNavigationStart: (int pageIndex) {
           setState(() {
             showLoadingIndicator = true;
@@ -189,14 +198,25 @@ class _STableViewState extends State<STableView> {
       appBar: AppBar(
         title: Text(' ${surveyData.formName} - S Table Data'),
         actions: [
-          IconButton(
+          TextButton.icon(
             onPressed: () {
               if (koboDataSource.sortedColumns.isEmpty) return;
               koboDataSource.sortedColumns.clear();
               koboDataSource.notifyListeners();
             },
+            label: Text('Clear Sort'),
             icon: Icon(Icons.filter_list_off),
           ),
+          TextButton.icon(
+            onPressed: () {
+              if (koboDataSource.filterConditions.isEmpty) return;
+              koboDataSource.clearFilters();
+              koboDataSource.notifyListeners();
+            },
+            label: Text('Clear Filters'),
+            icon: Icon(Icons.filter_alt_off_outlined),
+          ),
+          SizedBox(width: 10),
           PopupMenuButton<int>(
             icon: Icon(Icons.translate),
             initialValue: selectedLangIndex,

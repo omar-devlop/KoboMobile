@@ -2,8 +2,8 @@ import 'package:kobo/data/modules/submission_data.dart';
 
 class ResponseData {
   late int count;
-  late Uri? next;
-  late Uri? previous;
+  late String? next;
+  late String? previous;
   late List<SubmissionData> results;
 
   ResponseData({

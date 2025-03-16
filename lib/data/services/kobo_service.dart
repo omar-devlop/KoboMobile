@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:kobo/core/helpers/constants.dart';
 import 'package:kobo/data/modules/choices_item.dart';
+import 'package:kobo/data/modules/response_data.dart';
 import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
 import 'package:kobo/data/modules/survey_data.dart';
@@ -65,9 +66,14 @@ class KoboService {
         }
       }
       String formName = response.data["name"] ?? '';
+      String uid = response.data["uid"] ?? '';
+      int deploymentSubmissionCount =
+          response.data["deployment__submission_count"] ?? 0;
 
       return SurveyData(
         formName: formName,
+        uid: uid,
+        deploymentSubmissionCount: deploymentSubmissionCount,
         survey: surveyQuestions,
         choices: choicesData,
         languages: surveyLanguages,
@@ -95,13 +101,14 @@ class KoboService {
     return [];
   }
 
-  Future<List<SubmissionData>> fetchFormData({
+  Future<ResponseData> fetchFormData({
     required String uid,
+    int start = 0,
     Map<String, dynamic>? additionalQuery,
   }) async {
     Map<String, dynamic> queryParameters = {
       'format': 'json',
-      'start': 0,
+      'start': start,
       'sort': '{"_id":-1}',
       'limit': Constants.limit, // handle Limits
     };
@@ -116,16 +123,19 @@ class KoboService {
     );
 
     if (response.statusCode == 200) {
-      List<SubmissionData> data =
-          response.data["results"]
-              .map<SubmissionData>(
-                (json) => SubmissionData.fromJson(json),
-              )
-              .toList();
+      ResponseData responseData = ResponseData(
+        count: response.data["count"],
+        next: response.data["next"],
+        previous: response.data["previous"],
+        results:
+            response.data["results"]
+                .map<SubmissionData>((json) => SubmissionData.fromJson(json))
+                .toList(),
+      );
 
-      return data;
+      return responseData;
     }
 
-    return [];
+    return ResponseData(count: 0, results: []);
   }
 }

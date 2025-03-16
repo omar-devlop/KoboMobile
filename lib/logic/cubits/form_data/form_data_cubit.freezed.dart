@@ -20,22 +20,22 @@ mixin _$FormDataState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<SubmissionData> data) loading,
-    required TResult Function(List<SubmissionData> data) success,
+    required TResult Function(ResponseData data) loading,
+    required TResult Function(ResponseData data) success,
     required TResult Function(String error) error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<SubmissionData> data)? loading,
-    TResult? Function(List<SubmissionData> data)? success,
+    TResult? Function(ResponseData data)? loading,
+    TResult? Function(ResponseData data)? success,
     TResult? Function(String error)? error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<SubmissionData> data)? loading,
-    TResult Function(List<SubmissionData> data)? success,
+    TResult Function(ResponseData data)? loading,
+    TResult Function(ResponseData data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -129,8 +129,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<SubmissionData> data) loading,
-    required TResult Function(List<SubmissionData> data) success,
+    required TResult Function(ResponseData data) loading,
+    required TResult Function(ResponseData data) success,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -140,8 +140,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<SubmissionData> data)? loading,
-    TResult? Function(List<SubmissionData> data)? success,
+    TResult? Function(ResponseData data)? loading,
+    TResult? Function(ResponseData data)? success,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -151,8 +151,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<SubmissionData> data)? loading,
-    TResult Function(List<SubmissionData> data)? success,
+    TResult Function(ResponseData data)? loading,
+    TResult Function(ResponseData data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -211,7 +211,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
     $Res Function(_$LoadingImpl) then,
   ) = __$$LoadingImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<SubmissionData> data});
+  $Res call({ResponseData data});
 }
 
 /// @nodoc
@@ -227,14 +227,14 @@ class __$$LoadingImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null}) {
+  $Res call({Object? data = freezed}) {
     return _then(
       _$LoadingImpl(
         data:
-            null == data
-                ? _value._data
+            freezed == data
+                ? _value.data
                 : data // ignore: cast_nullable_to_non_nullable
-                    as List<SubmissionData>,
+                    as ResponseData,
       ),
     );
   }
@@ -243,16 +243,10 @@ class __$$LoadingImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadingImpl implements Loading {
-  const _$LoadingImpl({required final List<SubmissionData> data})
-    : _data = data;
+  const _$LoadingImpl({required this.data});
 
-  final List<SubmissionData> _data;
   @override
-  List<SubmissionData> get data {
-    if (_data is EqualUnmodifiableListView) return _data;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_data);
-  }
+  final ResponseData data;
 
   @override
   String toString() {
@@ -264,12 +258,12 @@ class _$LoadingImpl implements Loading {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadingImpl &&
-            const DeepCollectionEquality().equals(other._data, _data));
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
   /// Create a copy of FormDataState
   /// with the given fields replaced by the non-null parameter values.
@@ -283,8 +277,8 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<SubmissionData> data) loading,
-    required TResult Function(List<SubmissionData> data) success,
+    required TResult Function(ResponseData data) loading,
+    required TResult Function(ResponseData data) success,
     required TResult Function(String error) error,
   }) {
     return loading(data);
@@ -294,8 +288,8 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<SubmissionData> data)? loading,
-    TResult? Function(List<SubmissionData> data)? success,
+    TResult? Function(ResponseData data)? loading,
+    TResult? Function(ResponseData data)? success,
     TResult? Function(String error)? error,
   }) {
     return loading?.call(data);
@@ -305,8 +299,8 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<SubmissionData> data)? loading,
-    TResult Function(List<SubmissionData> data)? success,
+    TResult Function(ResponseData data)? loading,
+    TResult Function(ResponseData data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -355,10 +349,9 @@ class _$LoadingImpl implements Loading {
 }
 
 abstract class Loading implements FormDataState {
-  const factory Loading({required final List<SubmissionData> data}) =
-      _$LoadingImpl;
+  const factory Loading({required final ResponseData data}) = _$LoadingImpl;
 
-  List<SubmissionData> get data;
+  ResponseData get data;
 
   /// Create a copy of FormDataState
   /// with the given fields replaced by the non-null parameter values.
@@ -374,7 +367,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
     $Res Function(_$SuccessImpl) then,
   ) = __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<SubmissionData> data});
+  $Res call({ResponseData data});
 }
 
 /// @nodoc
@@ -390,13 +383,13 @@ class __$$SuccessImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null}) {
+  $Res call({Object? data = freezed}) {
     return _then(
       _$SuccessImpl(
-        null == data
-            ? _value._data
+        freezed == data
+            ? _value.data
             : data // ignore: cast_nullable_to_non_nullable
-                as List<SubmissionData>,
+                as ResponseData,
       ),
     );
   }
@@ -405,15 +398,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  const _$SuccessImpl(final List<SubmissionData> data) : _data = data;
+  const _$SuccessImpl(this.data);
 
-  final List<SubmissionData> _data;
   @override
-  List<SubmissionData> get data {
-    if (_data is EqualUnmodifiableListView) return _data;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_data);
-  }
+  final ResponseData data;
 
   @override
   String toString() {
@@ -425,12 +413,12 @@ class _$SuccessImpl implements Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            const DeepCollectionEquality().equals(other._data, _data));
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
   /// Create a copy of FormDataState
   /// with the given fields replaced by the non-null parameter values.
@@ -444,8 +432,8 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<SubmissionData> data) loading,
-    required TResult Function(List<SubmissionData> data) success,
+    required TResult Function(ResponseData data) loading,
+    required TResult Function(ResponseData data) success,
     required TResult Function(String error) error,
   }) {
     return success(data);
@@ -455,8 +443,8 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<SubmissionData> data)? loading,
-    TResult? Function(List<SubmissionData> data)? success,
+    TResult? Function(ResponseData data)? loading,
+    TResult? Function(ResponseData data)? success,
     TResult? Function(String error)? error,
   }) {
     return success?.call(data);
@@ -466,8 +454,8 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<SubmissionData> data)? loading,
-    TResult Function(List<SubmissionData> data)? success,
+    TResult Function(ResponseData data)? loading,
+    TResult Function(ResponseData data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -516,9 +504,9 @@ class _$SuccessImpl implements Success {
 }
 
 abstract class Success implements FormDataState {
-  const factory Success(final List<SubmissionData> data) = _$SuccessImpl;
+  const factory Success(final ResponseData data) = _$SuccessImpl;
 
-  List<SubmissionData> get data;
+  ResponseData get data;
 
   /// Create a copy of FormDataState
   /// with the given fields replaced by the non-null parameter values.
@@ -599,8 +587,8 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<SubmissionData> data) loading,
-    required TResult Function(List<SubmissionData> data) success,
+    required TResult Function(ResponseData data) loading,
+    required TResult Function(ResponseData data) success,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -610,8 +598,8 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<SubmissionData> data)? loading,
-    TResult? Function(List<SubmissionData> data)? success,
+    TResult? Function(ResponseData data)? loading,
+    TResult? Function(ResponseData data)? success,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -621,8 +609,8 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<SubmissionData> data)? loading,
-    TResult Function(List<SubmissionData> data)? success,
+    TResult Function(ResponseData data)? loading,
+    TResult Function(ResponseData data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {

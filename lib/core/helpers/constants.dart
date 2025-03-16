@@ -1,3 +1,3 @@
 class Constants {
-  static const int limit = 50;
+  static const int limit = 30;
 }

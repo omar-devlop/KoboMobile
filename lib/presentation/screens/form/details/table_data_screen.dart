@@ -13,7 +13,8 @@ class TableDataScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DataTableCubit, DataTableState>(
+    return 
+    BlocBuilder<DataTableCubit, DataTableState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
