@@ -22,21 +22,23 @@ class SurveyItem {
   });
 
   SurveyItem.fromJson(Map<String, dynamic> json) {
-    name = json['name'] ?? json['\$kuid'];
+    name = json['name'] ?? json['\$autoname'] ?? json['\$kuid'];
     type = json['type'].split(' ')[0];
     kuid = json['\$kuid'];
     qpath = json['\$qpath'] ?? "";
     xpath = json['\$xpath'] ?? "";
     autoname = json['\$autoname'] ?? "";
-    labels = json['label'] is List
-        ? [
-            json['name'] ?? "",
-            ...(json['label'] as List).whereType<String>().cast<String>()
-          ]
-        : [json['name'] ?? ""];
-    isRequired = json['required'] == null
-        ? false
-        : json['required'] == 'true'
+    labels =
+        json['label'] is List
+            ? [
+              name,
+              ...(json['label'] as List).whereType<String>().cast<String>(),
+            ]
+            : [name];
+    isRequired =
+        json['required'] == null
+            ? false
+            : json['required'] == 'true'
             ? true
             : false;
     selectFromListName = json['select_from_list_name'] ?? "";

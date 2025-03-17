@@ -7,6 +7,7 @@ import 'package:kobo/data/modules/response_data.dart';
 import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
+import 'package:kobo/data/modules/validation_status.dart';
 import 'package:kobo/data/services/kobo_service.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -30,14 +31,29 @@ class KoboFormDataSource extends DataGridSource {
 
   @override
   DataGridRowAdapter buildRow(DataGridRow row) {
+    Color? rowColor;
     return DataGridRowAdapter(
       cells:
           row.getCells().map<Widget>((e) {
-            return Container(
-              alignment: Alignment.center,
-              child: Text(e.value.toString(), overflow: TextOverflow.ellipsis),
+            Widget childWidget = Text(
+              e.value.toString(),
+              overflow: TextOverflow.ellipsis,
             );
+            if (e.columnName == '_validation_status') {
+              Widget vIcon = (e.value as ValidationStatus).getIcon();
+              childWidget = Row(
+                spacing: 5,
+                children: [
+                  SizedBox(width: 5),
+                  vIcon,
+                  Text((e.value as ValidationStatus).label.toString()),
+                ],
+              );
+              rowColor = (e.value as ValidationStatus).getColor();
+            }
+            return Container(alignment: Alignment.center, child: childWidget);
           }).toList(),
+      color: rowColor,
     );
   }
 
@@ -72,6 +88,11 @@ class KoboFormDataSource extends DataGridSource {
                   return DataGridCell<int>(
                     columnName: '#',
                     value: index + (Constants.limit * pageNumber),
+                  );
+                } else if (colName == '_validation_status') {
+                  return DataGridCell<ValidationStatus>(
+                    columnName: '_validation_status',
+                    value: item.validationStatus,
                   );
                 }
 

@@ -27,7 +27,6 @@ class _STableViewState extends State<STableView> {
   static const double _dataPagerHeight = 60;
   bool showLoadingIndicator = true;
 
-  // Kobo Grid Column
   GridColumn koboGridColumn({required String columnName, String? columnLabel}) {
     return GridColumn(
       width: columnWidths[columnName] ?? double.nan,
@@ -44,6 +43,12 @@ class _STableViewState extends State<STableView> {
   List<GridColumn> getColumns() {
     columns.clear();
     columns.add(koboGridColumn(columnName: '#', columnLabel: '#'));
+    columns.add(
+      koboGridColumn(
+        columnName: '_validation_status',
+        columnLabel: 'Validation',
+      ),
+    );
     for (var column in formColumns) {
       if (column.type.contains('group') || column.type.contains('repeat')) {
         continue;
@@ -61,14 +66,19 @@ class _STableViewState extends State<STableView> {
   void updateColumns() {
     for (int i = 0; i < columns.length; i++) {
       String columnName = columns[i].columnName;
-      SurveyItem? formColumn =
-          formColumns
-              .where((element) => element.name == columnName)
-              .firstOrNull;
-      String columnLabel =
-          formColumn == null
-              ? columnName
-              : formColumn.labels.getIndexOrFirst(selectedLangIndex);
+      String columnLabel = '';
+      if (columnName == '_validation_status') {
+        columnLabel = 'Validation';
+      } else {
+        SurveyItem? formColumn =
+            formColumns
+                .where((element) => element.name == columnName)
+                .firstOrNull;
+        columnLabel =
+            formColumn == null
+                ? columnName
+                : formColumn.labels.getIndexOrFirst(selectedLangIndex);
+      }
 
       GridColumn newCol = koboGridColumn(
         columnName: columnName,
@@ -120,10 +130,20 @@ class _STableViewState extends State<STableView> {
         onColumnResizeUpdate: (ColumnResizeUpdateDetails details) {
           int columnIndex = details.columnIndex;
           String columnName = details.column.columnName;
-          String columnLabel = formColumns
-              .firstWhere((element) => element.name == columnName)
-              .labels
-              .getIndexOrFirst(selectedLangIndex);
+          int columnLabelIndex = formColumns.indexWhere(
+            (element) => element.name == columnName,
+          );
+          String columnLabel = '';
+          if (columnName == '_validation_status') {
+            columnLabel = 'Validation';
+          } else {
+            columnLabel =
+                columnLabelIndex < 0
+                    ? columnName
+                    : formColumns[columnLabelIndex].labels.getIndexOrFirst(
+                      selectedLangIndex,
+                    );
+          }
           columnWidths[columnName] = details.width;
           setState(() {
             columns[columnIndex] = koboGridColumn(
@@ -146,7 +166,6 @@ class _STableViewState extends State<STableView> {
           return true;
         },
 
-        
         // onQueryRowHeight: (details) {
         //   return details.getIntrinsicRowHeight(details.rowIndex);
         // },
@@ -157,7 +176,6 @@ class _STableViewState extends State<STableView> {
   }
 
   Widget _buildDataPager() {
-    // debugPrint((surveyData.data!.count / _rowsPerPage).ceil().toString());
     return SfDataPagerTheme(
       data: SfDataPagerThemeData(
         selectedItemColor: Theme.of(context).primaryColor,
@@ -166,7 +184,6 @@ class _STableViewState extends State<STableView> {
         delegate: koboDataSource,
         availableRowsPerPage: const <int>[30, 50, 100, 200, 500],
 
-        // pageCount: (surveyData.data!.count / _rowsPerPage).ceil().toDouble(),
         pageCount:
             (surveyData.deploymentSubmissionCount / _rowsPerPage)
                 .ceil()
