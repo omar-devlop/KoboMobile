@@ -27,10 +27,15 @@ class _STableViewState extends State<STableView> {
   static const double _dataPagerHeight = 60;
   bool showLoadingIndicator = true;
 
-  GridColumn koboGridColumn({required String columnName, String? columnLabel}) {
+  GridColumn koboGridColumn({
+    required String columnName,
+    String? columnLabel,
+    double? width,
+    double minimumWidth = 100,
+  }) {
     return GridColumn(
-      width: columnWidths[columnName] ?? double.nan,
-      minimumWidth: 100,
+      width: columnWidths[columnName] ?? width ?? double.nan,
+      minimumWidth: minimumWidth,
       columnName: columnName,
       label: Container(
         // padding: const EdgeInsets.all(16.0),
@@ -42,11 +47,14 @@ class _STableViewState extends State<STableView> {
 
   List<GridColumn> getColumns() {
     columns.clear();
-    columns.add(koboGridColumn(columnName: '#', columnLabel: '#'));
+    columns.add(
+      koboGridColumn(columnName: '#', columnLabel: '#', minimumWidth: 75),
+    );
     columns.add(
       koboGridColumn(
         columnName: '_validation_status',
         columnLabel: 'Validation',
+        
       ),
     );
     for (var column in formColumns) {
@@ -93,7 +101,6 @@ class _STableViewState extends State<STableView> {
   void initState() {
     super.initState();
     surveyData = widget.surveyData;
-    // submissionData = surveyData.data!.results;
     formColumns = surveyData.survey;
     languages = surveyData.languages;
     columns = getColumns();
@@ -215,30 +222,40 @@ class _STableViewState extends State<STableView> {
       appBar: AppBar(
         title: Text(' ${surveyData.formName} - S Table Data'),
         actions: [
-          TextButton.icon(
-            onPressed: () {
-              if (koboDataSource.sortedColumns.isEmpty) return;
-              koboDataSource.sortedColumns.clear();
-              koboDataSource.notifyListeners();
-            },
-            label: Text('Clear Sort'),
-            icon: Icon(Icons.filter_list_off),
-          ),
-          TextButton.icon(
-            onPressed: () {
-              if (koboDataSource.filterConditions.isEmpty) return;
-              koboDataSource.clearFilters();
-              koboDataSource.notifyListeners();
-            },
-            label: Text('Clear Filters'),
-            icon: Icon(Icons.filter_alt_off_outlined),
-          ),
-          SizedBox(width: 10),
           PopupMenuButton<int>(
-            icon: Icon(Icons.translate),
             initialValue: selectedLangIndex,
-            itemBuilder:
-                (BuildContext context) => List<PopupMenuEntry<int>>.generate(
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  child: Row(
+                    children: [
+                      Icon(Icons.filter_list_off),
+                      SizedBox(width: 10),
+                      Text('Clear Sort'),
+                    ],
+                  ),
+                  onTap: () {
+                    if (koboDataSource.sortedColumns.isEmpty) return;
+                    koboDataSource.sortedColumns.clear();
+                    koboDataSource.notifyListeners();
+                  },
+                ),
+                PopupMenuItem(
+                  child: Row(
+                    children: [
+                      Icon(Icons.filter_alt_off_outlined),
+                      SizedBox(width: 10),
+                      Text('Clear Filters'),
+                    ],
+                  ),
+                  onTap: () {
+                    if (koboDataSource.filterConditions.isEmpty) return;
+                    koboDataSource.clearFilters();
+                    koboDataSource.notifyListeners();
+                  },
+                ),
+                PopupMenuDivider(),
+                ...List<PopupMenuEntry<int>>.generate(
                   languages.length,
                   (i) => CheckedPopupMenuItem<int>(
                     value: i,
@@ -246,6 +263,8 @@ class _STableViewState extends State<STableView> {
                     child: Text(languages.getIndexOrFirst(i)),
                   ),
                 ),
+              ];
+            },
             onSelected: (int item) {
               if (item == selectedLangIndex) return;
               setState(() {

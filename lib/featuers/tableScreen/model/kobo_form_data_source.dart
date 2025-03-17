@@ -7,7 +7,6 @@ import 'package:kobo/data/modules/response_data.dart';
 import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
-import 'package:kobo/data/modules/validation_status.dart';
 import 'package:kobo/data/services/kobo_service.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -40,16 +39,24 @@ class KoboFormDataSource extends DataGridSource {
               overflow: TextOverflow.ellipsis,
             );
             if (e.columnName == '_validation_status') {
-              Widget vIcon = (e.value as ValidationStatus).getIcon();
+              Widget validationIcon = getValidationStatusIcon(
+                e.value.toString(),
+              );
               childWidget = Row(
+                mainAxisSize: MainAxisSize.max,
                 spacing: 5,
                 children: [
                   SizedBox(width: 5),
-                  vIcon,
-                  Text((e.value as ValidationStatus).label.toString()),
+                  validationIcon,
+                  Expanded(
+                    child: Text(
+                      e.value.toString(),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                 ],
               );
-              rowColor = (e.value as ValidationStatus).getColor();
+              rowColor = getValidationStatusColor(e.value.toString());
             }
             return Container(alignment: Alignment.center, child: childWidget);
           }).toList(),
@@ -72,6 +79,32 @@ class KoboFormDataSource extends DataGridSource {
     return true;
   }
 
+  Widget getValidationStatusIcon(String validationLabel) {
+    switch (validationLabel) {
+      case 'Approved':
+        return Icon(Icons.done, color: Colors.green);
+      case 'On Hold':
+        return Icon(Icons.priority_high, color: Colors.orange);
+      case 'Not Approved':
+        return Icon(Icons.close, color: Colors.red);
+      default:
+    }
+    return SizedBox.shrink();
+  }
+
+  Color? getValidationStatusColor(String validationLabel) {
+    switch (validationLabel) {
+      case 'Approved':
+        return Colors.green.shade50.withAlpha(100);
+      case 'On Hold':
+        return Colors.orange.shade50.withAlpha(100);
+      case 'Not Approved':
+        return Colors.red.shade50.withAlpha(100);
+      default:
+    }
+    return null;
+  }
+
   void buildDataGridRows({int? languageIndex}) {
     setLanguageIndex(languageIndex);
     _koboDataRows =
@@ -90,9 +123,9 @@ class KoboFormDataSource extends DataGridSource {
                     value: index + (Constants.limit * pageNumber),
                   );
                 } else if (colName == '_validation_status') {
-                  return DataGridCell<ValidationStatus>(
+                  return DataGridCell<String?>(
                     columnName: '_validation_status',
-                    value: item.validationStatus,
+                    value: item.validationStatus?.label,
                   );
                 }
 
