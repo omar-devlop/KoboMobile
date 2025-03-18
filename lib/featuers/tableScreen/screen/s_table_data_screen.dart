@@ -15,7 +15,8 @@ class STableDataScreen extends StatelessWidget {
         return Scaffold(
           appBar: state.whenOrNull(
             initial: () => AppBar(),
-            loading: (_) => AppBar(),
+            loading:
+                (_) => AppBar(title: Text(' ${kForm.name} - S Table Data')),
             error: (_) => AppBar(),
           ),
           body: state.when(

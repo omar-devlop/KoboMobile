@@ -17,7 +17,7 @@ class KoboformsCubit extends Cubit<KoboformsState> {
   List<KoboForm> forms = [];
 
   void fetchForms() async {
-    safeEmit(KoboformsState.loading());
+    safeEmit(KoboformsState.loading(msg: 'Fetching forms...'));
     forms = await getIt<KoboService>().fetchForms();
     safeEmit(KoboformsState.success(forms));
   }

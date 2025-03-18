@@ -54,7 +54,6 @@ class _STableViewState extends State<STableView> {
       koboGridColumn(
         columnName: '_validation_status',
         columnLabel: 'Validation',
-        
       ),
     );
     for (var column in formColumns) {
@@ -152,6 +151,8 @@ class _STableViewState extends State<STableView> {
                     );
           }
           columnWidths[columnName] = details.width;
+          if (!mounted) return false;
+
           setState(() {
             columns[columnIndex] = koboGridColumn(
               columnName: columnName,
@@ -183,6 +184,9 @@ class _STableViewState extends State<STableView> {
   }
 
   Widget _buildDataPager() {
+    double pageCount =
+        (surveyData.deploymentSubmissionCount / _rowsPerPage).ceil().toDouble();
+    pageCount = pageCount < 1 ? 1 : pageCount;
     return SfDataPagerTheme(
       data: SfDataPagerThemeData(
         selectedItemColor: Theme.of(context).primaryColor,
@@ -191,28 +195,34 @@ class _STableViewState extends State<STableView> {
         delegate: koboDataSource,
         availableRowsPerPage: const <int>[30, 50, 100, 200, 500],
 
-        pageCount:
-            (surveyData.deploymentSubmissionCount / _rowsPerPage)
-                .ceil()
-                .toDouble(),
+        pageCount: pageCount,
 
         // onRowsPerPageChanged: (int? rowsPerPage) {
+        // if (!mounted) return;
         //   setState(() {
         //     _rowsPerPage = rowsPerPage!;
         //   });
         // },
         onPageNavigationStart: (int pageIndex) {
+          if (!mounted) return;
           setState(() {
             showLoadingIndicator = true;
           });
         },
         onPageNavigationEnd: (int pageIndex) {
+          if (!mounted) return;
           setState(() {
             showLoadingIndicator = false;
           });
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    koboDataSource.dispose();
+    super.dispose();
   }
 
   @override
@@ -254,7 +264,9 @@ class _STableViewState extends State<STableView> {
                     koboDataSource.notifyListeners();
                   },
                 ),
+
                 PopupMenuDivider(),
+
                 ...List<PopupMenuEntry<int>>.generate(
                   languages.length,
                   (i) => CheckedPopupMenuItem<int>(
@@ -266,10 +278,11 @@ class _STableViewState extends State<STableView> {
               ];
             },
             onSelected: (int item) {
+              if (!mounted) return;
               if (item == selectedLangIndex) return;
-              setState(() {
-                selectedLangIndex = item;
-              });
+              selectedLangIndex = item;
+
+              setState(() {});
               updateColumns();
               koboDataSource.refreshDataGrid(
                 newColumns: columns,

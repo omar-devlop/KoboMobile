@@ -2,7 +2,7 @@ class KoboForm {
   String? dateCreated;
   String? dateModified;
   String? dateDeployed;
-  String? ownerUsername;
+  late String ownerUsername;
   late String uid;
   String? kind;
   late String name;
@@ -18,7 +18,7 @@ class KoboForm {
     this.dateCreated,
     this.dateModified,
     this.dateDeployed,
-    this.ownerUsername,
+    required this.ownerUsername,
     required this.uid,
     this.kind,
     required this.name,
@@ -35,7 +35,7 @@ class KoboForm {
     dateCreated = json['date_created'];
     dateModified = json['date_modified'];
     dateDeployed = json['date_deployed'];
-    ownerUsername = json['owner__username'];
+    ownerUsername = json['owner__username'] ?? '';
     uid = json['uid'].toString();
     kind = json['kind'];
     name = json['name'].toString();

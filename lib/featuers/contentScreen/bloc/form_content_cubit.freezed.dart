@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'kobo_forms_cubit.dart';
+part of 'form_content_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -16,26 +16,26 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$KoboformsState {
+mixin _$FormContentState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<KoboForm> data) success,
+    required TResult Function(String msg) loading,
+    required TResult Function(List<SurveyItem> data) success,
     required TResult Function(String error) error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(List<KoboForm> data)? success,
+    TResult? Function(String msg)? loading,
+    TResult? Function(List<SurveyItem> data)? success,
     TResult? Function(String error)? error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<KoboForm> data)? success,
+    TResult Function(String msg)? loading,
+    TResult Function(List<SurveyItem> data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -64,24 +64,24 @@ mixin _$KoboformsState {
 }
 
 /// @nodoc
-abstract class $KoboformsStateCopyWith<$Res> {
-  factory $KoboformsStateCopyWith(
-    KoboformsState value,
-    $Res Function(KoboformsState) then,
-  ) = _$KoboformsStateCopyWithImpl<$Res, KoboformsState>;
+abstract class $FormContentStateCopyWith<$Res> {
+  factory $FormContentStateCopyWith(
+    FormContentState value,
+    $Res Function(FormContentState) then,
+  ) = _$FormContentStateCopyWithImpl<$Res, FormContentState>;
 }
 
 /// @nodoc
-class _$KoboformsStateCopyWithImpl<$Res, $Val extends KoboformsState>
-    implements $KoboformsStateCopyWith<$Res> {
-  _$KoboformsStateCopyWithImpl(this._value, this._then);
+class _$FormContentStateCopyWithImpl<$Res, $Val extends FormContentState>
+    implements $FormContentStateCopyWith<$Res> {
+  _$FormContentStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of KoboformsState
+  /// Create a copy of FormContentState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -95,14 +95,14 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$KoboformsStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$FormContentStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
     _$InitialImpl _value,
     $Res Function(_$InitialImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of KoboformsState
+  /// Create a copy of FormContentState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -113,7 +113,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'KoboformsState.initial()';
+    return 'FormContentState.initial()';
   }
 
   @override
@@ -129,8 +129,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<KoboForm> data) success,
+    required TResult Function(String msg) loading,
+    required TResult Function(List<SurveyItem> data) success,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -140,8 +140,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(List<KoboForm> data)? success,
+    TResult? Function(String msg)? loading,
+    TResult? Function(List<SurveyItem> data)? success,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -151,8 +151,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<KoboForm> data)? success,
+    TResult Function(String msg)? loading,
+    TResult Function(List<SurveyItem> data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -200,7 +200,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements KoboformsState {
+abstract class _Initial implements FormContentState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -210,73 +210,101 @@ abstract class _$$LoadingImplCopyWith<$Res> {
     _$LoadingImpl value,
     $Res Function(_$LoadingImpl) then,
   ) = __$$LoadingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String msg});
 }
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$KoboformsStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$FormContentStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
     _$LoadingImpl _value,
     $Res Function(_$LoadingImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of KoboformsState
+  /// Create a copy of FormContentState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? msg = null}) {
+    return _then(
+      _$LoadingImpl(
+        msg:
+            null == msg
+                ? _value.msg
+                : msg // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 
 class _$LoadingImpl implements Loading {
-  const _$LoadingImpl();
+  const _$LoadingImpl({required this.msg});
+
+  @override
+  final String msg;
 
   @override
   String toString() {
-    return 'KoboformsState.loading()';
+    return 'FormContentState.loading(msg: $msg)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadingImpl &&
+            (identical(other.msg, msg) || other.msg == msg));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, msg);
+
+  /// Create a copy of FormContentState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      __$$LoadingImplCopyWithImpl<_$LoadingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<KoboForm> data) success,
+    required TResult Function(String msg) loading,
+    required TResult Function(List<SurveyItem> data) success,
     required TResult Function(String error) error,
   }) {
-    return loading();
+    return loading(msg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(List<KoboForm> data)? success,
+    TResult? Function(String msg)? loading,
+    TResult? Function(List<SurveyItem> data)? success,
     TResult? Function(String error)? error,
   }) {
-    return loading?.call();
+    return loading?.call(msg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<KoboForm> data)? success,
+    TResult Function(String msg)? loading,
+    TResult Function(List<SurveyItem> data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(msg);
     }
     return orElse();
   }
@@ -319,8 +347,16 @@ class _$LoadingImpl implements Loading {
   }
 }
 
-abstract class Loading implements KoboformsState {
-  const factory Loading() = _$LoadingImpl;
+abstract class Loading implements FormContentState {
+  const factory Loading({required final String msg}) = _$LoadingImpl;
+
+  String get msg;
+
+  /// Create a copy of FormContentState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -330,19 +366,19 @@ abstract class _$$SuccessImplCopyWith<$Res> {
     $Res Function(_$SuccessImpl) then,
   ) = __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<KoboForm> data});
+  $Res call({List<SurveyItem> data});
 }
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$KoboformsStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$FormContentStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
     _$SuccessImpl _value,
     $Res Function(_$SuccessImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of KoboformsState
+  /// Create a copy of FormContentState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -352,7 +388,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
         null == data
             ? _value._data
             : data // ignore: cast_nullable_to_non_nullable
-                as List<KoboForm>,
+                as List<SurveyItem>,
       ),
     );
   }
@@ -361,11 +397,11 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  const _$SuccessImpl(final List<KoboForm> data) : _data = data;
+  const _$SuccessImpl(final List<SurveyItem> data) : _data = data;
 
-  final List<KoboForm> _data;
+  final List<SurveyItem> _data;
   @override
-  List<KoboForm> get data {
+  List<SurveyItem> get data {
     if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_data);
@@ -373,7 +409,7 @@ class _$SuccessImpl implements Success {
 
   @override
   String toString() {
-    return 'KoboformsState.success(data: $data)';
+    return 'FormContentState.success(data: $data)';
   }
 
   @override
@@ -388,7 +424,7 @@ class _$SuccessImpl implements Success {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
-  /// Create a copy of KoboformsState
+  /// Create a copy of FormContentState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -400,8 +436,8 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<KoboForm> data) success,
+    required TResult Function(String msg) loading,
+    required TResult Function(List<SurveyItem> data) success,
     required TResult Function(String error) error,
   }) {
     return success(data);
@@ -411,8 +447,8 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(List<KoboForm> data)? success,
+    TResult? Function(String msg)? loading,
+    TResult? Function(List<SurveyItem> data)? success,
     TResult? Function(String error)? error,
   }) {
     return success?.call(data);
@@ -422,8 +458,8 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<KoboForm> data)? success,
+    TResult Function(String msg)? loading,
+    TResult Function(List<SurveyItem> data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -471,12 +507,12 @@ class _$SuccessImpl implements Success {
   }
 }
 
-abstract class Success implements KoboformsState {
-  const factory Success(final List<KoboForm> data) = _$SuccessImpl;
+abstract class Success implements FormContentState {
+  const factory Success(final List<SurveyItem> data) = _$SuccessImpl;
 
-  List<KoboForm> get data;
+  List<SurveyItem> get data;
 
-  /// Create a copy of KoboformsState
+  /// Create a copy of FormContentState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -495,14 +531,14 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$KoboformsStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$FormContentStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
     _$ErrorImpl _value,
     $Res Function(_$ErrorImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of KoboformsState
+  /// Create a copy of FormContentState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -529,7 +565,7 @@ class _$ErrorImpl implements Error {
 
   @override
   String toString() {
-    return 'KoboformsState.error(error: $error)';
+    return 'FormContentState.error(error: $error)';
   }
 
   @override
@@ -543,7 +579,7 @@ class _$ErrorImpl implements Error {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  /// Create a copy of KoboformsState
+  /// Create a copy of FormContentState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -555,8 +591,8 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<KoboForm> data) success,
+    required TResult Function(String msg) loading,
+    required TResult Function(List<SurveyItem> data) success,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -566,8 +602,8 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(List<KoboForm> data)? success,
+    TResult? Function(String msg)? loading,
+    TResult? Function(List<SurveyItem> data)? success,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -577,8 +613,8 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<KoboForm> data)? success,
+    TResult Function(String msg)? loading,
+    TResult Function(List<SurveyItem> data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -626,12 +662,12 @@ class _$ErrorImpl implements Error {
   }
 }
 
-abstract class Error implements KoboformsState {
+abstract class Error implements FormContentState {
   const factory Error({required final String error}) = _$ErrorImpl;
 
   String get error;
 
-  /// Create a copy of KoboformsState
+  /// Create a copy of FormContentState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>

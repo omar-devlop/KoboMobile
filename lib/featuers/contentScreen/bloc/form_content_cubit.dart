@@ -16,7 +16,7 @@ class FormContentCubit extends Cubit<FormContentState> {
   List<SurveyItem> data = [];
 
   void fetchContent(String uid) async {
-    safeEmit(FormContentState.loading());
+    safeEmit(FormContentState.loading(msg: "Fetching content..."));
     data = await getIt<KoboService>().fetchFormContent(uid: uid);
     safeEmit(FormContentState.success(data));
   }

@@ -21,9 +21,9 @@ class KoboFormDataSource extends DataGridSource {
   List<SubmissionData> _koboDataList;
   final SurveyData _surveyData;
   List<DataGridRow> _koboDataRows = [];
-  bool isFirstCall = true;
-  int pageNumber = 0;
-  int langIndex = 1;
+  int _pageNumber = 0;
+  int _langIndex = 1;
+  bool _isDisposed = false; // Track disposal state
 
   @override
   List<DataGridRow> get rows => _koboDataRows;
@@ -66,7 +66,7 @@ class KoboFormDataSource extends DataGridSource {
 
   @override
   Future<bool> handlePageChange(int oldPageIndex, int newPageIndex) async {
-    pageNumber = newPageIndex;
+    _pageNumber = newPageIndex;
 
     ResponseData newData = await getIt<KoboService>().fetchFormData(
       uid: _surveyData.uid,
@@ -77,6 +77,12 @@ class KoboFormDataSource extends DataGridSource {
     refreshDataGrid();
 
     return true;
+  }
+
+  @override
+  void dispose() {
+    _isDisposed = true;
+    super.dispose();
   }
 
   Widget getValidationStatusIcon(String validationLabel) {
@@ -106,7 +112,7 @@ class KoboFormDataSource extends DataGridSource {
   }
 
   void buildDataGridRows({int? languageIndex}) {
-    setLanguageIndex(languageIndex);
+    getLanguageIndex(languageIndex);
     _koboDataRows =
         _koboDataList.asMap().entries.map((entry) {
           final index = entry.key + 1; // Generate row number
@@ -120,7 +126,7 @@ class KoboFormDataSource extends DataGridSource {
                 if (colName == '#') {
                   return DataGridCell<int>(
                     columnName: '#',
-                    value: index + (Constants.limit * pageNumber),
+                    value: index + (Constants.limit * _pageNumber),
                   );
                 } else if (colName == '_validation_status') {
                   return DataGridCell<String?>(
@@ -154,7 +160,7 @@ class KoboFormDataSource extends DataGridSource {
                               ? newCellValues.add(cellValueItem)
                               : newCellValues.add(
                                 _surveyData.choices[choicesItemIndex].labels
-                                    .getIndexOrFirst(langIndex),
+                                    .getIndexOrFirst(_langIndex),
                               );
                         }
                         cellValue = newCellValues.join(" ");
@@ -167,7 +173,7 @@ class KoboFormDataSource extends DataGridSource {
                             : cellValue = _surveyData
                                 .choices[choicesItemIndex]
                                 .labels
-                                .getIndexOrFirst(langIndex);
+                                .getIndexOrFirst(_langIndex);
                       }
                     }
                   }
@@ -183,10 +189,10 @@ class KoboFormDataSource extends DataGridSource {
         }).toList();
   }
 
-  int setLanguageIndex(int? index) {
-    if (index == null) return langIndex;
-    langIndex = index;
-    return langIndex;
+  int getLanguageIndex(int? index) {
+    if (index == null) return _langIndex;
+    _langIndex = index;
+    return _langIndex;
   }
 
   void refreshDataGrid({
@@ -197,6 +203,8 @@ class KoboFormDataSource extends DataGridSource {
     if (newColumns != null) _gridColumns = newColumns;
     if (newData != null) _koboDataList = newData;
     buildDataGridRows(languageIndex: languageIndex);
+    if (_isDisposed) return;
+
     notifyListeners();
   }
 }

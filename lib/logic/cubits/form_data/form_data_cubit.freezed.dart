@@ -227,11 +227,11 @@ class __$$LoadingImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = freezed}) {
+  $Res call({Object? data = null}) {
     return _then(
       _$LoadingImpl(
         data:
-            freezed == data
+            null == data
                 ? _value.data
                 : data // ignore: cast_nullable_to_non_nullable
                     as ResponseData,
@@ -258,12 +258,11 @@ class _$LoadingImpl implements Loading {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadingImpl &&
-            const DeepCollectionEquality().equals(other.data, data));
+            (identical(other.data, data) || other.data == data));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(runtimeType, data);
 
   /// Create a copy of FormDataState
   /// with the given fields replaced by the non-null parameter values.
@@ -383,10 +382,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = freezed}) {
+  $Res call({Object? data = null}) {
     return _then(
       _$SuccessImpl(
-        freezed == data
+        null == data
             ? _value.data
             : data // ignore: cast_nullable_to_non_nullable
                 as ResponseData,
@@ -413,12 +412,11 @@ class _$SuccessImpl implements Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            const DeepCollectionEquality().equals(other.data, data));
+            (identical(other.data, data) || other.data == data));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(runtimeType, data);
 
   /// Create a copy of FormDataState
   /// with the given fields replaced by the non-null parameter values.
