@@ -49,7 +49,7 @@ class SubmissionData {
       (key, value) => data.addAll({
         key.split('/').last:
             value
-                .toString(), // Split key to remve the group path name and get the key name only
+                .toString(), // Split key to remove the group path name and get the key name only
       }),
     );
   }

@@ -4,9 +4,9 @@ import 'package:kobo/data/modules/kobo_form.dart';
 import 'package:kobo/logic/cubits/form_data/form_data_cubit.dart';
 import 'package:kobo/presentation/widgets/form_data_submissions_list.dart';
 
-class DataScreen extends StatelessWidget {
+class OldDataScreen extends StatelessWidget {
   final KoboForm kForm;
-  const DataScreen({
+  const OldDataScreen({
     super.key,
     required this.kForm,
   });

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kobo/core/kobo_utils/validation_check.dart';
 import 'package:kobo/data/modules/submission_data.dart';
 
 class FormDataSubmissionsList extends StatelessWidget {
@@ -36,7 +35,7 @@ class FormDataSubmissionsList extends StatelessWidget {
         return ListTile(
           leading: CircleAvatar(child: Text('${index + 1}')),
           title: Text(kSubmission.metaInstanceName),
-          trailing: kSubmission.validationStatus.toIcon(),
+          // trailing: kSubmission.validationStatus.toIcon(),
           subtitle: Text(
             kSubmission.id.toString(),
             style: TextStyle(fontWeight: FontWeight.w100),

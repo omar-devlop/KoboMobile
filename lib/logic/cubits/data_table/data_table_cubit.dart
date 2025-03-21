@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/enums/validation_types.dart';
 import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/kobo_utils/safe_index.dart';
-import 'package:kobo/core/kobo_utils/validation_check.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/data/modules/choices_item.dart';
 import 'package:kobo/data/modules/response_data.dart';
@@ -144,7 +143,7 @@ class DataTableCubit extends Cubit<DataTableState> {
         }
         if (column.field == "validation_status") {
           cells[column.field] = PlutoCell(
-            value: sBasicItem.validationStatus.toValue(),
+            value: sBasicItem.validationStatus.toString(),
           );
           continue;
         }

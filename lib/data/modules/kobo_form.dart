@@ -9,7 +9,7 @@ class KoboForm {
   String? assetType;
   String? versionId;
   late bool hasDeployment;
-  bool? deploymentActive;
+  late bool deploymentActive;
   late int deploymentSubmissionCount;
   String? deploymentStatus;
   String? status;
@@ -25,7 +25,7 @@ class KoboForm {
     this.assetType,
     this.versionId,
     required this.hasDeployment,
-    this.deploymentActive,
+    required this.deploymentActive,
     required this.deploymentSubmissionCount,
     this.deploymentStatus,
     this.status,
@@ -42,7 +42,7 @@ class KoboForm {
     assetType = json['asset_type'];
     versionId = json['version_id'];
     hasDeployment = json['has_deployment'] ?? false;
-    deploymentActive = json['deployment__active'];
+    deploymentActive = json['deployment__active']?? false;
     deploymentSubmissionCount = json['deployment__submission_count'] ?? 0;
     deploymentStatus = json['deployment_status'];
     status = json['status'];

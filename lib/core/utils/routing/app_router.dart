@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
+import 'package:kobo/featuers/dataScreen/bloc/data_cubit.dart';
+import 'package:kobo/featuers/dataScreen/screen/data_screen.dart';
 import 'package:kobo/logic/cubits/data_table/data_table_cubit.dart';
 import 'package:kobo/logic/cubits/form_assets/form_asset_cubit.dart';
 import 'package:kobo/featuers/contentScreen/bloc/form_content_cubit.dart';
@@ -10,7 +12,6 @@ import 'package:kobo/featuers/homeScreen/bloc/kobo_forms_cubit.dart';
 import 'package:kobo/featuers/tableScreen/bloc/s_data_table_cubit.dart';
 import 'package:kobo/presentation/screens/empty/empty_screen.dart';
 import 'package:kobo/featuers/contentScreen/screen/content_screen.dart';
-import 'package:kobo/presentation/screens/form/details/data_screen.dart';
 import 'package:kobo/featuers/tableScreen/screen/s_table_data_screen.dart';
 import 'package:kobo/presentation/screens/form/form_screen.dart';
 import 'package:kobo/presentation/screens/form/details/table_data_screen.dart';
@@ -57,17 +58,6 @@ class AppRouter {
         KoboForm kForm = arguments as KoboForm;
         return MaterialPageRoute(builder: (_) => FormScreen(kForm: kForm));
 
-      case Routes.dataScreen:
-        KoboForm kForm = arguments as KoboForm;
-
-        return MaterialPageRoute(
-          builder:
-              (_) => BlocProvider(
-                create: (context) => FormDataCubit(kForm.uid),
-                child: DataScreen(kForm: kForm),
-              ),
-        );
-
       case Routes.tableDataScreen:
         KoboForm kForm = arguments as KoboForm;
 
@@ -83,6 +73,14 @@ class AppRouter {
               ),
         );
 
+      case Routes.dataScreen:
+        KoboForm kForm = arguments as KoboForm;
+        return slideTransitionPage(
+          BlocProvider(
+            create: (context) => DataCubit(kForm.uid),
+            child: DataScreen(kForm: kForm),
+          ),
+        );
       case Routes.sTableDataScreen:
         KoboForm kForm = arguments as KoboForm;
         return slideTransitionPage(

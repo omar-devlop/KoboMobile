@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kobo/core/helpers/constants.dart';
 import 'package:kobo/core/kobo_utils/safe_index.dart';
+import 'package:kobo/core/kobo_utils/validation_status.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/data/modules/choices_item.dart';
 import 'package:kobo/data/modules/response_data.dart';
@@ -40,7 +41,7 @@ class KoboFormDataSource extends DataGridSource {
             );
             if (e.columnName == '_validation_status') {
               Widget validationIcon = getValidationStatusIcon(
-                e.value.toString(),
+                validationLabel: e.value.toString(),
               );
               childWidget = Row(
                 mainAxisSize: MainAxisSize.max,
@@ -56,7 +57,9 @@ class KoboFormDataSource extends DataGridSource {
                   ),
                 ],
               );
-              rowColor = getValidationStatusColor(e.value.toString());
+              rowColor = getValidationStatusColor(
+                validationLabel: e.value.toString(),
+              );
             }
             return Container(alignment: Alignment.center, child: childWidget);
           }).toList(),
@@ -83,32 +86,6 @@ class KoboFormDataSource extends DataGridSource {
   void dispose() {
     _isDisposed = true;
     super.dispose();
-  }
-
-  Widget getValidationStatusIcon(String validationLabel) {
-    switch (validationLabel) {
-      case 'Approved':
-        return Icon(Icons.done, color: Colors.green);
-      case 'On Hold':
-        return Icon(Icons.priority_high, color: Colors.orange);
-      case 'Not Approved':
-        return Icon(Icons.close, color: Colors.red);
-      default:
-    }
-    return SizedBox.shrink();
-  }
-
-  Color? getValidationStatusColor(String validationLabel) {
-    switch (validationLabel) {
-      case 'Approved':
-        return Colors.green.shade50.withAlpha(100);
-      case 'On Hold':
-        return Colors.orange.shade50.withAlpha(100);
-      case 'Not Approved':
-        return Colors.red.shade50.withAlpha(100);
-      default:
-    }
-    return null;
   }
 
   void buildDataGridRows({int? languageIndex}) {

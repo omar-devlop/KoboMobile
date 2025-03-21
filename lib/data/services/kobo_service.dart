@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:kobo/core/helpers/constants.dart';
 import 'package:kobo/data/modules/choices_item.dart';
+import 'package:kobo/data/modules/kobo_user.dart';
 import 'package:kobo/data/modules/response_data.dart';
 import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
@@ -10,6 +11,18 @@ import 'package:kobo/data/modules/survey_item.dart';
 class KoboService {
   final Dio _dio;
   KoboService(this._dio);
+
+  late KoboUser _user;
+
+  get user => _user;
+
+  Future<void> fetchUserDetails() async {
+    var response = await _dio.get('/me', queryParameters: {'format': 'json'});
+
+    if (response.statusCode == 200) {
+      _user = KoboUser.fromJson(response.data);
+    }
+  }
 
   Future<List<KoboForm>> fetchForms() async {
     var response = await _dio.get(
