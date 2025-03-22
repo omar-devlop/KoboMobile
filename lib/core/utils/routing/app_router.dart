@@ -4,6 +4,7 @@ import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
 import 'package:kobo/featuers/dataScreen/bloc/data_cubit.dart';
 import 'package:kobo/featuers/dataScreen/screen/data_screen.dart';
+import 'package:kobo/featuers/settingScreen/screen/settings_screen.dart';
 import 'package:kobo/logic/cubits/data_table/data_table_cubit.dart';
 import 'package:kobo/logic/cubits/form_assets/form_asset_cubit.dart';
 import 'package:kobo/featuers/contentScreen/bloc/form_content_cubit.dart';
@@ -98,6 +99,8 @@ class AppRouter {
             child: ContentScreen(kForm: kForm),
           ),
         );
+      case Routes.settingsScreen:
+        return slideTransitionPage(SettingsScreen());
 
       default:
         return null;

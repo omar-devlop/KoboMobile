@@ -32,8 +32,8 @@ class SubmissionData {
   SubmissionData.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     formhubUuid = json['formhub/uuid'] ?? "";
-    version = json['__version__'] ?? "";
-    metaInstanceID = json['meta/instanceID'] ?? "";
+    version = json['__version__'].toString();
+    metaInstanceID = json['meta/instanceID']  ?? "";
     metaInstanceName = json['meta/instanceName'] ?? "instanceName: n/a";
     xformIdString = json['_xform_id_string'] ?? "";
     uuid = json['_uuid'] ?? "";

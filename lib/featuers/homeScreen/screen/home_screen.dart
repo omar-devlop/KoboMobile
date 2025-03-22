@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kobo/core/helpers/extensions.dart';
+import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/featuers/homeScreen/bloc/kobo_forms_cubit.dart';
 import 'package:kobo/featuers/homeScreen/widget/kobo_form_card.dart';
 
@@ -23,10 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Kobo App'),
         actions: [
           IconButton(
-            onPressed:
-                () => BlocProvider.of<KoboformsCubit>(context).fetchForms(),
-            icon: Icon(Icons.refresh),
+            onPressed: () => context.pushNamed(Routes.settingsScreen),
+            icon: Icon(Icons.settings_outlined),
           ),
+          SizedBox(width: 10),
+
+          IconButton(onPressed: reFetchForms, icon: Icon(Icons.refresh)),
           SizedBox(width: 10),
         ],
       ),
@@ -61,23 +65,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
             success: (data) {
-              if (screenSize.width < 600) {
-                return RefreshIndicator(
-                  onRefresh: reFetchForms,
-                  child: ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0,
-                          vertical: 4.0,
-                        ),
-                        child: KoboFormCard(kForm: data[index]),
-                      );
-                    },
-                  ),
-                );
-              }
+              // if (screenSize.width < 600) {
+              //   return RefreshIndicator(
+              //     onRefresh: reFetchForms,
+              //     child: ListView.builder(
+              //       itemCount: data.length,
+              //       itemBuilder: (context, index) {
+              //         return Padding(
+              //           padding: const EdgeInsets.symmetric(
+              //             horizontal: 8.0,
+              //             vertical: 4.0,
+              //           ),
+              //           child: KoboFormCard(kForm: data[index]),
+              //         );
+              //       },
+              //     ),
+              //   );
+              // }
 
               return RefreshIndicator(
                 onRefresh: reFetchForms,
@@ -87,8 +91,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     vertical: 4.0,
                   ),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: (screenSize.width / 300).toInt(),
-                    childAspectRatio: 2.5,
+                    crossAxisCount:
+                        screenSize.width < 600
+                            ? 1
+                            : (screenSize.width / 300).toInt(),
+                    childAspectRatio:
+                        screenSize.width < 600 ? screenSize.width / 110 : 2.5,
                     crossAxisSpacing: 8.0,
                     mainAxisSpacing: 8.0,
                   ),
