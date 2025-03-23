@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
+import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/featuers/dataScreen/bloc/data_cubit.dart';
 import 'package:kobo/featuers/dataScreen/screen/data_screen.dart';
 import 'package:kobo/featuers/settingScreen/screen/settings_screen.dart';
+import 'package:kobo/featuers/submissionScreen/screen/submission_screen.dart';
 import 'package:kobo/logic/cubits/data_table/data_table_cubit.dart';
 import 'package:kobo/logic/cubits/form_assets/form_asset_cubit.dart';
 import 'package:kobo/featuers/contentScreen/bloc/form_content_cubit.dart';
@@ -46,7 +48,7 @@ class AppRouter {
       case Routes.emptyScreen: // to be used for testing
         return MaterialPageRoute(builder: (_) => const EmptyScreen());
 
-      case Routes.homeScreen:
+      case Routes.homeScreen: // HOME
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider(
@@ -55,11 +57,11 @@ class AppRouter {
               ),
         );
 
-      case Routes.formScreen:
+      case Routes.formScreen: // FORM
         KoboForm kForm = arguments as KoboForm;
         return MaterialPageRoute(builder: (_) => FormScreen(kForm: kForm));
 
-      case Routes.tableDataScreen:
+      case Routes.tableDataScreen: // TABLE -- REMOVE
         KoboForm kForm = arguments as KoboForm;
 
         return MaterialPageRoute(
@@ -74,7 +76,7 @@ class AppRouter {
               ),
         );
 
-      case Routes.dataScreen:
+      case Routes.dataScreen: // DATA (Submissions)
         KoboForm kForm = arguments as KoboForm;
         return slideTransitionPage(
           BlocProvider(
@@ -82,7 +84,7 @@ class AppRouter {
             child: DataScreen(kForm: kForm),
           ),
         );
-      case Routes.sTableDataScreen:
+      case Routes.sTableDataScreen: // TABLE
         KoboForm kForm = arguments as KoboForm;
         return slideTransitionPage(
           BlocProvider(
@@ -91,7 +93,7 @@ class AppRouter {
           ),
         );
 
-      case Routes.contentScreen:
+      case Routes.contentScreen: // CONTENT (Questions)
         KoboForm kForm = arguments as KoboForm;
         return slideTransitionPage(
           BlocProvider(
@@ -99,7 +101,11 @@ class AppRouter {
             child: ContentScreen(kForm: kForm),
           ),
         );
-      case Routes.settingsScreen:
+      case Routes.submissionScreen: // SUBMISSION
+        // KoboForm kForm = arguments as KoboForm;
+        SubmissionData kForm = arguments as SubmissionData;
+        return slideTransitionPage(SubmissionScreen(submissionData: kForm));
+      case Routes.settingsScreen: // SETTINGS
         return slideTransitionPage(SettingsScreen());
 
       default:

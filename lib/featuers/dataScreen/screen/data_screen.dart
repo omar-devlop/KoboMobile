@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/kobo_utils/validation_status.dart';
+import 'package:kobo/core/utils/routing/navigation_route.dart';
+import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
 import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/featuers/dataScreen/bloc/data_cubit.dart';
+import 'package:kobo/core/utils/routing/open_container_navigation.dart';
 
 class DataScreen extends StatelessWidget {
   final KoboForm kForm;
@@ -37,20 +40,30 @@ class DataScreen extends StatelessWidget {
                 return ListView.builder(
                   itemCount: submissionList.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: CircleAvatar(
-                        child: Text(
-                          (index + 1).toString(),
-                          style: TextStyle(
-                            fontFeatures: [FontFeature.tabularFigures()],
+                    return OpenContainerNavigation(
+                      openPage: getPage(
+                        pageName: Routes.submissionScreen,
+                        arguments: submissionList[index],
+                      ),
+
+                      child: (void Function() openContainer) {
+                        return ListTile(
+                          leading: CircleAvatar(
+                            child: Text(
+                              (index + 1).toString(),
+                              style: TextStyle(
+                                fontFeatures: [FontFeature.tabularFigures()],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      title: Text(submissionList[index].metaInstanceName),
-                      trailing: getValidationStatusIcon(
-                        validationLabel:
-                            submissionList[index].validationStatus?.label,
-                      ),
+                          title: Text(submissionList[index].metaInstanceName),
+                          trailing: getValidationStatusIcon(
+                            validationLabel:
+                                submissionList[index].validationStatus?.label,
+                          ),
+                          onTap: openContainer,
+                        );
+                      },
                     );
                   },
                 );
