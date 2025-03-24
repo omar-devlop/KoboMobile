@@ -6,7 +6,7 @@ import 'package:kobo/core/utils/routing/navigation_route.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
 import 'package:kobo/data/modules/submission_data.dart';
-import 'package:kobo/featuers/dataScreen/bloc/data_cubit.dart';
+import 'package:kobo/featuers/data/bloc/data_cubit.dart';
 import 'package:kobo/core/utils/routing/open_container_navigation.dart';
 
 class DataScreen extends StatelessWidget {

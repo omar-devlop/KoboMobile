@@ -32,7 +32,7 @@ class KoboApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      initialRoute: Routes.homeScreen,
+      initialRoute: Routes.loginScreen,
       onGenerateRoute: appRouter.generateRoute,
     );
   }

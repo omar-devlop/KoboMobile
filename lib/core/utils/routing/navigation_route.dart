@@ -3,22 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
 import 'package:kobo/data/modules/submission_data.dart';
-import 'package:kobo/featuers/dataScreen/bloc/data_cubit.dart';
-import 'package:kobo/featuers/dataScreen/screen/data_screen.dart';
-import 'package:kobo/featuers/settingScreen/screen/settings_screen.dart';
-import 'package:kobo/featuers/submissionScreen/screen/submission_screen.dart';
+import 'package:kobo/featuers/data/bloc/data_cubit.dart';
+import 'package:kobo/featuers/data/screen/data_screen.dart';
+import 'package:kobo/featuers/settings/screen/languages_screen.dart';
+import 'package:kobo/featuers/settings/screen/settings_screen.dart';
+import 'package:kobo/featuers/submission/screen/submission_screen.dart';
 import 'package:kobo/logic/cubits/data_table/data_table_cubit.dart';
 import 'package:kobo/logic/cubits/form_assets/form_asset_cubit.dart';
-import 'package:kobo/featuers/contentScreen/bloc/form_content_cubit.dart';
+import 'package:kobo/featuers/content/bloc/form_content_cubit.dart';
 import 'package:kobo/logic/cubits/form_data/form_data_cubit.dart';
-import 'package:kobo/featuers/homeScreen/bloc/kobo_forms_cubit.dart';
-import 'package:kobo/featuers/tableScreen/bloc/s_data_table_cubit.dart';
+import 'package:kobo/featuers/home/bloc/kobo_forms_cubit.dart';
+import 'package:kobo/featuers/table/bloc/s_data_table_cubit.dart';
 import 'package:kobo/presentation/screens/empty/empty_screen.dart';
-import 'package:kobo/featuers/contentScreen/screen/content_screen.dart';
-import 'package:kobo/featuers/tableScreen/screen/s_table_data_screen.dart';
+import 'package:kobo/featuers/content/screen/content_screen.dart';
+import 'package:kobo/featuers/table/screen/s_table_data_screen.dart';
 import 'package:kobo/presentation/screens/form/form_screen.dart';
 import 'package:kobo/presentation/screens/form/details/table_data_screen.dart';
-import 'package:kobo/featuers/homeScreen/screen/home_screen.dart';
+import 'package:kobo/featuers/home/screen/home_screen.dart';
 
 Widget getPage({required String pageName, dynamic arguments}) {
   switch (pageName) {
@@ -72,6 +73,8 @@ Widget getPage({required String pageName, dynamic arguments}) {
       return SubmissionScreen(submissionData: kForm);
     case Routes.settingsScreen: // SETTINGS
       return SettingsScreen();
+    case Routes.languagesScreen:
+      return LanguagesScreen();
 
     default:
       return const EmptyScreen();

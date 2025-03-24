@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/core/helpers/extensions.dart';
+import 'package:kobo/core/utils/networking/dio_factory';
 import 'package:kobo/core/utils/routing/routes.dart';
-import 'package:kobo/featuers/homeScreen/bloc/kobo_forms_cubit.dart';
-import 'package:kobo/featuers/homeScreen/widget/kobo_form_card.dart';
+import 'package:kobo/featuers/home/bloc/kobo_forms_cubit.dart';
+import 'package:kobo/featuers/home/widget/kobo_form_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,9 +14,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Future<void> reFetchForms() async {
-    BlocProvider.of<KoboformsCubit>(context).fetchForms();
-  }
+  Future<void> reFetchForms() async =>
+      BlocProvider.of<KoboformsCubit>(context).fetchForms();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kobo App'),
+        leading: IconButton(
+          onPressed: () {
+            DioFactory.removeCredentialsIntoHeader();
+            context.pushReplacementNamed(Routes.loginScreen);
+          },
+          icon: Icon(Icons.logout),
+        ),
         actions: [
           IconButton(
             onPressed: () => context.pushNamed(Routes.settingsScreen),

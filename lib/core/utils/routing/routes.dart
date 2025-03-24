@@ -8,7 +8,9 @@ class Routes {
   static const String dataScreen = '/dataScreen';
   static const String sTableDataScreen = '/sTableDataScreen';
   static const String settingsScreen = '/settingsScreen';
+  static const String languagesScreen = '/languagesScreen';
   static const String submissionScreen = '/submissionScreen';
 
+  static const String loginScreen = '/loginScreen';
   static const String tableDataScreen = '/tableDataScreen';
 }

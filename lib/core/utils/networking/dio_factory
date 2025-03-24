@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'dart:convert';
 
 class DioFactory {
   /// private constructor as I don't want to allow creating an instance of this class
@@ -19,6 +20,7 @@ class DioFactory {
       dio!
         ..options.connectTimeout = timeOut
         ..options.receiveTimeout = timeOut;
+  
       addDioHeaders();
       // addDioInterceptor();
       return dio!;
@@ -37,13 +39,23 @@ class DioFactory {
 
   static void setTokenIntoHeaderAfterLogin(String token) {
     dio?.options.headers = {
-      // 'Authorization': 'Basic $token',
       'Authorization': 'Token $token',
     };
   }
+   static void setCredentialsIntoHeader({required String username, required String password}) {
+    dio?.options.headers = {
+     'Authorization':
+            'Basic ${base64.encode(utf8.encode('$username:$password'))}',
+    };
+  }
+   static void removeCredentialsIntoHeader() {
+    dio?.options.headers.remove('Authorization'); 
+  }
+
 
   static void addDioInterceptor() {
     dio?.interceptors.add(
+     
       PrettyDioLogger(
         // requestBody: true,
         requestHeader: true,

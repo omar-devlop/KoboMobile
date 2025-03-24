@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,7 +18,7 @@ class KoboformsCubit extends Cubit<KoboformsState> {
   List<KoboForm> forms = [];
 
   void fetchForms() async {
-    safeEmit(KoboformsState.loading(msg: 'Fetching forms...'));
+    safeEmit(KoboformsState.loading(msg: 'fetchingForms'.tr()));
     forms = await getIt<KoboService>().fetchForms();
     safeEmit(KoboformsState.success(forms));
   }

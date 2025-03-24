@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
-import 'package:kobo/featuers/tableScreen/bloc/s_data_table_cubit.dart';
-import 'package:kobo/featuers/tableScreen/widget/s_table_view.dart';
+import 'package:kobo/featuers/table/bloc/s_data_table_cubit.dart';
+import 'package:kobo/featuers/table/widget/s_table_view.dart';
 
 class STableDataScreen extends StatelessWidget {
   final KoboForm kForm;

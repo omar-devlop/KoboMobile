@@ -1,7 +1,18 @@
 {
-    "title": "مرحبا بالعالم!",
+    "en": "English",
+    "ar": "العربية",
     "settings": "الإعدادات",
     "chooseLanguage": "اختر اللغة",
-    "en": "English",
-    "ar": "العربية"
+    "fetchingForms": "جلب النماذج ...",
+    "username": "اسم المستخدم",
+"password": "كلمة المرور",
+    "rememberMe": "تذكرني",
+    "signUp": "إنشاء حساب",
+    "login": "تسجيل الدخول",
+    "loggingIn": "جارٍ تسجيل الدخول ...",
+    "loggedIn": "تم تسجيل الدخول بنجاح",
+    "couldNotLogin": "تعذر تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "couldNotLaunch": "تعذر تشغيل"
 }

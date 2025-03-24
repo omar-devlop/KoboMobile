@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class LanguagesPage extends StatelessWidget {
-  const LanguagesPage({super.key});
+class LanguagesScreen extends StatelessWidget {
+  const LanguagesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/core/utils/routing/navigation_route.dart';
 import 'package:kobo/core/utils/routing/open_container_navigation.dart';
@@ -96,46 +97,37 @@ class KoboFormCard extends StatelessWidget {
                             ),
                           ),
                         Spacer(),
-                        OpenContainerNavigation(
-                          openPage: getPage(
-                            pageName: Routes.contentScreen,
-                            arguments: kForm,
-                          ),
-                          child:
-                              (openContainer) => IconButton(
-                                color: theme.primaryColor,
-                                onPressed: openContainer,
-                                icon: Icon(Icons.question_answer_outlined),
-                                tooltip: 'Questions',
+                        IconButton(
+                          color: theme.primaryColor,
+                          onPressed:
+                              () => context.pushNamed(
+                                Routes.contentScreen,
+                                arguments: kForm,
                               ),
+                          icon: Icon(Icons.question_answer_outlined),
+                          tooltip: 'Questions',
                         ),
                         if (kForm.hasDeployment)
-                          OpenContainerNavigation(
-                            openPage: getPage(
-                              pageName: Routes.dataScreen,
-                              arguments: kForm,
-                            ),
-                            child:
-                                (openContainer) => IconButton(
-                                  color: theme.primaryColor,
-                                  onPressed: openContainer,
-                                  icon: Icon(Icons.data_array),
-                                  tooltip: 'Data',
+                          IconButton(
+                            color: theme.primaryColor,
+                            onPressed:
+                                () => context.pushNamed(
+                                  Routes.dataScreen,
+                                  arguments: kForm,
                                 ),
+                            icon: Icon(Icons.data_array),
+                            tooltip: 'Data',
                           ),
                         if (kForm.hasDeployment)
-                          OpenContainerNavigation(
-                            openPage: getPage(
-                              pageName: Routes.sTableDataScreen,
-                              arguments: kForm,
-                            ),
-                            child:
-                                (openContainer) => IconButton(
-                                  color: theme.primaryColor,
-                                  onPressed: openContainer,
-                                  icon: Icon(Icons.table_rows_outlined),
-                                  tooltip: 'Table',
+                          IconButton(
+                            color: theme.primaryColor,
+                            onPressed:
+                                () => context.pushNamed(
+                                  Routes.sTableDataScreen,
+                                  arguments: kForm,
                                 ),
+                            icon: Icon(Icons.table_rows_outlined),
+                            tooltip: 'Table',
                           ),
                       ],
                     ),

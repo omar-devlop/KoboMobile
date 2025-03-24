@@ -3,7 +3,7 @@ import 'package:kobo/core/helpers/constants.dart';
 import 'package:kobo/core/kobo_utils/safe_index.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
-import 'package:kobo/featuers/tableScreen/model/kobo_form_data_source.dart';
+import 'package:kobo/featuers/table/model/kobo_form_data_source.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 

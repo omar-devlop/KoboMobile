@@ -16,12 +16,32 @@ class KoboService {
 
   get user => _user;
 
-  Future<void> fetchUserDetails() async {
-    var response = await _dio.get('/me', queryParameters: {'format': 'json'});
+  Future<dynamic> fetchUserDetails() async {
+    try {
+      var response = await _dio.get(
+        '/me',
+        queryParameters: {'format': 'json'},
+        options: Options(
+          validateStatus: (status) {
+            if (status == null) return false;
+            if (status == 200 || status > 400) return true;
 
-    if (response.statusCode == 200) {
-      _user = KoboUser.fromJson(response.data);
+            return false;
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        _user = KoboUser.fromJson(response.data);
+        return true;
+      } else if (response.statusCode == 401) {
+        return 'Response status code "${response.statusCode.toString()}"';
+      }
+    } catch (e) {
+      return e.toString();
     }
+
+    return false;
   }
 
   Future<List<KoboForm>> fetchForms() async {

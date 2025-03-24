@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
-import 'package:kobo/featuers/contentScreen/bloc/form_content_cubit.dart';
+import 'package:kobo/featuers/content/bloc/form_content_cubit.dart';
 
 class ContentScreen extends StatelessWidget {
   final KoboForm kForm;

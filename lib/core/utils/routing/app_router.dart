@@ -3,29 +3,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
 import 'package:kobo/data/modules/submission_data.dart';
-import 'package:kobo/featuers/dataScreen/bloc/data_cubit.dart';
-import 'package:kobo/featuers/dataScreen/screen/data_screen.dart';
-import 'package:kobo/featuers/settingScreen/screen/settings_screen.dart';
-import 'package:kobo/featuers/submissionScreen/screen/submission_screen.dart';
+import 'package:kobo/featuers/auth/bloc/auth_cubit.dart';
+import 'package:kobo/featuers/auth/screen/login_page.dart';
+import 'package:kobo/featuers/data/bloc/data_cubit.dart';
+import 'package:kobo/featuers/data/screen/data_screen.dart';
+import 'package:kobo/featuers/settings/screen/languages_screen.dart';
+import 'package:kobo/featuers/settings/screen/settings_screen.dart';
+import 'package:kobo/featuers/submission/screen/submission_screen.dart';
 import 'package:kobo/logic/cubits/data_table/data_table_cubit.dart';
 import 'package:kobo/logic/cubits/form_assets/form_asset_cubit.dart';
-import 'package:kobo/featuers/contentScreen/bloc/form_content_cubit.dart';
+import 'package:kobo/featuers/content/bloc/form_content_cubit.dart';
 import 'package:kobo/logic/cubits/form_data/form_data_cubit.dart';
-import 'package:kobo/featuers/homeScreen/bloc/kobo_forms_cubit.dart';
-import 'package:kobo/featuers/tableScreen/bloc/s_data_table_cubit.dart';
+import 'package:kobo/featuers/home/bloc/kobo_forms_cubit.dart';
+import 'package:kobo/featuers/table/bloc/s_data_table_cubit.dart';
 import 'package:kobo/presentation/screens/empty/empty_screen.dart';
-import 'package:kobo/featuers/contentScreen/screen/content_screen.dart';
-import 'package:kobo/featuers/tableScreen/screen/s_table_data_screen.dart';
+import 'package:kobo/featuers/content/screen/content_screen.dart';
+import 'package:kobo/featuers/table/screen/s_table_data_screen.dart';
 import 'package:kobo/presentation/screens/form/form_screen.dart';
 import 'package:kobo/presentation/screens/form/details/table_data_screen.dart';
-import 'package:kobo/featuers/homeScreen/screen/home_screen.dart';
+import 'package:kobo/featuers/home/screen/home_screen.dart';
 
 class AppRouter {
-  PageRouteBuilder<dynamic> slideTransitionPage(Widget page) {
+  PageRouteBuilder<dynamic> slideTransitionPage(Widget page, {Offset? offset}) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(0.0, 1.0);
+        Offset begin = offset ?? Offset(0.0, 1.0);
         const end = Offset.zero;
         const curve = Curves.easeInOutCubic;
 
@@ -48,13 +51,20 @@ class AppRouter {
       case Routes.emptyScreen: // to be used for testing
         return MaterialPageRoute(builder: (_) => const EmptyScreen());
 
+      case Routes.loginScreen: // LOGIN
+        return slideTransitionPage(
+          BlocProvider(
+            create: (context) => AuthCubit(),
+            child: const LoginScreen(),
+          ),
+          offset: Offset(0.0, -1.0),
+        );
       case Routes.homeScreen: // HOME
-        return MaterialPageRoute(
-          builder:
-              (_) => BlocProvider(
-                create: (context) => KoboformsCubit(),
-                child: const HomeScreen(),
-              ),
+        return slideTransitionPage(
+          BlocProvider(
+            create: (context) => KoboformsCubit(),
+            child: const HomeScreen(),
+          ),
         );
 
       case Routes.formScreen: // FORM
@@ -107,6 +117,8 @@ class AppRouter {
         return slideTransitionPage(SubmissionScreen(submissionData: kForm));
       case Routes.settingsScreen: // SETTINGS
         return slideTransitionPage(SettingsScreen());
+      case Routes.languagesScreen: // LANGUAGES
+        return slideTransitionPage(LanguagesScreen());
 
       default:
         return null;
