@@ -13,6 +13,8 @@
     "loggedIn": "تم تسجيل الدخول بنجاح",
     "couldNotLoginResponseCode": "تعذر تسجيل الدخول: رمز الخطأ {}",
     "logout": "تسجيل الخروج",
+    "areYouSure": "هل انت متأكد؟",
+    "cancel": "الغاء",
     "dontHaveAccount": "ليس لديك حساب؟",
     "couldNotLaunch": "تعذر تشغيل"
 }

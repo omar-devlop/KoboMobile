@@ -157,9 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     autofillHints: const [AutofillHints.username],
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                        ),
+                        borderSide: const BorderSide(color: Colors.transparent),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -181,9 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     autofillHints: const [AutofillHints.password],
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                        ),
+                        borderSide: const BorderSide(color: Colors.transparent),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -213,9 +209,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     success: loginSuccessButton,
                     orElse: loginButton,
                   ),
-    
+
                   SizedBox(height: 24),
-    
+
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
@@ -235,7 +231,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(height: 48),
-    
+
                   state.maybeWhen(
                     error:
                         (msg) => Text(

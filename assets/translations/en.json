@@ -13,6 +13,8 @@
     "loggedIn": "Logged in successfully",
     "couldNotLoginResponseCode": "Could Not Login: Response status code {}",
     "logout": "Logout",
+    "areYouSure": "Are you sure?",
+    "cancel": "Cancel",
     "dontHaveAccount": "Don't have an account?",
     "couldNotLaunch": "Could not launch"
 }
