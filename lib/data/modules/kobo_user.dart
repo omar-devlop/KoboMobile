@@ -36,23 +36,25 @@ class KoboUser {
   });
 
   factory KoboUser.fromJson(Map<String, dynamic> json) => KoboUser(
-        username: json['username'] as String,
-        firstName: json['first_name'] as String,
-        lastName: json['last_name'] as String,
-        email: json['email'] as String,
-        serverTime: json['server_time'] as String,
-        dateJoined: json['date_joined'] as String,
-        projectsUrl: json['projects_url'] as String,
-        isSuperuser: json['is_superuser'] as bool,
-        gravatar: json['gravatar'] as String,
-        isStaff: json['is_staff'] as bool,
-        lastLogin: json['last_login'] as String,
-        extraDetails: ExtraDetails.fromJson(json['extra_details'] as Map<String, dynamic>),
-        gitRev: json['git_rev'],
-        socialAccounts: json['social_accounts'] as List<dynamic>,
-        validatedPassword: json['validated_password'] as bool,
-        acceptedTos: json['accepted_tos'] as bool,
-      );
+    username: json['username'] ?? '',
+    firstName: json['first_name'] ?? '',
+    lastName: json['last_name'] ?? '',
+    email: json['email'] ?? '',
+    serverTime: json['server_time'] ?? '',
+    dateJoined: json['date_joined'] ?? '',
+    projectsUrl: json['projects_url'] ?? '',
+    isSuperuser: json['is_superuser'] as bool,
+    gravatar: json['gravatar'] ?? '',
+    isStaff: json['is_staff'] as bool,
+    lastLogin: json['last_login'] ?? '',
+    extraDetails: ExtraDetails.fromJson(
+      json['extra_details'] as Map<String, dynamic>,
+    ),
+    gitRev: json['git_rev'],
+    socialAccounts: json['social_accounts'] as List<dynamic>,
+    validatedPassword: json['validated_password'] as bool,
+    acceptedTos: json['accepted_tos'] as bool,
+  );
 }
 
 class ExtraDetails {
@@ -70,7 +72,7 @@ class ExtraDetails {
   final String lastUiLanguage;
   final String organizationType;
   final String organizationWebsite;
-  final ProjectViewsSettings projectViewsSettings;
+  final ProjectViewsSettings? projectViewsSettings;
   final String newsletterSubscription;
 
   ExtraDetails({
@@ -93,24 +95,28 @@ class ExtraDetails {
   });
 
   factory ExtraDetails.fromJson(Map<String, dynamic> json) => ExtraDetails(
-        bio: json['bio'] as String,
-        city: json['city'] as String,
-        name: json['name'] as String,
-        gender: json['gender'] as String,
-        sector: json['sector'] as String,
-        country: json['country'] as String,
-        twitter: json['twitter'] as String,
-        linkedin: json['linkedin'] as String,
-        instagram: json['instagram'] as String,
-        organization: json['organization'] as String,
-        requireAuth: json['require_auth'] as bool,
-        lastUiLanguage: json['last_ui_language'] as String,
-        organizationType: json['organization_type'] as String,
-        organizationWebsite: json['organization_website'] as String,
-        projectViewsSettings:
-            ProjectViewsSettings.fromJson(json['project_views_settings'] as Map<String, dynamic>),
-        newsletterSubscription: json['newsletter_subscription'] as String,
-      );
+    bio: json['bio'] ?? '',
+    city: json['city'] ?? '',
+    name: json['name'] ?? '',
+    gender: json['gender'] ?? '',
+    sector: json['sector'] ?? '',
+    country: json['country'] ?? '',
+    twitter: json['twitter'] ?? '',
+    linkedin: json['linkedin'] ?? '',
+    instagram: json['instagram'] ?? '',
+    organization: json['organization'] ?? '',
+    requireAuth: json['require_auth'] as bool,
+    lastUiLanguage: json['last_ui_language'] ?? '',
+    organizationType: json['organization_type'] ?? '',
+    organizationWebsite: json['organization_website'] ?? '',
+    projectViewsSettings:
+        json['project_views_settings'] == null
+            ? null
+            : ProjectViewsSettings.fromJson(
+              json['project_views_settings'] as Map<String, dynamic>,
+            ),
+    newsletterSubscription: json['newsletter_subscription'].toString(),
+  );
 }
 
 class ProjectViewsSettings {
@@ -118,9 +124,11 @@ class ProjectViewsSettings {
 
   ProjectViewsSettings({required this.koboMyProjects});
 
-  factory ProjectViewsSettings.fromJson(Map<String, dynamic> json) => ProjectViewsSettings(
-        koboMyProjects:
-            KoboMyProjects.fromJson(json['kobo_my_projects'] as Map<String, dynamic>),
+  factory ProjectViewsSettings.fromJson(Map<String, dynamic> json) =>
+      ProjectViewsSettings(
+        koboMyProjects: KoboMyProjects.fromJson(
+          json['kobo_my_projects'] as Map<String, dynamic>,
+        ),
       );
 }
 
@@ -136,8 +144,8 @@ class KoboMyProjects {
   });
 
   factory KoboMyProjects.fromJson(Map<String, dynamic> json) => KoboMyProjects(
-        order: json['order'] as Map<String, dynamic>,
-        fields: (json['fields'] as List<dynamic>).map((e) => e as String).toList(),
-        filters: json['filters'] as List<dynamic>,
-      );
+    order: json['order'] as Map<String, dynamic>,
+    fields: (json['fields'] as List<dynamic>).map((e) => e as String).toList(),
+    filters: json['filters'] as List<dynamic>,
+  );
 }

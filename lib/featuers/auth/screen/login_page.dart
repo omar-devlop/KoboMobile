@@ -117,33 +117,33 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     }
 
-    return BlocListener<AuthCubit, AuthState>(
-      listener: (context, state) {
-        if (state is Success) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            context.pushReplacementNamed(Routes.homeScreen);
-          });
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: TextButton.icon(
-            icon: Icon(Icons.language),
-            label: Text(
-              context.tr(context.locale.languageCode),
-              // style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            onPressed: () => context.pushNamed(Routes.languagesScreen),
+    return Scaffold(
+      appBar: AppBar(
+        title: TextButton.icon(
+          icon: Icon(Icons.language),
+          label: Text(
+            context.tr(context.locale.languageCode),
+            // style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          // actions: const [
-          //   ThemeToggleIconWidget(),
-          //   SizedBox(width: 16),
-          // ],
+          onPressed: () => context.pushNamed(Routes.languagesScreen),
         ),
-        body: BlocBuilder<AuthCubit, AuthState>(
-          builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.all(16),
+        // actions: const [
+        //   ThemeToggleIconWidget(),
+        //   SizedBox(width: 16),
+        // ],
+      ),
+      body: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is Success) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              context.pushReplacementNamed(Routes.homeScreen);
+            });
+          }
+        },
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: AutofillGroup(
               child: ListView(
                 children: [
                   SizedBox(height: 72),
@@ -157,7 +157,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     autofillHints: const [AutofillHints.username],
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.transparent),
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                        ),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -179,7 +181,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     autofillHints: const [AutofillHints.password],
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.transparent),
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                        ),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -209,9 +213,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     success: loginSuccessButton,
                     orElse: loginButton,
                   ),
-
+    
                   SizedBox(height: 24),
-
+    
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
@@ -231,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(height: 48),
-
+    
                   state.maybeWhen(
                     error:
                         (msg) => Text(
@@ -243,9 +247,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
