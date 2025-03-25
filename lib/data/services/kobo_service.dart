@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:kobo/core/helpers/constants.dart';
 import 'package:kobo/data/modules/choices_item.dart';
 import 'package:kobo/data/modules/kobo_user.dart';
@@ -35,7 +36,7 @@ class KoboService {
         _user = KoboUser.fromJson(response.data);
         return true;
       } else if (response.statusCode == 401) {
-        return 'Response status code "${response.statusCode.toString()}"';
+        return 'couldNotLoginResponseCode'.tr(args:[response.statusCode.toString()]);
       }
     } catch (e) {
       return e.toString();

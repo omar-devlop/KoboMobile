@@ -11,7 +11,7 @@
     "login": "Login",
     "loggingIn": "Logging in...",
     "loggedIn": "Logged in successfully",
-    "couldNotLogin": "Could Not Login",
+    "couldNotLoginResponseCode": "Could Not Login: Response status code {}",
     "logout": "Logout",
     "dontHaveAccount": "Don't have an account?",
     "couldNotLaunch": "Could not launch"

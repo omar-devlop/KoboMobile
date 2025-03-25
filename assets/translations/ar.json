@@ -11,7 +11,7 @@
     "login": "تسجيل الدخول",
     "loggingIn": "جارٍ تسجيل الدخول ...",
     "loggedIn": "تم تسجيل الدخول بنجاح",
-    "couldNotLogin": "تعذر تسجيل الدخول",
+    "couldNotLoginResponseCode": "تعذر تسجيل الدخول: رمز الخطأ {}",
     "logout": "تسجيل الخروج",
     "dontHaveAccount": "ليس لديك حساب؟",
     "couldNotLaunch": "تعذر تشغيل"

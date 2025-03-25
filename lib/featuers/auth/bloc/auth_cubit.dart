@@ -20,11 +20,7 @@ class AuthCubit extends Cubit<AuthState> {
     dynamic isAuth = await getIt<KoboService>().fetchUserDetails();
     if (isAuth is String || (isAuth is bool && !isAuth)) {
       DioFactory.removeCredentialsIntoHeader();
-      safeEmit(
-        AuthState.error(
-          error: '${'couldNotLogin'.tr()}: ${(isAuth.toString())}',
-        ),
-      );
+      safeEmit(AuthState.error(error: isAuth.toString()));
       return;
     }
 
