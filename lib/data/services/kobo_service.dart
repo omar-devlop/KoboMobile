@@ -17,19 +17,18 @@ class KoboService {
 
   get user => _user;
 
-  Future<dynamic> fetchUserDetails() async {
+  Future<dynamic> fetchUserDetails(
+  ) async {
     var response = await _dio.get('/me', queryParameters: {'format': 'json'});
 
     if (response.statusCode == 200) {
       _user = KoboUser.fromJson(response.data);
       return true;
-    } else if (response.statusCode == 401) {
+    } else {
       return 'couldNotLoginResponseCode'.tr(
         args: [response.statusCode.toString()],
       );
     }
-
-    return false;
   }
 
   Future<List<KoboForm>> fetchForms() async {

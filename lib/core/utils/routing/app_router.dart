@@ -8,6 +8,8 @@ import 'package:kobo/featuers/data/bloc/data_cubit.dart';
 import 'package:kobo/featuers/data/screen/data_screen.dart';
 import 'package:kobo/featuers/settings/screen/languages_screen.dart';
 import 'package:kobo/featuers/settings/screen/settings_screen.dart';
+import 'package:kobo/featuers/users/bloc/cubit/users_cubit.dart';
+import 'package:kobo/featuers/users/screen/users_screen.dart';
 import 'package:kobo/logic/cubits/data_table/data_table_cubit.dart';
 import 'package:kobo/logic/cubits/form_assets/form_asset_cubit.dart';
 import 'package:kobo/logic/cubits/form_data/form_data_cubit.dart';
@@ -46,7 +48,13 @@ class AppRouter {
     switch (settings.name) {
       case Routes.emptyScreen: // to be used for testing
         return MaterialPageRoute(builder: (_) => const EmptyScreen());
-
+      case Routes.usersScreen: // LOGIN
+        return slideTransitionPage(
+          BlocProvider(
+            create: (context) => UsersCubit(),
+            child: const UsersScreen(),
+          ),
+        );
       case Routes.loginScreen: // LOGIN
         return slideTransitionPage(
           BlocProvider(

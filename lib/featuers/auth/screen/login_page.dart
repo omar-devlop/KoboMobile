@@ -5,10 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kobo/core/helpers/constants.dart';
 import 'package:kobo/core/helpers/extensions.dart';
-import 'package:kobo/core/utils/di/dependency_injection.dart';
-import 'package:kobo/core/utils/networking/dio_factory';
+import 'package:kobo/core/helpers/shared_pref_helper.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
-import 'package:kobo/data/services/kobo_service.dart';
 import 'package:kobo/featuers/auth/bloc/auth_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -35,27 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
         SnackBar(content: Text('${context.tr('couldNotLaunch')} "$url"')),
       );
     }
-    return;
-  }
-
-  Future<void> tryLogin() async {
-    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
-      return;
-    }
-
-    DioFactory.setCredentialsIntoHeader(
-      username: usernameController.text,
-      password: passwordController.text,
-    );
-    bool isAuth = await getIt<KoboService>().fetchUserDetails();
-    if (!isAuth) {
-      DioFactory.removeCredentialsIntoHeader();
-      return;
-    }
-    if (mounted) {
-      context.pushReplacementNamed(Routes.homeScreen);
-    }
-
     return;
   }
 
@@ -210,6 +187,33 @@ class _LoginScreenState extends State<LoginScreen> {
                     orElse: loginButton,
                   ),
 
+                  SizedBox(height: 12),
+                  TextButton.icon(
+                    onPressed: () async {
+                      int savedUsers =
+                          (await SharedPrefHelper.getStringList(
+                            Constants.koboUsersKeys,
+                          )).length;
+                      if (savedUsers > 0) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          context.pushNamedAndRemoveUntil(
+                            Routes.usersScreen,
+                            predicate: (Route<dynamic> route) => false,
+                          );
+                        });
+                      } else {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(context.tr('noSavedAccounts')),
+                            ),
+                          );
+                        });
+                      }
+                    },
+                    label: Text(context.tr('savedAccounts')),
+                    icon: Icon(Icons.group),
+                  ),
                   SizedBox(height: 24),
 
                   RichText(

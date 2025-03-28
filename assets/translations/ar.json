@@ -5,7 +5,7 @@
     "chooseLanguage": "اختر اللغة",
     "fetchingForms": "جلب النماذج ...",
     "username": "اسم المستخدم",
-"password": "كلمة المرور",
+    "password": "كلمة المرور",
     "rememberMe": "تذكرني",
     "signUp": "إنشاء حساب",
     "login": "تسجيل الدخول",
@@ -16,5 +16,10 @@
     "areYouSure": "هل انت متأكد؟",
     "cancel": "الغاء",
     "dontHaveAccount": "ليس لديك حساب؟",
-    "couldNotLaunch": "تعذر تشغيل"
+    "couldNotLaunch": "تعذر تشغيل",
+    "noSavedAccounts": "لا يوجد حسابات محفوظة",
+    "users": "المستخدمون",
+    "clearAll": "مسح الكل",
+    "addAccount": "إضافة حساب",
+    "savedAccounts": "الحسابات المحفوظة"
 }

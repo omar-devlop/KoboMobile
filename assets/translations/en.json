@@ -16,5 +16,10 @@
     "areYouSure": "Are you sure?",
     "cancel": "Cancel",
     "dontHaveAccount": "Don't have an account?",
-    "couldNotLaunch": "Could not launch"
+    "couldNotLaunch": "Could not launch",
+    "noSavedAccounts": "There is no saved accounts",
+    "users": "Users",
+    "clearAll": "Clear all",
+    "addAccount": "Add account",
+    "savedAccounts": "Saved accounts"
 }

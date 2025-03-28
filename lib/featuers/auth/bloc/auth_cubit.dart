@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kobo/core/helpers/constants.dart';
+import 'package:kobo/core/helpers/shared_pref_helper.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/core/utils/networking/dio_factory';
 import 'package:kobo/data/services/kobo_service.dart';
@@ -17,8 +19,17 @@ class AuthCubit extends Cubit<AuthState> {
     safeEmit(AuthState.loading(msg: 'loggingIn'.tr()));
 
     DioFactory.setCredentialsIntoHeader(username: username, password: password);
+
     dynamic isAuth = await getIt<KoboService>().fetchUserDetails();
-    if (isAuth is String || (isAuth is bool && !isAuth)) {
+
+    if (isAuth is bool && isAuth) {
+      _storeUser(
+        credentials: DioFactory.getCredentials(
+          username: username,
+          password: password,
+        ),
+      );
+    } else if (isAuth is String || (isAuth is bool && !isAuth)) {
       DioFactory.removeCredentialsIntoHeader();
       safeEmit(AuthState.error(error: isAuth.toString()));
       return;
@@ -26,5 +37,18 @@ class AuthCubit extends Cubit<AuthState> {
 
     safeEmit(AuthState.success());
     return;
+  }
+
+  void _storeUser({required String credentials}) async {
+    List<String> usersList = await SharedPrefHelper.getStringList(
+      Constants.koboUsersKeys,
+    );
+    String userName = await getIt<KoboService>().user.username;
+    if (!usersList.contains(userName)) {
+      usersList.add(userName);
+      await SharedPrefHelper.setData(Constants.koboUsersKeys, usersList);
+    }
+
+    await SharedPrefHelper.setSecuredString(userName, credentials);
   }
 }
