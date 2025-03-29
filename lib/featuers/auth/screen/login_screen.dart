@@ -22,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
 
   bool _obscured = true;
+  bool _rememberMe = true;
 
   Future<void> _launchUrl() async {
     Uri url = Constants.koboSignupUrl;
@@ -61,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
           BlocProvider.of<AuthCubit>(context).login(
             username: usernameController.text,
             password: passwordController.text,
+            rememberMe: _rememberMe,
           );
         },
         label: Text(context.tr('login')),
@@ -180,7 +182,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 48),
+                  SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: CheckboxListTile(
+                      visualDensity: VisualDensity.compact,
+                      controlAffinity: ListTileControlAffinity.leading,
+                      value: _rememberMe,
+                      onChanged: (value) {
+                        setState(() {
+                          _rememberMe = !_rememberMe;
+                        });
+                      },
+                      title: Text(context.tr("rememberMe")),
+                    ),
+                  ),
+                  SizedBox(height: 24),
                   state.maybeWhen(
                     loading: loadingButton,
                     success: loginSuccessButton,

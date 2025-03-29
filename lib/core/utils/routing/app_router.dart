@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
 import 'package:kobo/featuers/auth/bloc/auth_cubit.dart';
-import 'package:kobo/featuers/auth/screen/login_page.dart';
+import 'package:kobo/featuers/auth/screen/login_screen.dart';
 import 'package:kobo/featuers/data/bloc/data_cubit.dart';
 import 'package:kobo/featuers/data/screen/data_screen.dart';
 import 'package:kobo/featuers/settings/screen/languages_screen.dart';

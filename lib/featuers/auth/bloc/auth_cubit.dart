@@ -15,14 +15,14 @@ class AuthCubit extends Cubit<AuthState> {
 
   void safeEmit(AuthState state) => !isClosed ? emit(state) : null;
 
-  void login({required String username, required String password}) async {
+  void login({required String username, required String password, bool rememberMe = false}) async {
     safeEmit(AuthState.loading(msg: 'loggingIn'.tr()));
 
     DioFactory.setCredentialsIntoHeader(username: username, password: password);
 
     dynamic isAuth = await getIt<KoboService>().fetchUserDetails();
 
-    if (isAuth is bool && isAuth) {
+    if (isAuth is bool && isAuth  && rememberMe) {
       _storeUser(
         credentials: DioFactory.getCredentials(
           username: username,
