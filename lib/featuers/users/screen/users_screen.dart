@@ -167,7 +167,11 @@ class UsersScreen extends StatelessWidget {
                       ],
                     );
                   }
-                  return UserCard(user: data[index], loadingUser: loadingUser);
+                  return Stack(
+                    children: [
+                      UserCard(user: data[index], loadingUser: loadingUser),
+                    ],
+                  );
                 },
               ),
             ),

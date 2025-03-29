@@ -21,5 +21,6 @@
     "users": "Users",
     "clearAll": "Clear all",
     "addAccount": "Add account",
-    "savedAccounts": "Saved accounts"
+    "savedAccounts": "Saved accounts",
+    "changeAccounts": "Change accounts"
 }

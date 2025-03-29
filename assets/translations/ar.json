@@ -21,5 +21,6 @@
     "users": "المستخدمون",
     "clearAll": "مسح الكل",
     "addAccount": "إضافة حساب",
-    "savedAccounts": "الحسابات المحفوظة"
+    "savedAccounts": "الحسابات المحفوظة",
+    "changeAccounts": "تغيير الحساب"
 }

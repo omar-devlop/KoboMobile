@@ -20,10 +20,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   Future<void> reFetchForms() async =>
       BlocProvider.of<KoboformsCubit>(context).fetchForms();
-  void logout() {
+
+  void logout({String? routeName}) {
     DioFactory.removeCredentialsIntoHeader();
     context.pushNamedAndRemoveUntil(
-      Routes.loginScreen,
+      routeName ?? Routes.loginScreen,
       predicate: (Route<dynamic> route) => false,
     );
   }
@@ -71,6 +72,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             Spacer(),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.group_outlined),
+              title: Text(context.tr('changeAccounts')),
+              onTap: () => logout(routeName: Routes.usersScreen),
+            ),
             ListTile(
               iconColor: theme.colorScheme.error,
               textColor: theme.colorScheme.error,
@@ -116,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       iconColor: theme.colorScheme.error,
                                       foregroundColor: theme.colorScheme.error,
                                     ),
-                                    onPressed: logout,
+                                    onPressed: logout, // remove saved data from shared preferences
                                     label: Text(context.tr("logout")),
                                     icon: Icon(Icons.logout),
                                   ),
