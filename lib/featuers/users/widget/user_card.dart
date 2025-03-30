@@ -63,10 +63,18 @@ class UserCard extends StatelessWidget {
               ),
             ),
             isUserLoading
-                ? SizedBox(
-                  width: 15,
-                  height: 15,
-                  child: CircularProgressIndicator(strokeCap: StrokeCap.round),
+                ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: 15,
+                      height: 15,
+                      child: CircularProgressIndicator(
+                        strokeCap: StrokeCap.round,
+                      ),
+                    ),
+                    SizedBox(width: 8.0),
+                  ],
                 )
                 : Icon(Icons.chevron_right),
           ],
