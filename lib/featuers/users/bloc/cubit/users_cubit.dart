@@ -24,6 +24,21 @@ class UsersCubit extends Cubit<UsersState> {
     }
   }
 
+  onReorder(int oldIndex, int newIndex) {
+    if (oldIndex == newIndex) return;
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    List<String> newList =
+        List.from(usersList)
+          ..removeAt(oldIndex)
+          ..insert(newIndex, usersList[oldIndex]);
+
+    SharedPrefHelper.setData(Constants.koboUsersKeys, newList);
+    usersList = newList;
+    safeEmit(UsersState.savedUsers(data: newList));
+  }
+
   Future<bool> clearSavedUsers() async {
     usersList = await SharedPrefHelper.getStringList(Constants.koboUsersKeys);
     if (usersList.isNotEmpty) {

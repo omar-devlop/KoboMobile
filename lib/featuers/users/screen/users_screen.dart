@@ -14,7 +14,6 @@ class UsersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     Size screenSize = MediaQuery.of(context).size;
-
     navigateToLoginScreen() {
       if (context.mounted) {
         context.pushNamedAndRemoveUntil(
@@ -29,153 +28,153 @@ class UsersScreen extends StatelessWidget {
       navigateToLoginScreen();
     }
 
-    getUsersList(List<String> data, {String? loadingUser}) {
+    Widget getUsersList(List<String> usersList, {String? loadingUser}) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 12.0,
-          children: [
-            SizedBox(height: 72),
-            SvgPicture.asset(
-              'assets/svg/kobo_logo.svg',
-              width: screenSize.width / 1.5,
-            ),
-            SizedBox(height: 48),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  context.tr("savedAccounts"),
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextButton.icon(
-                  onPressed: () {
-                    showDialog<String>(
-                      context: context,
-                      builder:
-                          (BuildContext context) => Dialog(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0,
-                                vertical: 12,
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: <Widget>[
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    context.tr("clearAll"),
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Text(context.tr('areYouSure')),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      TextButton.icon(
-                                        onPressed: context.pop,
-                                        label: Text(context.tr('cancel')),
-                                        icon: Icon(Icons.close),
-                                      ),
-                                      TextButton.icon(
-                                        style: TextButton.styleFrom(
-                                          iconColor: theme.colorScheme.error,
-                                          foregroundColor:
-                                              theme.colorScheme.error,
-                                        ),
-                                        onPressed: clearAllSavedAccounts,
-                                        label: Text(context.tr("clearAll")),
-                                        icon: Icon(Icons.delete_outline),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                    );
-                  },
-                  label: Text(context.tr('clearAll')),
-                  icon: Icon(Icons.delete_outline),
-                  style: TextButton.styleFrom(
-                    iconColor: theme.colorScheme.error,
-                    foregroundColor: theme.colorScheme.error,
-                  ),
-                ),
-              ],
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: data.length + 1,
-                itemBuilder: (context, index) {
-                  if (index == data.length) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Divider(),
-                        ),
-                        GestureDetector(
-                          onTap: navigateToLoginScreen,
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 8.0),
-                            padding: EdgeInsets.all(12.0),
-                            decoration: BoxDecoration(
-                              color: theme.colorScheme.surfaceContainer,
-                              borderRadius: BorderRadius.circular(4.0),
-                            ),
-                            child: Row(
-                              spacing: 12.0,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.person_add,
-                                  color: theme.colorScheme.primary,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    context.tr("addAccount"),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: theme.textTheme.labelLarge!.copyWith(
-                                      color: theme.colorScheme.primary,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.add,
-                                  color: theme.colorScheme.primary,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  }
-                  return Stack(
-                    children: [
-                      UserCard(user: data[index], loadingUser: loadingUser),
-                    ],
-                  );
-                },
+        child: ReorderableListView.builder(
+          buildDefaultDragHandles: false,
+          itemCount: usersList.length,
+
+          header: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 12.0,
+            children: [
+              SizedBox(height: 72),
+              SvgPicture.asset(
+                'assets/svg/kobo_logo.svg',
+                width: screenSize.width / 1.5,
               ),
-            ),
-          ],
+              SizedBox(height: 48),
+
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    context.tr("savedAccounts"),
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextButton.icon(
+                    onPressed: () {
+                      showDialog<String>(
+                        context: context,
+                        builder:
+                            (BuildContext context) => Dialog(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20.0,
+                                  vertical: 12,
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: <Widget>[
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      context.tr("clearAll"),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Text(context.tr('areYouSure')),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextButton.icon(
+                                          onPressed: context.pop,
+                                          label: Text(context.tr('cancel')),
+                                          icon: Icon(Icons.close),
+                                        ),
+                                        TextButton.icon(
+                                          style: TextButton.styleFrom(
+                                            iconColor: theme.colorScheme.error,
+                                            foregroundColor:
+                                                theme.colorScheme.error,
+                                          ),
+                                          onPressed: clearAllSavedAccounts,
+                                          label: Text(context.tr("clearAll")),
+                                          icon: Icon(Icons.delete_outline),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                      );
+                    },
+                    label: Text(context.tr('clearAll')),
+                    icon: Icon(Icons.delete_outline),
+                    style: TextButton.styleFrom(
+                      iconColor: theme.colorScheme.error,
+                      foregroundColor: theme.colorScheme.error,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+
+          proxyDecorator: (child, index, animation) {
+            return Material(color: Colors.transparent, child: child);
+          },
+          itemBuilder: (context, index) {
+            return ReorderableDelayedDragStartListener(
+              index: index,
+              key: Key(index.toString()),
+              child: UserCard(user: usersList[index], loadingUser: loadingUser),
+            );
+          },
+
+          onReorder: BlocProvider.of<UsersCubit>(context).onReorder,
+          footer: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Divider(),
+              ),
+              GestureDetector(
+                onTap: navigateToLoginScreen,
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 8.0),
+                  padding: EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surfaceContainer,
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                  child: Row(
+                    spacing: 12.0,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(Icons.person_add, color: theme.colorScheme.primary),
+                      Expanded(
+                        child: Text(
+                          context.tr("addAccount"),
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.labelLarge!.copyWith(
+                            color: theme.colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Icon(Icons.add, color: theme.colorScheme.primary),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -199,11 +198,16 @@ class UsersScreen extends StatelessWidget {
           return state.when(
             loading: (msg) => Center(child: CircularProgressIndicator()),
 
-            savedUsers: (data) => getUsersList(data),
+            savedUsers: (data) {
+              return getUsersList(data);
+            },
 
-            empty: () => getUsersList([]),
-            logging:
-                (data, userName) => getUsersList(data, loadingUser: userName),
+            empty: () {
+              return getUsersList([]);
+            },
+            logging: (data, userName) {
+              return getUsersList(data, loadingUser: userName);
+            },
           );
         },
       ),
