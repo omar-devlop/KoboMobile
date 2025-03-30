@@ -96,6 +96,12 @@ class SharedPrefHelper {
     return await flutterSecureStorage.read(key: key) ?? '';
   }
 
+  static removeSecuredData(String key) async {
+    const flutterSecureStorage = FlutterSecureStorage();
+    debugPrint('FlutterSecureStorage : data with key : $key has been removed');
+    await flutterSecureStorage.delete(key: key);
+  }
+
   /// Removes all keys and values in the FlutterSecureStorage
   static clearAllSecuredData() async {
     debugPrint('FlutterSecureStorage : all data has been cleared');

@@ -1,3 +1,6 @@
+import 'package:kobo/core/helpers/constants.dart';
+import 'package:kobo/core/helpers/shared_pref_helper.dart';
+
 class KoboUser {
   final String username;
   final String firstName;
@@ -55,6 +58,19 @@ class KoboUser {
     validatedPassword: json['validated_password'] as bool,
     acceptedTos: json['accepted_tos'] as bool,
   );
+  Future<bool> removeSavedAccount() async {
+    await SharedPrefHelper.removeData(username);
+    List<String> usersList = await SharedPrefHelper.getStringList(
+      Constants.koboUsersKeys,
+    );
+    usersList.remove(username);
+
+    await SharedPrefHelper.setData(Constants.koboUsersKeys, usersList);
+
+    await SharedPrefHelper.removeSecuredData(username);
+
+    return true;
+  }
 }
 
 class ExtraDetails {

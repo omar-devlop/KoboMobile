@@ -21,8 +21,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> reFetchForms() async =>
       BlocProvider.of<KoboformsCubit>(context).fetchForms();
 
-  void logout({String? routeName}) {
+  KoboUser koboUser = getIt<KoboService>().user;
+
+  void logout({String? routeName, bool removeSavedAccount = false}) {
     DioFactory.removeCredentialsIntoHeader();
+
+    if (removeSavedAccount) {
+      koboUser.removeSavedAccount();
+    }
+
     context.pushNamedAndRemoveUntil(
       routeName ?? Routes.loginScreen,
       predicate: (Route<dynamic> route) => false,
@@ -33,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     ThemeData theme = Theme.of(context);
-    KoboUser koboUser = getIt<KoboService>().user;
 
     return Scaffold(
       drawer: Drawer(
@@ -43,29 +49,35 @@ class _HomeScreenState extends State<HomeScreen> {
             DrawerHeader(
               child: Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    CircleAvatar(
-                      radius: 25,
-                      child: Text(
-                        koboUser.username[0].toUpperCase(),
-                        style: const TextStyle(fontSize: 25),
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CircleAvatar(
+                          radius: 25,
+                          child: Text(
+                            koboUser.username[0].toUpperCase(),
+                            style: const TextStyle(fontSize: 25),
+                          ),
+                        ),
+                        // const Spacer(flex: 2),
+                        Text(
+                          koboUser.username,
+                          style: theme.textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          koboUser.extraDetails.name,
+                          style: theme.textTheme.bodySmall,
+                        ),
+                        Text(koboUser.email, style: theme.textTheme.bodyMedium),
+                        // const Spacer(flex: 1),
+                      ],
                     ),
-                    const Spacer(flex: 2),
-                    Text(
-                      koboUser.username,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    Text(
-                      koboUser.email,
-                      style: const TextStyle(fontWeight: FontWeight.w300),
-                    ),
-                    const Spacer(flex: 1),
                   ],
                 ),
               ),
@@ -123,7 +135,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       iconColor: theme.colorScheme.error,
                                       foregroundColor: theme.colorScheme.error,
                                     ),
-                                    onPressed: logout, // remove saved data from shared preferences
+                                    onPressed:
+                                        () => logout(
+                                          removeSavedAccount: true,
+                                        ), // remove saved data from shared preferences
                                     label: Text(context.tr("logout")),
                                     icon: Icon(Icons.logout),
                                   ),
@@ -141,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       appBar: AppBar(
-        title: const Text('Kobo App'),
+        title: Text('Hi, ${koboUser.extraDetails.name}'),
         actions: [
           IconButton(
             onPressed: () => context.pushNamed(Routes.settingsScreen),
