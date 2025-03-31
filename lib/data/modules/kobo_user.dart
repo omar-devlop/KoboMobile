@@ -1,8 +1,3 @@
-import 'package:kobo/core/utils/di/dependency_injection.dart';
-import 'package:kobo/data/services/kobo_service.dart';
-import 'package:kobo/featuers/users/model/account.dart';
-import 'package:kobo/featuers/users/model/account_repo.dart';
-
 class KoboUser {
   final String username;
   final String firstName;
@@ -60,17 +55,6 @@ class KoboUser {
     validatedPassword: json['validated_password'] as bool,
     acceptedTos: json['accepted_tos'] as bool,
   );
-  Future<bool> removeSavedAccount() async {
-    AccountRepository.removeAccount(
-      Account(
-        username: username,
-        password: '',
-        serverUrl: getIt<KoboService>().serverUrl,
-      ),
-    );
-
-    return true;
-  }
 }
 
 class ExtraDetails {

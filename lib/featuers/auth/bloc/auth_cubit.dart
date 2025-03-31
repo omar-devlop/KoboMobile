@@ -5,7 +5,7 @@ import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/core/utils/networking/dio_factory';
 import 'package:kobo/data/services/kobo_service.dart';
 import 'package:kobo/featuers/users/model/account.dart';
-import 'package:kobo/featuers/users/model/account_repo.dart';
+import 'package:kobo/featuers/users/model/account_repository.dart';
 
 part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';
@@ -27,7 +27,8 @@ class AuthCubit extends Cubit<AuthState> {
     dynamic isAuth = await getIt<KoboService>().fetchUserDetails();
 
     if (isAuth is bool && isAuth && rememberMe) {
-      AccountRepository.saveAccount(account);
+      AccountRepository accountRepo = getIt<AccountRepository>();
+      accountRepo.saveAccount(account);
     } else if (isAuth is String || (isAuth is bool && !isAuth)) {
       DioFactory.removeCredentialsIntoHeader();
       safeEmit(AuthState.error(error: isAuth.toString()));

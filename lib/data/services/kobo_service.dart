@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:kobo/core/helpers/constants.dart';
+import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/data/modules/choices_item.dart';
 import 'package:kobo/data/modules/kobo_user.dart';
 import 'package:kobo/data/modules/response_data.dart';
@@ -8,6 +9,8 @@ import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
+import 'package:kobo/featuers/users/model/account.dart';
+import 'package:kobo/featuers/users/model/account_repository.dart';
 
 class KoboService {
   final Dio _dio;
@@ -22,6 +25,15 @@ class KoboService {
   void setServer({required String url}) {
     _serverUrl = url;
     _dio.options.baseUrl = serverUrl;
+  }
+
+  Future<bool> removeSavedAccount() async {
+    AccountRepository accountRepo = getIt<AccountRepository>();
+    accountRepo.removeAccount(
+      Account(username: user.username, password: '', serverUrl: serverUrl),
+    );
+
+    return true;
   }
 
   Future<dynamic> fetchUserDetails() async {

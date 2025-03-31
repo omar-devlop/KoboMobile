@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:kobo/core/helpers/preferences_service.dart';
-
 class Account {
   String username;
   String password;
@@ -35,8 +33,4 @@ class Account {
   @override
   String toString() =>
       'Account(username: $username, password: $password, serverUrl: $serverUrl)';
-
-  get getSavedPassword async {
-    return await PreferencesService.getSecuredString(toKey());
-  }
 }

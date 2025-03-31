@@ -4,7 +4,7 @@ import 'package:kobo/core/helpers/preferences_service.dart';
 import 'package:kobo/featuers/users/model/account.dart';
 
 class AccountRepository {
-  static Future<void> saveAccount(Account account) async {
+  Future<void> saveAccount(Account account) async {
     debugPrint('SAVING ---> ${account.toString()}');
 
     List<String> accountsList = await PreferencesService.getStringList(
@@ -21,7 +21,7 @@ class AccountRepository {
     );
   }
 
-  static Future<void> removeAccount(Account account) async {
+  Future<void> removeAccount(Account account) async {
     debugPrint('REMOVEING ---> ${account.toString()}');
 
     List<String> accountsList = await PreferencesService.getStringList(
@@ -34,7 +34,7 @@ class AccountRepository {
     await PreferencesService.removeData(account.toKey());
   }
 
-  static Future<void> saveAllAccounts(List<Account> accountsList) async {
+  Future<void> saveAllAccounts(List<Account> accountsList) async {
     debugPrint('NEW_ACCOUNT_LIST --->');
     List<String> newAccountsList = [];
 
@@ -45,7 +45,7 @@ class AccountRepository {
     return;
   }
 
-  static Future<List<Account>> getSavedAccountsList() async {
+  Future<List<Account>> getSavedAccountsList() async {
     debugPrint('ALL ACCOUNTS --->');
 
     final List<String> savedAccounts = await PreferencesService.getStringList(
@@ -57,7 +57,7 @@ class AccountRepository {
     return accounts;
   }
 
-  static Future<bool> removeSavedAccounts() async {
+  Future<bool> removeSavedAccounts() async {
     debugPrint('REMOVE ACCOUNTS --->');
 
     final List<String> savedAccounts = await PreferencesService.getStringList(
@@ -71,5 +71,9 @@ class AccountRepository {
     await PreferencesService.removeData(Constants.koboUsersKeys);
 
     return true;
+  }
+
+  Future<String> getAccountSavedPassword(Account account) async {
+    return await PreferencesService.getSecuredString(account.toKey());
   }
 }

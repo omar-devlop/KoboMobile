@@ -4,7 +4,7 @@ import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/core/utils/networking/dio_factory';
 import 'package:kobo/data/services/kobo_service.dart';
 import 'package:kobo/featuers/users/model/account.dart';
-import 'package:kobo/featuers/users/model/account_repo.dart';
+import 'package:kobo/featuers/users/model/account_repository.dart';
 
 part 'users_state.dart';
 part 'users_cubit.freezed.dart';
@@ -15,9 +15,10 @@ class UsersCubit extends Cubit<UsersState> {
   }
   void safeEmit(UsersState state) => !isClosed ? emit(state) : null;
   List<Account> accountsList = [];
+  AccountRepository accountRepo = getIt<AccountRepository>();
 
   getSavedAccounts() async {
-    accountsList = await AccountRepository.getSavedAccountsList();
+    accountsList = await accountRepo.getSavedAccountsList();
     if (accountsList.isEmpty) {
       safeEmit(UsersState.empty());
     } else {
@@ -36,19 +37,19 @@ class UsersCubit extends Cubit<UsersState> {
           ..insert(newIndex, accountsList[oldIndex]);
 
     accountsList = newList;
-    AccountRepository.saveAllAccounts(accountsList);
+    accountRepo.saveAllAccounts(accountsList);
     safeEmit(UsersState.savedUsers(data: accountsList));
   }
 
   Future<bool> clearSavedAccounts() async {
-    return await AccountRepository.removeSavedAccounts();
+    return await accountRepo.removeSavedAccounts();
   }
 
   Future<bool> savedAccountLogin(Account account) async {
     safeEmit(
       UsersState.logging(data: accountsList, userName: account.username),
     );
-    account.password = await account.getSavedPassword;
+    account.password = await accountRepo.getAccountSavedPassword(account);
     KoboService koboService = getIt<KoboService>();
 
     DioFactory.setCredentialsIntoHeader(

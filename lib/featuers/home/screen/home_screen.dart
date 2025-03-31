@@ -22,19 +22,27 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> reFetchForms() async =>
       BlocProvider.of<KoboformsCubit>(context).fetchForms();
 
-  KoboUser koboUser = getIt<KoboService>().user;
+  late KoboService koboService;
+  late KoboUser koboUser;
 
   void logout({String? routeName, bool removeSavedAccount = false}) {
     DioFactory.removeCredentialsIntoHeader();
 
     if (removeSavedAccount) {
-      koboUser.removeSavedAccount();
+      koboService.removeSavedAccount();
     }
 
     context.pushNamedAndRemoveUntil(
       routeName ?? Routes.loginScreen,
       predicate: (Route<dynamic> route) => false,
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    koboService = getIt<KoboService>();
+    koboUser = koboService.user;
   }
 
   @override
@@ -85,6 +93,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             Spacer(),
+            ListTile(
+              leading: Icon(Icons.settings_outlined),
+              title: Text(context.tr('settings')),
+              onTap: () => context.pushNamed(Routes.settingsScreen),
+            ),
             ListTile(
               iconColor: theme.colorScheme.error,
               textColor: theme.colorScheme.error,
@@ -144,9 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       foregroundColor: theme.colorScheme.error,
                                     ),
                                     onPressed:
-                                        () => logout(
-                                          removeSavedAccount: true,
-                                        ), // remove saved data from shared preferences
+                                        () => logout(removeSavedAccount: true),
                                     label: Text(context.tr("logout")),
                                     icon: Icon(Icons.logout),
                                   ),
@@ -166,12 +177,6 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Hi, ${koboUser.extraDetails.name}'),
         actions: [
-          IconButton(
-            onPressed: () => context.pushNamed(Routes.settingsScreen),
-            icon: Icon(Icons.settings_outlined),
-          ),
-          SizedBox(width: 10),
-
           IconButton(onPressed: reFetchForms, icon: Icon(Icons.refresh)),
           SizedBox(width: 10),
         ],
@@ -207,24 +212,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
             success: (data) {
-              // if (screenSize.width < 600) {
-              //   return RefreshIndicator(
-              //     onRefresh: reFetchForms,
-              //     child: ListView.builder(
-              //       itemCount: data.length,
-              //       itemBuilder: (context, index) {
-              //         return Padding(
-              //           padding: const EdgeInsets.symmetric(
-              //             horizontal: 8.0,
-              //             vertical: 4.0,
-              //           ),
-              //           child: KoboFormCard(kForm: data[index]),
-              //         );
-              //       },
-              //     ),
-              //   );
-              // }
-
               return RefreshIndicator(
                 onRefresh: reFetchForms,
                 child: GridView.builder(
@@ -253,20 +240,6 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
       ),
-      // bottomNavigationBar: NavigationBar(
-      //   labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-      //   destinations: [
-      //     NavigationDestination(icon: Icon(Icons.home_outlined), label: 'Home'),
-      //     NavigationDestination(
-      //       icon: Icon(Icons.settings_outlined),
-      //       label: 'Settings',
-      //     ),
-      //         NavigationDestination(
-      //       icon: Icon(Icons.person_outline),
-      //       label: 'Account',
-      //     ),
-      //   ],
-      // ),
     );
   }
 }
