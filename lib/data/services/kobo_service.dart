@@ -13,9 +13,16 @@ class KoboService {
   final Dio _dio;
   KoboService(this._dio);
 
+  late String _serverUrl;
   late KoboUser _user;
 
   get user => _user;
+  get serverUrl => _serverUrl;
+
+  void setServer({required String url}) {
+    _serverUrl = url;
+    _dio.options.baseUrl = serverUrl;
+  }
 
   Future<dynamic> fetchUserDetails() async {
     var response = await _dio.get('/me', queryParameters: {'format': 'json'});

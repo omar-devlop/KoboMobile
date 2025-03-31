@@ -108,4 +108,9 @@ class PreferencesService {
     const flutterSecureStorage = FlutterSecureStorage();
     await flutterSecureStorage.deleteAll();
   }
+
+  static void clearAllSavedPreferences() {
+    clearAllData();
+    clearAllSecuredData();
+  }
 }

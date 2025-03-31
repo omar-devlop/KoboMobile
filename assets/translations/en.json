@@ -22,5 +22,7 @@
     "clearAll": "Clear all",
     "addAccount": "Add account",
     "savedAccounts": "Saved accounts",
-    "changeAccounts": "Change accounts"
+    "changeAccounts": "Change accounts",
+    "clearSavedPreferences": "Clear saved preferences"
+
 }

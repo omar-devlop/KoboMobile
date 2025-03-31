@@ -14,7 +14,7 @@ class DioFactory {
     if (dio == null) {
       dio = Dio(
         BaseOptions(
-          baseUrl: 'https://eu.kobotoolbox.org',
+          // baseUrl: 'https://eu.kobotoolbox.org',
           validateStatus: (status) => true,
         ),
       );

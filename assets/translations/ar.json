@@ -22,5 +22,7 @@
     "clearAll": "مسح الكل",
     "addAccount": "إضافة حساب",
     "savedAccounts": "الحسابات المحفوظة",
-    "changeAccounts": "تغيير الحساب"
+    "changeAccounts": "تغيير الحساب",
+    "clearSavedPreferences": "مسح التفضيلات المحفوظة"
+
 }

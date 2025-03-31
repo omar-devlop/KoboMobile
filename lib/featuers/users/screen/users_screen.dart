@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/featuers/users/bloc/cubit/users_cubit.dart';
+import 'package:kobo/featuers/users/model/account.dart';
 import 'package:kobo/featuers/users/widget/user_card.dart';
 
 class UsersScreen extends StatelessWidget {
@@ -24,11 +25,11 @@ class UsersScreen extends StatelessWidget {
     }
 
     clearAllSavedAccounts() async {
-      await BlocProvider.of<UsersCubit>(context).clearSavedUsers();
+      await BlocProvider.of<UsersCubit>(context).clearSavedAccounts();
       navigateToLoginScreen();
     }
 
-    Widget getUsersList(List<String> usersList, {String? loadingUser}) {
+    Widget getUsersList(List<Account> usersList, {String? loadingUser}) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: ReorderableListView.builder(
@@ -130,7 +131,28 @@ class UsersScreen extends StatelessWidget {
             return ReorderableDelayedDragStartListener(
               index: index,
               key: Key(index.toString()),
-              child: UserCard(user: usersList[index], loadingUser: loadingUser),
+              child: GestureDetector(
+                onTap:
+                    loadingUser != null
+                        ? null
+                        : () async {
+                          bool isAuth = await BlocProvider.of<UsersCubit>(
+                            context,
+                          ).savedAccountLogin(usersList[index]);
+                          if (isAuth) {
+                            if (context.mounted) {
+                              context.pushNamedAndRemoveUntil(
+                                Routes.homeScreen,
+                                predicate: (Route<dynamic> route) => false,
+                              );
+                            }
+                          }
+                        },
+                child: UserCard(
+                  user: usersList[index].username,
+                  loadingUser: loadingUser,
+                ),
+              ),
             );
           },
 

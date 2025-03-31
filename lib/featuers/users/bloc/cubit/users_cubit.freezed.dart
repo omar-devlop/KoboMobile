@@ -20,23 +20,23 @@ mixin _$UsersState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String msg) loading,
-    required TResult Function(List<String> data) savedUsers,
+    required TResult Function(List<Account> data) savedUsers,
     required TResult Function() empty,
-    required TResult Function(List<String> data, String userName) logging,
+    required TResult Function(List<Account> data, String userName) logging,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String msg)? loading,
-    TResult? Function(List<String> data)? savedUsers,
+    TResult? Function(List<Account> data)? savedUsers,
     TResult? Function()? empty,
-    TResult? Function(List<String> data, String userName)? logging,
+    TResult? Function(List<Account> data, String userName)? logging,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String msg)? loading,
-    TResult Function(List<String> data)? savedUsers,
+    TResult Function(List<Account> data)? savedUsers,
     TResult Function()? empty,
-    TResult Function(List<String> data, String userName)? logging,
+    TResult Function(List<Account> data, String userName)? logging,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -157,9 +157,9 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String msg) loading,
-    required TResult Function(List<String> data) savedUsers,
+    required TResult Function(List<Account> data) savedUsers,
     required TResult Function() empty,
-    required TResult Function(List<String> data, String userName) logging,
+    required TResult Function(List<Account> data, String userName) logging,
   }) {
     return loading(msg);
   }
@@ -168,9 +168,9 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String msg)? loading,
-    TResult? Function(List<String> data)? savedUsers,
+    TResult? Function(List<Account> data)? savedUsers,
     TResult? Function()? empty,
-    TResult? Function(List<String> data, String userName)? logging,
+    TResult? Function(List<Account> data, String userName)? logging,
   }) {
     return loading?.call(msg);
   }
@@ -179,9 +179,9 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String msg)? loading,
-    TResult Function(List<String> data)? savedUsers,
+    TResult Function(List<Account> data)? savedUsers,
     TResult Function()? empty,
-    TResult Function(List<String> data, String userName)? logging,
+    TResult Function(List<Account> data, String userName)? logging,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -247,7 +247,7 @@ abstract class _$$SavedUsersImplCopyWith<$Res> {
     $Res Function(_$SavedUsersImpl) then,
   ) = __$$SavedUsersImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<String> data});
+  $Res call({List<Account> data});
 }
 
 /// @nodoc
@@ -270,7 +270,7 @@ class __$$SavedUsersImplCopyWithImpl<$Res>
             null == data
                 ? _value._data
                 : data // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
+                    as List<Account>,
       ),
     );
   }
@@ -279,11 +279,11 @@ class __$$SavedUsersImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SavedUsersImpl implements SavedUsers {
-  const _$SavedUsersImpl({required final List<String> data}) : _data = data;
+  const _$SavedUsersImpl({required final List<Account> data}) : _data = data;
 
-  final List<String> _data;
+  final List<Account> _data;
   @override
-  List<String> get data {
+  List<Account> get data {
     if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_data);
@@ -318,9 +318,9 @@ class _$SavedUsersImpl implements SavedUsers {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String msg) loading,
-    required TResult Function(List<String> data) savedUsers,
+    required TResult Function(List<Account> data) savedUsers,
     required TResult Function() empty,
-    required TResult Function(List<String> data, String userName) logging,
+    required TResult Function(List<Account> data, String userName) logging,
   }) {
     return savedUsers(data);
   }
@@ -329,9 +329,9 @@ class _$SavedUsersImpl implements SavedUsers {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String msg)? loading,
-    TResult? Function(List<String> data)? savedUsers,
+    TResult? Function(List<Account> data)? savedUsers,
     TResult? Function()? empty,
-    TResult? Function(List<String> data, String userName)? logging,
+    TResult? Function(List<Account> data, String userName)? logging,
   }) {
     return savedUsers?.call(data);
   }
@@ -340,9 +340,9 @@ class _$SavedUsersImpl implements SavedUsers {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String msg)? loading,
-    TResult Function(List<String> data)? savedUsers,
+    TResult Function(List<Account> data)? savedUsers,
     TResult Function()? empty,
-    TResult Function(List<String> data, String userName)? logging,
+    TResult Function(List<Account> data, String userName)? logging,
     required TResult orElse(),
   }) {
     if (savedUsers != null) {
@@ -390,10 +390,10 @@ class _$SavedUsersImpl implements SavedUsers {
 }
 
 abstract class SavedUsers implements UsersState {
-  const factory SavedUsers({required final List<String> data}) =
+  const factory SavedUsers({required final List<Account> data}) =
       _$SavedUsersImpl;
 
-  List<String> get data;
+  List<Account> get data;
 
   /// Create a copy of UsersState
   /// with the given fields replaced by the non-null parameter values.
@@ -446,9 +446,9 @@ class _$EmptyImpl implements Empty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String msg) loading,
-    required TResult Function(List<String> data) savedUsers,
+    required TResult Function(List<Account> data) savedUsers,
     required TResult Function() empty,
-    required TResult Function(List<String> data, String userName) logging,
+    required TResult Function(List<Account> data, String userName) logging,
   }) {
     return empty();
   }
@@ -457,9 +457,9 @@ class _$EmptyImpl implements Empty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String msg)? loading,
-    TResult? Function(List<String> data)? savedUsers,
+    TResult? Function(List<Account> data)? savedUsers,
     TResult? Function()? empty,
-    TResult? Function(List<String> data, String userName)? logging,
+    TResult? Function(List<Account> data, String userName)? logging,
   }) {
     return empty?.call();
   }
@@ -468,9 +468,9 @@ class _$EmptyImpl implements Empty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String msg)? loading,
-    TResult Function(List<String> data)? savedUsers,
+    TResult Function(List<Account> data)? savedUsers,
     TResult Function()? empty,
-    TResult Function(List<String> data, String userName)? logging,
+    TResult Function(List<Account> data, String userName)? logging,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -528,7 +528,7 @@ abstract class _$$LoggingImplCopyWith<$Res> {
     $Res Function(_$LoggingImpl) then,
   ) = __$$LoggingImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<String> data, String userName});
+  $Res call({List<Account> data, String userName});
 }
 
 /// @nodoc
@@ -551,7 +551,7 @@ class __$$LoggingImplCopyWithImpl<$Res>
             null == data
                 ? _value._data
                 : data // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
+                    as List<Account>,
         userName:
             null == userName
                 ? _value.userName
@@ -566,13 +566,13 @@ class __$$LoggingImplCopyWithImpl<$Res>
 
 class _$LoggingImpl implements Logging {
   const _$LoggingImpl({
-    required final List<String> data,
+    required final List<Account> data,
     required this.userName,
   }) : _data = data;
 
-  final List<String> _data;
+  final List<Account> _data;
   @override
-  List<String> get data {
+  List<Account> get data {
     if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_data);
@@ -615,9 +615,9 @@ class _$LoggingImpl implements Logging {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String msg) loading,
-    required TResult Function(List<String> data) savedUsers,
+    required TResult Function(List<Account> data) savedUsers,
     required TResult Function() empty,
-    required TResult Function(List<String> data, String userName) logging,
+    required TResult Function(List<Account> data, String userName) logging,
   }) {
     return logging(data, userName);
   }
@@ -626,9 +626,9 @@ class _$LoggingImpl implements Logging {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String msg)? loading,
-    TResult? Function(List<String> data)? savedUsers,
+    TResult? Function(List<Account> data)? savedUsers,
     TResult? Function()? empty,
-    TResult? Function(List<String> data, String userName)? logging,
+    TResult? Function(List<Account> data, String userName)? logging,
   }) {
     return logging?.call(data, userName);
   }
@@ -637,9 +637,9 @@ class _$LoggingImpl implements Logging {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String msg)? loading,
-    TResult Function(List<String> data)? savedUsers,
+    TResult Function(List<Account> data)? savedUsers,
     TResult Function()? empty,
-    TResult Function(List<String> data, String userName)? logging,
+    TResult Function(List<Account> data, String userName)? logging,
     required TResult orElse(),
   }) {
     if (logging != null) {
@@ -688,11 +688,11 @@ class _$LoggingImpl implements Logging {
 
 abstract class Logging implements UsersState {
   const factory Logging({
-    required final List<String> data,
+    required final List<Account> data,
     required final String userName,
   }) = _$LoggingImpl;
 
-  List<String> get data;
+  List<Account> get data;
   String get userName;
 
   /// Create a copy of UsersState

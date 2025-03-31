@@ -8,6 +8,7 @@ import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/helpers/preferences_service.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/featuers/auth/bloc/auth_cubit.dart';
+import 'package:kobo/featuers/users/model/account.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -60,8 +61,11 @@ class _LoginScreenState extends State<LoginScreen> {
       return FilledButton.icon(
         onPressed: () {
           BlocProvider.of<AuthCubit>(context).login(
-            username: usernameController.text,
-            password: passwordController.text,
+            Account(
+              username: usernameController.text,
+              password: passwordController.text,
+              serverUrl: 'https://eu.kobotoolbox.org',
+            ),
             rememberMe: _rememberMe,
           );
         },

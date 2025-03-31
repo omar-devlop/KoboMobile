@@ -1,5 +1,7 @@
-import 'package:kobo/core/helpers/constants.dart';
-import 'package:kobo/core/helpers/preferences_service.dart';
+import 'package:kobo/core/utils/di/dependency_injection.dart';
+import 'package:kobo/data/services/kobo_service.dart';
+import 'package:kobo/featuers/users/model/account.dart';
+import 'package:kobo/featuers/users/model/account_repo.dart';
 
 class KoboUser {
   final String username;
@@ -59,15 +61,13 @@ class KoboUser {
     acceptedTos: json['accepted_tos'] as bool,
   );
   Future<bool> removeSavedAccount() async {
-    await PreferencesService.removeData(username);
-    List<String> usersList = await PreferencesService.getStringList(
-      Constants.koboUsersKeys,
+    AccountRepository.removeAccount(
+      Account(
+        username: username,
+        password: '',
+        serverUrl: getIt<KoboService>().serverUrl,
+      ),
     );
-    usersList.remove(username);
-
-    await PreferencesService.setData(Constants.koboUsersKeys, usersList);
-
-    await PreferencesService.removeSecuredData(username);
 
     return true;
   }

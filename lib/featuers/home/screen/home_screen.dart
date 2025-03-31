@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/core/helpers/extensions.dart';
+import 'package:kobo/core/helpers/preferences_service.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/core/utils/networking/dio_factory';
 import 'package:kobo/core/utils/routing/routes.dart';
@@ -84,6 +85,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             Spacer(),
+            ListTile(
+              iconColor: theme.colorScheme.error,
+              textColor: theme.colorScheme.error,
+              leading: Icon(Icons.delete_forever_outlined),
+              title: Text(context.tr('clearSavedPreferences')),
+              onTap: PreferencesService.clearAllSavedPreferences,
+            ),
             Divider(),
             ListTile(
               leading: Icon(Icons.group_outlined),
