@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kobo/core/helpers/constants.dart';
 import 'package:kobo/core/helpers/extensions.dart';
-import 'package:kobo/core/helpers/shared_pref_helper.dart';
+import 'package:kobo/core/helpers/preferences_service.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/featuers/auth/bloc/auth_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -208,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextButton.icon(
                     onPressed: () async {
                       int savedUsers =
-                          (await SharedPrefHelper.getStringList(
+                          (await PreferencesService.getStringList(
                             Constants.koboUsersKeys,
                           )).length;
                       if (savedUsers > 0) {

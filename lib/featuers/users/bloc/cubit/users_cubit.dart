@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/helpers/constants.dart';
-import 'package:kobo/core/helpers/shared_pref_helper.dart';
+import 'package:kobo/core/helpers/preferences_service.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/core/utils/networking/dio_factory';
 import 'package:kobo/data/services/kobo_service.dart';
@@ -16,7 +16,7 @@ class UsersCubit extends Cubit<UsersState> {
   void safeEmit(UsersState state) => !isClosed ? emit(state) : null;
   List<String> usersList = [];
   getSavedUsers() async {
-    usersList = await SharedPrefHelper.getStringList(Constants.koboUsersKeys);
+    usersList = await PreferencesService.getStringList(Constants.koboUsersKeys);
     if (usersList.isEmpty) {
       safeEmit(UsersState.empty());
     } else {
@@ -34,25 +34,25 @@ class UsersCubit extends Cubit<UsersState> {
           ..removeAt(oldIndex)
           ..insert(newIndex, usersList[oldIndex]);
 
-    SharedPrefHelper.setData(Constants.koboUsersKeys, newList);
+    PreferencesService.setData(Constants.koboUsersKeys, newList);
     usersList = newList;
     safeEmit(UsersState.savedUsers(data: newList));
   }
 
   Future<bool> clearSavedUsers() async {
-    usersList = await SharedPrefHelper.getStringList(Constants.koboUsersKeys);
+    usersList = await PreferencesService.getStringList(Constants.koboUsersKeys);
     if (usersList.isNotEmpty) {
       for (var element in usersList) {
-        await SharedPrefHelper.removeData(element);
+        await PreferencesService.removeData(element);
       }
     }
-    await SharedPrefHelper.removeData(Constants.koboUsersKeys);
+    await PreferencesService.removeData(Constants.koboUsersKeys);
     return true;
   }
 
   savedUserLogin({required String userName}) async {
     safeEmit(UsersState.logging(data: usersList, userName: userName));
-    String userPass = await SharedPrefHelper.getSecuredString(userName);
+    String userPass = await PreferencesService.getSecuredString(userName);
     if (userPass.isEmpty) return false;
 
     DioFactory.setSavedCredentialsIntoHeader(userPass: userPass);

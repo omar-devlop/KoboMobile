@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPrefHelper {
+class PreferencesService {
   // private constructor as I don't want to allow creating an instance of this class itself.
-  SharedPrefHelper._();
+  PreferencesService._();
 
   /// Removes a value from SharedPreferences with given [key].
   static removeData(String key) async {

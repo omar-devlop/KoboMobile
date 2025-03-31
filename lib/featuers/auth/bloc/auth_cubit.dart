@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/helpers/constants.dart';
-import 'package:kobo/core/helpers/shared_pref_helper.dart';
+import 'package:kobo/core/helpers/preferences_service.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/core/utils/networking/dio_factory';
 import 'package:kobo/data/services/kobo_service.dart';
@@ -40,15 +40,15 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void _storeUser({required String credentials}) async {
-    List<String> usersList = await SharedPrefHelper.getStringList(
+    List<String> usersList = await PreferencesService.getStringList(
       Constants.koboUsersKeys,
     );
     String userName = await getIt<KoboService>().user.username;
     if (!usersList.contains(userName)) {
       usersList.add(userName);
-      await SharedPrefHelper.setData(Constants.koboUsersKeys, usersList);
+      await PreferencesService.setData(Constants.koboUsersKeys, usersList);
     }
 
-    await SharedPrefHelper.setSecuredString(userName, credentials);
+    await PreferencesService.setSecuredString(userName, credentials);
   }
 }
