@@ -38,12 +38,7 @@ class DioFactory {
     };
   }
 
-  static void setTokenIntoHeaderAfterLogin(String token) {
-    dio?.options.headers = {
-      'Authorization': 'Token $token',
-    };
-  }
-
+  
   static String getCredentials({required String username, required String password}){
 
     return base64.encode(utf8.encode('$username:$password'));
@@ -55,12 +50,7 @@ class DioFactory {
             'Basic ${getCredentials(username: username, password: password)}',
     };
   }
-   static void setSavedCredentialsIntoHeader({required String userPass}) {
-    dio?.options.headers = {
-     'Authorization':
-            'Basic $userPass',
-    };
-  }
+
    static void removeCredentialsIntoHeader() {
     dio?.options.headers.remove('Authorization'); 
   }

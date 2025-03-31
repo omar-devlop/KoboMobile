@@ -7,10 +7,7 @@ import 'package:kobo/featuers/users/model/account_repository.dart';
 final getIt = GetIt.instance;
 
 Future<void> setupGetIt() async {
-  // Dio & ApiService
   Dio dio = DioFactory.getDio();
-  // DioFactory.setTokenIntoHeaderAfterLogin(
-  //     '5d5483e662e150734a690ccacec834bc25a3474b');
 
   getIt.registerLazySingleton<KoboService>(() => KoboService(dio));
   getIt.registerLazySingleton<AccountRepository>(() => AccountRepository());

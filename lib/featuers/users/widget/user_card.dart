@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:kobo/featuers/users/model/account.dart';
 
 class UserCard extends StatelessWidget {
-  final String user;
-  final String? loadingUser;
-  const UserCard({super.key, required this.user, this.loadingUser});
+  final Account account;
+  final String? loadingAccount;
+  const UserCard({super.key, required this.account, this.loadingAccount});
 
   @override
   Widget build(BuildContext context) {
-    bool isUserLoading = loadingUser != null && (user == loadingUser);
+    bool isUserLoading =
+        loadingAccount != null && (account.username == loadingAccount);
     // isUserLoading = true; // delete
     ThemeData theme = Theme.of(context);
     return Container(
@@ -18,7 +20,7 @@ class UserCard extends StatelessWidget {
         color:
             isUserLoading
                 ? theme.colorScheme.secondaryContainer
-                : theme.colorScheme.surfaceContainer, // surfaceContainerLow
+                : theme.colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(4.0),
       ),
       child: Row(
@@ -31,7 +33,7 @@ class UserCard extends StatelessWidget {
 
           Expanded(
             child: Text(
-              user,
+              account.username,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.labelLarge!.copyWith(
                 color: theme.colorScheme.onSecondaryContainer,

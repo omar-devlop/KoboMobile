@@ -149,8 +149,8 @@ class UsersScreen extends StatelessWidget {
                           }
                         },
                 child: UserCard(
-                  user: usersList[index].username,
-                  loadingUser: loadingUser,
+                  account: usersList[index],
+                  loadingAccount: loadingUser,
                 ),
               ),
             );
