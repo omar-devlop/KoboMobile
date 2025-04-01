@@ -21,6 +21,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController serverUrlController = TextEditingController();
 
   bool _obscured = true;
   bool _rememberMe = true;
@@ -42,6 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     usernameController.dispose();
     passwordController.dispose();
+    serverUrlController.dispose();
     super.dispose();
   }
 
@@ -49,6 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     usernameController.text = 'omaralafa';
     passwordController.text = 'Rappelzkobo1996';
+    serverUrlController.text = 'https://eu.kobotoolbox.org';
     super.initState();
   }
 
@@ -64,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Account(
               username: usernameController.text,
               password: passwordController.text,
-              serverUrl: 'https://eu.kobotoolbox.org',
+              serverUrl: serverUrlController.text,
             ),
             rememberMe: _rememberMe,
           );
@@ -104,10 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         title: TextButton.icon(
           icon: Icon(Icons.language),
-          label: Text(
-            context.tr(context.locale.languageCode),
-            // style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
+          label: Text(context.tr(context.locale.languageCode)),
           onPressed: () => context.pushNamed(Routes.languagesScreen),
         ),
         // actions: const [
@@ -118,9 +118,9 @@ class _LoginScreenState extends State<LoginScreen> {
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is Success) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (context.mounted) {
               context.pushReplacementNamed(Routes.homeScreen);
-            });
+            }
           }
         },
         builder: (context, state) {
@@ -135,6 +135,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: screenSize.width / 1.5,
                   ),
                   SizedBox(height: 72),
+
+                  TextField(
+                    controller: serverUrlController,
+                    decoration: InputDecoration(
+                      hintText: 'https://eu.kobotoolbox.org',
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: theme.colorScheme.outlineVariant,
+                        ),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      prefixIcon: const Icon(Icons.dns),
+                      labelText: context.tr('serverUrl'),
+                      filled: true,
+                      fillColor: theme.colorScheme.onInverseSurface,
+                    ),
+                  ),
+                  SizedBox(height: 24),
                   TextField(
                     controller: usernameController,
                     autofillHints: const [AutofillHints.username],

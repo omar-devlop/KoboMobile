@@ -23,6 +23,6 @@
     "addAccount": "إضافة حساب",
     "savedAccounts": "الحسابات المحفوظة",
     "changeAccounts": "تغيير الحساب",
-    "clearSavedPreferences": "مسح التفضيلات المحفوظة"
-
+    "clearSavedPreferences": "مسح التفضيلات المحفوظة",
+    "serverUrl": "رابط الخادم"
 }

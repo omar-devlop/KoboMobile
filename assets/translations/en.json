@@ -23,6 +23,7 @@
     "addAccount": "Add account",
     "savedAccounts": "Saved accounts",
     "changeAccounts": "Change accounts",
-    "clearSavedPreferences": "Clear saved preferences"
+    "clearSavedPreferences": "Clear saved preferences",
+    "serverUrl": "Server URL"
 
 }

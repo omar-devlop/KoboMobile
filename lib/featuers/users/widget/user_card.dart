@@ -32,13 +32,25 @@ class UserCard extends StatelessWidget {
           Icon(Icons.person),
 
           Expanded(
-            child: Text(
-              account.username,
-              overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.labelLarge!.copyWith(
-                color: theme.colorScheme.onSecondaryContainer,
-                fontWeight: FontWeight.bold,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  account.username,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.labelLarge!.copyWith(
+                    color: theme.colorScheme.onSecondaryContainer,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  account.serverUrl,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodySmall!.copyWith(
+                    color: theme.colorScheme.secondary,
+                  ),
+                ),
+              ],
             ),
           ),
           isUserLoading
