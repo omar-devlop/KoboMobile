@@ -1,14 +1,14 @@
 class ChoicesItem {
   late String name;
   late String kuid;
-  late List<String> label;
+  late List<String> labels;
   late String listName;
   String? autovalue;
 
   ChoicesItem({
     required this.name,
     required this.kuid,
-    required this.label,
+    required this.labels,
     required this.listName,
     this.autovalue,
   });
@@ -17,7 +17,7 @@ class ChoicesItem {
     name = json['name'] ?? json['\$kuid'];
     kuid = json['\$kuid'];
 
-    label = json['label'] is List
+    labels = json['label'] is List
         ? [
             json['name'] ?? "",
             ...(json['label'] as List).whereType<String>().cast<String>()

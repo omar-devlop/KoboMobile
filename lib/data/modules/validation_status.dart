@@ -1,3 +1,4 @@
+
 class ValidationStatus {
   int? timestamp;
   String? uid;

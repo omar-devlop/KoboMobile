@@ -4,10 +4,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/enums/validation_types.dart';
 import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/kobo_utils/safe_index.dart';
-import 'package:kobo/core/kobo_utils/validation_check.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/data/modules/choices_item.dart';
-import 'package:kobo/data/modules/form_data.dart';
+import 'package:kobo/data/modules/response_data.dart';
+import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/pluto_table.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
@@ -55,7 +55,7 @@ class DataTableCubit extends Cubit<DataTableState> {
   Future<SurveyData> _fetchAsset() async =>
       await getIt<KoboService>().fetchFormAsset(uid: uid);
 
-  Future<List<SubmissionBasicData>> _fetchData() async =>
+  Future<ResponseData> _fetchData() async =>
       await getIt<KoboService>().fetchFormData(uid: uid);
 
   // -------------------------------------------------------------------------------------------
@@ -118,7 +118,7 @@ class DataTableCubit extends Cubit<DataTableState> {
 
       newColumns.add(
         PlutoColumn(
-          title: sItem.label.getIndexOrFirst(labelIndex), // sItem.type,
+          title: sItem.labels.getIndexOrFirst(labelIndex), // sItem.type,
           field: sItem.name,
           type: PlutoColumnType.text(),
           readOnly: true,
@@ -133,7 +133,7 @@ class DataTableCubit extends Cubit<DataTableState> {
     List<PlutoRow> newRows = [];
 
     int index = 1;
-    for (SubmissionBasicData sBasicItem in surveyData.data) {
+    for (SubmissionData sBasicItem in surveyData.data!.results) {
       Map<String, PlutoCell> cells = {};
       for (PlutoColumn column in tableData.columns) {
         if (column.field == "index") {
@@ -143,7 +143,7 @@ class DataTableCubit extends Cubit<DataTableState> {
         }
         if (column.field == "validation_status") {
           cells[column.field] = PlutoCell(
-            value: sBasicItem.validationStatus.toValue(),
+            value: sBasicItem.validationStatus.toString(),
           );
           continue;
         }
@@ -162,7 +162,7 @@ class DataTableCubit extends Cubit<DataTableState> {
                 .firstWhere(
                   (ChoicesItem element) => (element.name == cellValue),
                 )
-                .label
+                .labels
                 .getIndexOrFirst(labelIndex);
 
             cells[column.field] = PlutoCell(value: newCellValue);
@@ -179,7 +179,7 @@ class DataTableCubit extends Cubit<DataTableState> {
                     .firstWhere(
                       (ChoicesItem element) => element.name == cellValueItem,
                     )
-                    .label
+                    .labels
                     .getIndexOrFirst(labelIndex),
               );
             }

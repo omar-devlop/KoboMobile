@@ -2,14 +2,14 @@ class KoboForm {
   String? dateCreated;
   String? dateModified;
   String? dateDeployed;
-  String? ownerUsername;
+  late String ownerUsername;
   late String uid;
   String? kind;
   late String name;
   String? assetType;
   String? versionId;
   late bool hasDeployment;
-  bool? deploymentActive;
+  late bool deploymentActive;
   late int deploymentSubmissionCount;
   String? deploymentStatus;
   String? status;
@@ -18,14 +18,14 @@ class KoboForm {
     this.dateCreated,
     this.dateModified,
     this.dateDeployed,
-    this.ownerUsername,
+    required this.ownerUsername,
     required this.uid,
     this.kind,
     required this.name,
     this.assetType,
     this.versionId,
     required this.hasDeployment,
-    this.deploymentActive,
+    required this.deploymentActive,
     required this.deploymentSubmissionCount,
     this.deploymentStatus,
     this.status,
@@ -35,14 +35,14 @@ class KoboForm {
     dateCreated = json['date_created'];
     dateModified = json['date_modified'];
     dateDeployed = json['date_deployed'];
-    ownerUsername = json['owner__username'];
+    ownerUsername = json['owner__username'] ?? '';
     uid = json['uid'].toString();
     kind = json['kind'];
     name = json['name'].toString();
     assetType = json['asset_type'];
     versionId = json['version_id'];
     hasDeployment = json['has_deployment'] ?? false;
-    deploymentActive = json['deployment__active'];
+    deploymentActive = json['deployment__active']?? false;
     deploymentSubmissionCount = json['deployment__submission_count'] ?? 0;
     deploymentStatus = json['deployment_status'];
     status = json['status'];

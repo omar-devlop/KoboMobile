@@ -13,39 +13,13 @@ class TableDataScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DataTableCubit, DataTableState>(
+    return 
+    BlocBuilder<DataTableCubit, DataTableState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
             title: Text('${kForm.name} - Table Data'),
-            actions: [
-              PopupMenuButton(
-                icon: Icon(Icons.language),
-                onSelected: (value) {
-                  if (value is! int) return;
-                  int langIndex = 0;
-                  langIndex = value;
-
-                  BlocProvider.of<DataTableCubit>(context)
-                      .changeLanguage(langIndex);
-                },
-                itemBuilder: (BuildContext context) {
-                  List<PopupMenuItem> langs = [];
-                  state.whenOrNull(
-                    success: (data) {
-                      for (var i = 0; i < data.languages.length; i++) {
-                        langs.add(
-                          PopupMenuItem(
-                              value: i, child: Text(data.languages[i])),
-                        );
-                      }
-                    },
-                  );
-                  return langs;
-                },
-              ),
-            ],
-          ),
+             ),
           body: state.when(
             initial: () => LinearProgressIndicator(),
             loading: (msg) => Center(
@@ -61,7 +35,8 @@ class TableDataScreen extends StatelessWidget {
             error: (msg) => Center(
               child: Text(msg),
             ),
-            success: (tableData) => TableView(
+            success: (tableData) =>
+            TableView(
               columns: tableData.columns,
               rows: tableData.rows,
             ),
