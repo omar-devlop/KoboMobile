@@ -1,3 +1,4 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobo/core/theme/app_theme.dart';
@@ -22,16 +23,20 @@ class KoboApp extends StatelessWidget {
         builder: (context, themeMode) {
           return BlocBuilder<AccentColorCubit, Color>(
             builder: (context, color) {
-              return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                themeMode: themeMode,
-                theme: lightTheme(context),
-                darkTheme: darkTheme(context),
-                localizationsDelegates: context.localizationDelegates,
-                supportedLocales: context.supportedLocales,
-                locale: context.locale,
-                initialRoute: Routes.usersScreen,
-                onGenerateRoute: appRouter.generateRoute,
+              return DynamicColorBuilder(
+                builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+                  return MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    themeMode: themeMode,
+                    theme: lightTheme(context, lightDynamic?.harmonized()),
+                    darkTheme: darkTheme(context, darkDynamic?.harmonized()),
+                    localizationsDelegates: context.localizationDelegates,
+                    supportedLocales: context.supportedLocales,
+                    locale: context.locale,
+                    initialRoute: Routes.usersScreen,
+                    onGenerateRoute: appRouter.generateRoute,
+                  );
+                },
               );
             },
           );

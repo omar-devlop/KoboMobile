@@ -28,6 +28,8 @@ dependencies:
   path_provider: ^2.1.5
   hydrated_bloc: ^10.0.0
 
+  dynamic_color: ^1.7.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
