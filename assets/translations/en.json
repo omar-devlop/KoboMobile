@@ -26,6 +26,13 @@
     "clearSavedPreferences": "Clear saved preferences",
     "serverUrl": "Server URL",
     "confirmation": "Confirmation",
-    "ok": "OK"
+    "ok": "OK",
+    "followSystem": "Follow System",
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode",
+    "appearance": "Appearance",
+    "accentColor": "Accent Color"
+
+    
 
 }

@@ -10,15 +10,11 @@ import 'package:kobo/featuers/settings/screen/languages_screen.dart';
 import 'package:kobo/featuers/settings/screen/settings_screen.dart';
 import 'package:kobo/featuers/users/bloc/cubit/users_cubit.dart';
 import 'package:kobo/featuers/users/screen/users_screen.dart';
-import 'package:kobo/logic/cubits/data_table/data_table_cubit.dart';
-import 'package:kobo/logic/cubits/form_assets/form_asset_cubit.dart';
-import 'package:kobo/logic/cubits/form_data/form_data_cubit.dart';
 import 'package:kobo/featuers/home/bloc/kobo_forms_cubit.dart';
 import 'package:kobo/featuers/table/bloc/s_data_table_cubit.dart';
 import 'package:kobo/presentation/screens/empty/empty_screen.dart';
 import 'package:kobo/featuers/table/screen/s_table_data_screen.dart';
 import 'package:kobo/presentation/screens/form/form_screen.dart';
-import 'package:kobo/presentation/screens/form/details/table_data_screen.dart';
 import 'package:kobo/featuers/home/screen/home_screen.dart';
 
 class AppRouter {
@@ -55,6 +51,7 @@ class AppRouter {
             child: const UsersScreen(),
           ),
         );
+
       case Routes.loginScreen: // LOGIN
         return slideTransitionPage(
           BlocProvider(
@@ -74,21 +71,6 @@ class AppRouter {
       case Routes.formScreen: // FORM
         KoboForm kForm = arguments as KoboForm;
         return MaterialPageRoute(builder: (_) => FormScreen(kForm: kForm));
-
-      case Routes.tableDataScreen: // TABLE -- REMOVE
-        KoboForm kForm = arguments as KoboForm;
-
-        return MaterialPageRoute(
-          builder:
-              (_) => MultiBlocProvider(
-                providers: [
-                  BlocProvider(create: (context) => FormDataCubit(kForm.uid)),
-                  BlocProvider(create: (context) => FormAssetCubit(kForm.uid)),
-                  BlocProvider(create: (context) => DataTableCubit(kForm.uid)),
-                ],
-                child: TableDataScreen(kForm: kForm),
-              ),
-        );
 
       case Routes.dataScreen: // DATA (Submissions)
         KoboForm kForm = arguments as KoboForm;

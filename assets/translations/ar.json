@@ -26,5 +26,10 @@
     "clearSavedPreferences": "مسح التفضيلات المحفوظة",
     "serverUrl": "رابط الخادم",
     "confirmation": "تأكيد",
-    "ok": "حسناً"
+    "ok": "حسناً",
+    "followSystem": "اتباع النظام",
+    "lightMode": "الوضع الفاتح",
+    "darkMode": "الوضع الداكن",
+    "appearance": "المظهر",
+    "accentColor": "لون التمييز"
 }

@@ -8,6 +8,7 @@ import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/helpers/preferences_service.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/featuers/auth/bloc/auth_cubit.dart';
+import 'package:kobo/featuers/settings/widget/theme_toggle_icon_widget.dart';
 import 'package:kobo/featuers/users/model/account.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -95,7 +96,6 @@ class _LoginScreenState extends State<LoginScreen> {
           height: 16,
           width: 16,
           child: CircularProgressIndicator(
-            strokeCap: StrokeCap.round,
             color: theme.colorScheme.onPrimary,
             strokeWidth: 2,
           ),
@@ -105,15 +105,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: TextButton.icon(
-          icon: Icon(Icons.language),
-          label: Text(context.tr(context.locale.languageCode)),
-          onPressed: () => context.pushNamed(Routes.languagesScreen),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            TextButton.icon(
+              icon: Icon(Icons.language),
+              label: Text(context.tr(context.locale.languageCode)),
+              onPressed: () => context.pushNamed(Routes.languagesScreen),
+            ),
+            ThemeToggleIconWidget(),
+          ],
         ),
-        // actions: const [
-        //   ThemeToggleIconWidget(),
-        //   SizedBox(width: 16),
-        // ],
       ),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
@@ -161,7 +164,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             return PopupMenuItem<String>(
                               value: value,
                               child: Text(value),
-                              
                             );
                           }).toList();
                         },

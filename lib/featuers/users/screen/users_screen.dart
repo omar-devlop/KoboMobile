@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kobo/core/helpers/confirm_dialog.dart';
 import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
+import 'package:kobo/featuers/settings/widget/theme_toggle_icon_widget.dart';
 import 'package:kobo/featuers/users/bloc/cubit/users_cubit.dart';
 import 'package:kobo/featuers/users/model/account.dart';
 import 'package:kobo/featuers/users/widget/user_card.dart';
@@ -159,10 +160,17 @@ class UsersScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: TextButton.icon(
-          icon: Icon(Icons.language),
-          label: Text(context.tr(context.locale.languageCode)),
-          onPressed: () => context.pushNamed(Routes.languagesScreen),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            TextButton.icon(
+              icon: Icon(Icons.language),
+              label: Text(context.tr(context.locale.languageCode)),
+              onPressed: () => context.pushNamed(Routes.languagesScreen),
+            ),
+            ThemeToggleIconWidget(),
+          ],
         ),
       ),
       body: BlocConsumer<UsersCubit, UsersState>(

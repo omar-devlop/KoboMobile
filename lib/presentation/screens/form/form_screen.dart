@@ -62,17 +62,6 @@ class FormScreen extends StatelessWidget {
             title: Text('Data'),
             onTap: () => context.pushNamed(Routes.dataScreen, arguments: kForm),
           ),
-          ListTile(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              side: BorderSide(color: Colors.grey.shade300, width: 1.0),
-            ),
-            enabled: kForm.hasDeployment,
-            title: Text('Table Data'),
-            onTap:
-                () =>
-                    context.pushNamed(Routes.tableDataScreen, arguments: kForm),
-          ),
         ],
       ),
     );

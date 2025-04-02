@@ -60,9 +60,7 @@ class UserCard extends StatelessWidget {
                   SizedBox(
                     width: 15,
                     height: 15,
-                    child: CircularProgressIndicator(
-                      strokeCap: StrokeCap.round,
-                    ),
+                    child: CircularProgressIndicator(),
                   ),
                   SizedBox(width: 8.0),
                 ],
