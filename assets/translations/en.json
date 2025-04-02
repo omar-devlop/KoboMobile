@@ -24,6 +24,8 @@
     "savedAccounts": "Saved accounts",
     "changeAccounts": "Change accounts",
     "clearSavedPreferences": "Clear saved preferences",
-    "serverUrl": "Server URL"
+    "serverUrl": "Server URL",
+    "confirmation": "Confirmation",
+    "ok": "OK"
 
 }

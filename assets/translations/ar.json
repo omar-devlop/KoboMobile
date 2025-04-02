@@ -24,5 +24,7 @@
     "savedAccounts": "الحسابات المحفوظة",
     "changeAccounts": "تغيير الحساب",
     "clearSavedPreferences": "مسح التفضيلات المحفوظة",
-    "serverUrl": "رابط الخادم"
+    "serverUrl": "رابط الخادم",
+    "confirmation": "تأكيد",
+    "ok": "حسناً"
 }

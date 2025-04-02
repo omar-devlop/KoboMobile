@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kobo/core/helpers/confirm_dialog.dart';
 import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/featuers/users/bloc/cubit/users_cubit.dart';
@@ -58,60 +59,15 @@ class UsersScreen extends StatelessWidget {
                     ),
                   ),
                   TextButton.icon(
-                    onPressed: () {
-                      showDialog<String>(
-                        context: context,
-                        builder:
-                            (BuildContext context) => Dialog(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20.0,
-                                  vertical: 12,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    const SizedBox(height: 10),
-                                    Text(
-                                      context.tr("clearAll"),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Text(context.tr('areYouSure')),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        TextButton.icon(
-                                          onPressed: context.pop,
-                                          label: Text(context.tr('cancel')),
-                                          icon: Icon(Icons.close),
-                                        ),
-                                        TextButton.icon(
-                                          style: TextButton.styleFrom(
-                                            iconColor: theme.colorScheme.error,
-                                            foregroundColor:
-                                                theme.colorScheme.error,
-                                          ),
-                                          onPressed: clearAllSavedAccounts,
-                                          label: Text(context.tr("clearAll")),
-                                          icon: Icon(Icons.delete_outline),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                      );
-                    },
+                    onPressed:
+                        () => showConfirmationDialog(
+                          context: context,
+                          title: context.tr('clearAll'),
+                          confirmText: context.tr('clearAll'),
+                          confirmIcon: Icons.delete_outline,
+                          onConfirm: clearAllSavedAccounts,
+                        ),
+
                     label: Text(context.tr('clearAll')),
                     icon: Icon(Icons.delete_outline),
                     style: TextButton.styleFrom(
@@ -167,7 +123,7 @@ class UsersScreen extends StatelessWidget {
               GestureDetector(
                 onTap: navigateToLoginScreen,
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 8.0),
+                  margin: EdgeInsets.only(top: 8.0),
                   padding: EdgeInsets.all(12.0),
                   decoration: BoxDecoration(
                     color: theme.colorScheme.surfaceContainer,

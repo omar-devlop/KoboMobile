@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kobo/core/helpers/confirm_dialog.dart';
 import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/helpers/preferences_service.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
@@ -103,7 +104,12 @@ class _HomeScreenState extends State<HomeScreen> {
               textColor: theme.colorScheme.error,
               leading: Icon(Icons.delete_forever_outlined),
               title: Text(context.tr('clearSavedPreferences')),
-              onTap: PreferencesService.clearAllSavedPreferences,
+              onTap:
+                  () => showConfirmationDialog(
+                    context: context,
+                    onConfirm: PreferencesService.clearAllSavedPreferences,
+                    title: context.tr("clearSavedPreferences"),
+                  ),
             ),
             Divider(),
             ListTile(
@@ -116,59 +122,14 @@ class _HomeScreenState extends State<HomeScreen> {
               textColor: theme.colorScheme.error,
               leading: Icon(Icons.logout),
               title: Text(context.tr('logout')),
-              onTap: () {
-                showDialog<String>(
-                  context: context,
-                  builder:
-                      (BuildContext context) => Dialog(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0,
-                            vertical: 12,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              const SizedBox(height: 10),
-                              Text(
-                                context.tr("logout"),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              Text(context.tr('areYouSure')),
-                              const SizedBox(height: 10),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  TextButton.icon(
-                                    onPressed: context.pop,
-                                    label: Text(context.tr('cancel')),
-                                    icon: Icon(Icons.close),
-                                  ),
-                                  TextButton.icon(
-                                    style: TextButton.styleFrom(
-                                      iconColor: theme.colorScheme.error,
-                                      foregroundColor: theme.colorScheme.error,
-                                    ),
-                                    onPressed:
-                                        () => logout(removeSavedAccount: true),
-                                    label: Text(context.tr("logout")),
-                                    icon: Icon(Icons.logout),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                );
-              },
+              onTap:
+                  () => showConfirmationDialog(
+                    context: context,
+                    onConfirm: () => logout(removeSavedAccount: true),
+                    confirmText: context.tr("logout"),
+                    title: context.tr("logout"),
+                    confirmIcon: Icons.logout,
+                  ),
             ),
             SizedBox(height: 20),
           ],

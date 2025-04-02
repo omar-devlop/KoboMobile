@@ -151,6 +151,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(4),
                       ),
                       prefixIcon: const Icon(Icons.dns),
+                      suffixIcon: PopupMenuButton<String>(
+                        icon: const Icon(Icons.arrow_drop_down),
+                        onSelected: (String value) {
+                          serverUrlController.text = value;
+                        },
+                        itemBuilder: (BuildContext context) {
+                          return Constants.koboServersList.map((String value) {
+                            return PopupMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                              
+                            );
+                          }).toList();
+                        },
+                      ),
                       labelText: context.tr('serverUrl'),
                       filled: true,
                       fillColor: theme.colorScheme.onInverseSurface,
