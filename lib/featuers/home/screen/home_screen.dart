@@ -145,22 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: BlocBuilder<KoboformsCubit, KoboformsState>(
         builder: (context, state) {
           return state.when(
-            initial:
-                () => Center(
-                  child: Column(
-                    children: [
-                      Text('Hello World!'),
-                      FilledButton(
-                        onPressed:
-                            () =>
-                                BlocProvider.of<KoboformsCubit>(
-                                  context,
-                                ).fetchForms(),
-                        child: Text("getData"),
-                      ),
-                    ],
-                  ),
-                ),
+            initial: () => Center(child: CircularProgressIndicator()),
             loading:
                 (msg) => Center(
                   child: Column(
