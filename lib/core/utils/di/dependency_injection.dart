@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kobo/core/utils/networking/dio_factory';
-import 'package:kobo/data/services/kobo_service.dart';
+import 'package:kobo/core/services/kobo_service.dart';
 import 'package:kobo/featuers/users/model/account_repository.dart';
 
 final getIt = GetIt.instance;

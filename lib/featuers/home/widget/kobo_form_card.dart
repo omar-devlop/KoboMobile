@@ -6,7 +6,7 @@ import 'package:kobo/core/utils/routing/open_container_navigation.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
 import 'package:kobo/data/modules/kobo_user.dart';
-import 'package:kobo/data/services/kobo_service.dart';
+import 'package:kobo/core/services/kobo_service.dart';
 
 class KoboFormCard extends StatelessWidget {
   final KoboForm kForm;

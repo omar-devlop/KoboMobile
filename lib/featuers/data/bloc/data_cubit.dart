@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/data/modules/response_data.dart';
 import 'package:kobo/data/modules/survey_data.dart';
-import 'package:kobo/data/services/kobo_service.dart';
+import 'package:kobo/core/services/kobo_service.dart';
 
 part 'data_state.dart';
 part 'data_cubit.freezed.dart';

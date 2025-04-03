@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/data/modules/survey_item.dart';
-import 'package:kobo/data/services/kobo_service.dart';
+import 'package:kobo/core/services/kobo_service.dart';
 
 part 'form_content_state.dart';
 part 'form_content_cubit.freezed.dart';

@@ -8,7 +8,7 @@ import 'package:kobo/data/modules/response_data.dart';
 import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
-import 'package:kobo/data/services/kobo_service.dart';
+import 'package:kobo/core/services/kobo_service.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class KoboFormDataSource extends DataGridSource {

@@ -8,7 +8,7 @@ import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/core/utils/networking/dio_factory';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/data/modules/kobo_user.dart';
-import 'package:kobo/data/services/kobo_service.dart';
+import 'package:kobo/core/services/kobo_service.dart';
 import 'package:kobo/featuers/home/bloc/kobo_forms_cubit.dart';
 import 'package:kobo/featuers/home/widget/kobo_form_card.dart';
 
