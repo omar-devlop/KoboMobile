@@ -88,7 +88,10 @@ class UsersScreen extends StatelessWidget {
             return ReorderableDelayedDragStartListener(
               index: index,
               key: Key(index.toString()),
-              child: GestureDetector(
+              child: UserCard(
+                account: usersList[index],
+                loadingAccount: loadingUser,
+              ).tapScale(
                 onTap:
                     loadingUser != null
                         ? null
@@ -105,10 +108,6 @@ class UsersScreen extends StatelessWidget {
                             }
                           }
                         },
-                child: UserCard(
-                  account: usersList[index],
-                  loadingAccount: loadingUser,
-                ),
               ),
             );
           },
@@ -121,37 +120,34 @@ class UsersScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Divider(),
               ),
-              GestureDetector(
-                onTap: navigateToLoginScreen,
-                child: Container(
-                  margin: EdgeInsets.only(top: 8.0),
-                  padding: EdgeInsets.all(12.0),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.surfaceContainer,
-                    borderRadius: BorderRadius.circular(4.0),
-                  ),
-                  child: Row(
-                    spacing: 12.0,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(Icons.person_add, color: theme.colorScheme.primary),
-                      Expanded(
-                        child: Text(
-                          context.tr("addAccount"),
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.labelLarge!.copyWith(
-                            color: theme.colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
+              Container(
+                margin: EdgeInsets.only(top: 8.0),
+                padding: EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surfaceContainer,
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
+                child: Row(
+                  spacing: 12.0,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(Icons.person_add, color: theme.colorScheme.primary),
+                    Expanded(
+                      child: Text(
+                        context.tr("addAccount"),
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.labelLarge!.copyWith(
+                          color: theme.colorScheme.primary,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Icon(Icons.add, color: theme.colorScheme.primary),
-                    ],
-                  ),
+                    ),
+                    Icon(Icons.add, color: theme.colorScheme.primary),
+                  ],
                 ),
-              ),
+              ).tapScale(onTap: navigateToLoginScreen),
             ],
           ),
         ),
