@@ -26,7 +26,7 @@ class FormScreen extends StatelessWidget {
               side: BorderSide(color: Colors.grey.shade300, width: 1.0),
             ),
             enabled: kForm.hasDeployment,
-            title: Text('S Table Data'),
+            title: Text('Table Data'),
             onTap:
                 () => context.pushNamed(
                   Routes.tableDataScreen,
