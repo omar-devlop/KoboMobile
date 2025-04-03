@@ -12,8 +12,7 @@ part of 'users_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UsersState {
@@ -23,14 +22,16 @@ mixin _$UsersState {
     required TResult Function(List<Account> data) savedUsers,
     required TResult Function() empty,
     required TResult Function(List<Account> data, String userName) logging,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String msg)? loading,
     TResult? Function(List<Account> data)? savedUsers,
     TResult? Function()? empty,
     TResult? Function(List<Account> data, String userName)? logging,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String msg)? loading,
@@ -38,21 +39,24 @@ mixin _$UsersState {
     TResult Function()? empty,
     TResult Function(List<Account> data, String userName)? logging,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
     required TResult Function(SavedUsers value) savedUsers,
     required TResult Function(Empty value) empty,
     required TResult Function(Logging value) logging,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Loading value)? loading,
     TResult? Function(SavedUsers value)? savedUsers,
     TResult? Function(Empty value)? empty,
     TResult? Function(Logging value)? logging,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
@@ -60,15 +64,15 @@ mixin _$UsersState {
     TResult Function(Empty value)? empty,
     TResult Function(Logging value)? logging,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UsersStateCopyWith<$Res> {
   factory $UsersStateCopyWith(
-    UsersState value,
-    $Res Function(UsersState) then,
-  ) = _$UsersStateCopyWithImpl<$Res, UsersState>;
+          UsersState value, $Res Function(UsersState) then) =
+      _$UsersStateCopyWithImpl<$Res, UsersState>;
 }
 
 /// @nodoc
@@ -88,9 +92,8 @@ class _$UsersStateCopyWithImpl<$Res, $Val extends UsersState>
 /// @nodoc
 abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
-    _$LoadingImpl value,
-    $Res Function(_$LoadingImpl) then,
-  ) = __$$LoadingImplCopyWithImpl<$Res>;
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String msg});
 }
@@ -100,24 +103,22 @@ class __$$LoadingImplCopyWithImpl<$Res>
     extends _$UsersStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
-    _$LoadingImpl _value,
-    $Res Function(_$LoadingImpl) _then,
-  ) : super(_value, _then);
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UsersState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? msg = null}) {
-    return _then(
-      _$LoadingImpl(
-        msg:
-            null == msg
-                ? _value.msg
-                : msg // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? msg = null,
+  }) {
+    return _then(_$LoadingImpl(
+      msg: null == msg
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -243,9 +244,8 @@ abstract class Loading implements UsersState {
 /// @nodoc
 abstract class _$$SavedUsersImplCopyWith<$Res> {
   factory _$$SavedUsersImplCopyWith(
-    _$SavedUsersImpl value,
-    $Res Function(_$SavedUsersImpl) then,
-  ) = __$$SavedUsersImplCopyWithImpl<$Res>;
+          _$SavedUsersImpl value, $Res Function(_$SavedUsersImpl) then) =
+      __$$SavedUsersImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Account> data});
 }
@@ -255,24 +255,22 @@ class __$$SavedUsersImplCopyWithImpl<$Res>
     extends _$UsersStateCopyWithImpl<$Res, _$SavedUsersImpl>
     implements _$$SavedUsersImplCopyWith<$Res> {
   __$$SavedUsersImplCopyWithImpl(
-    _$SavedUsersImpl _value,
-    $Res Function(_$SavedUsersImpl) _then,
-  ) : super(_value, _then);
+      _$SavedUsersImpl _value, $Res Function(_$SavedUsersImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UsersState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null}) {
-    return _then(
-      _$SavedUsersImpl(
-        data:
-            null == data
-                ? _value._data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as List<Account>,
-      ),
-    );
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$SavedUsersImpl(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<Account>,
+    ));
   }
 }
 
@@ -405,9 +403,8 @@ abstract class SavedUsers implements UsersState {
 /// @nodoc
 abstract class _$$EmptyImplCopyWith<$Res> {
   factory _$$EmptyImplCopyWith(
-    _$EmptyImpl value,
-    $Res Function(_$EmptyImpl) then,
-  ) = __$$EmptyImplCopyWithImpl<$Res>;
+          _$EmptyImpl value, $Res Function(_$EmptyImpl) then) =
+      __$$EmptyImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -415,9 +412,8 @@ class __$$EmptyImplCopyWithImpl<$Res>
     extends _$UsersStateCopyWithImpl<$Res, _$EmptyImpl>
     implements _$$EmptyImplCopyWith<$Res> {
   __$$EmptyImplCopyWithImpl(
-    _$EmptyImpl _value,
-    $Res Function(_$EmptyImpl) _then,
-  ) : super(_value, _then);
+      _$EmptyImpl _value, $Res Function(_$EmptyImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UsersState
   /// with the given fields replaced by the non-null parameter values.
@@ -524,9 +520,8 @@ abstract class Empty implements UsersState {
 /// @nodoc
 abstract class _$$LoggingImplCopyWith<$Res> {
   factory _$$LoggingImplCopyWith(
-    _$LoggingImpl value,
-    $Res Function(_$LoggingImpl) then,
-  ) = __$$LoggingImplCopyWithImpl<$Res>;
+          _$LoggingImpl value, $Res Function(_$LoggingImpl) then) =
+      __$$LoggingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Account> data, String userName});
 }
@@ -536,39 +531,36 @@ class __$$LoggingImplCopyWithImpl<$Res>
     extends _$UsersStateCopyWithImpl<$Res, _$LoggingImpl>
     implements _$$LoggingImplCopyWith<$Res> {
   __$$LoggingImplCopyWithImpl(
-    _$LoggingImpl _value,
-    $Res Function(_$LoggingImpl) _then,
-  ) : super(_value, _then);
+      _$LoggingImpl _value, $Res Function(_$LoggingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UsersState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null, Object? userName = null}) {
-    return _then(
-      _$LoggingImpl(
-        data:
-            null == data
-                ? _value._data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as List<Account>,
-        userName:
-            null == userName
-                ? _value.userName
-                : userName // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? data = null,
+    Object? userName = null,
+  }) {
+    return _then(_$LoggingImpl(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<Account>,
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
 /// @nodoc
 
 class _$LoggingImpl implements Logging {
-  const _$LoggingImpl({
-    required final List<Account> data,
-    required this.userName,
-  }) : _data = data;
+  const _$LoggingImpl(
+      {required final List<Account> data, required this.userName})
+      : _data = data;
 
   final List<Account> _data;
   @override
@@ -598,10 +590,7 @@ class _$LoggingImpl implements Logging {
 
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_data),
-    userName,
-  );
+      runtimeType, const DeepCollectionEquality().hash(_data), userName);
 
   /// Create a copy of UsersState
   /// with the given fields replaced by the non-null parameter values.
@@ -687,10 +676,9 @@ class _$LoggingImpl implements Logging {
 }
 
 abstract class Logging implements UsersState {
-  const factory Logging({
-    required final List<Account> data,
-    required final String userName,
-  }) = _$LoggingImpl;
+  const factory Logging(
+      {required final List<Account> data,
+      required final String userName}) = _$LoggingImpl;
 
   List<Account> get data;
   String get userName;

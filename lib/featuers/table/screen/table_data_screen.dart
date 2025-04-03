@@ -10,13 +10,12 @@ class TableDataScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DataTableCubit, SDataTableState>(
+    return BlocBuilder<DataTableCubit, DataTableState>(
       builder: (context, state) {
         return Scaffold(
           appBar: state.whenOrNull(
             initial: () => AppBar(),
-            loading:
-                (_) => AppBar(title: Text(' ${kForm.name} - Table Data')),
+            loading: (_) => AppBar(title: Text(' ${kForm.name} - Table Data')),
             error: (_) => AppBar(),
           ),
           body: state.when(
@@ -30,7 +29,7 @@ class TableDataScreen extends StatelessWidget {
                   ),
                 ),
             error: (msg) => Center(child: Text(msg)),
-            success: (tableData) => TableView(surveyData: tableData),
+            success: (data) => TableView(survey: data),
           ),
         );
       },

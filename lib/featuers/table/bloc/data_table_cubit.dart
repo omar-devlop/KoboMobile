@@ -1,49 +1,36 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kobo/core/utils/di/dependency_injection.dart';
-import 'package:kobo/data/modules/response_data.dart';
-import 'package:kobo/data/modules/survey_data.dart';
+import 'package:kobo/core/services/kobo_form_repository.dart';
 import 'package:kobo/core/services/kobo_service.dart';
+import 'package:kobo/core/utils/di/dependency_injection.dart';
 
 part 'data_table_state.dart';
 part 'data_table_cubit.freezed.dart';
 
-class DataTableCubit extends Cubit<SDataTableState> {
-  DataTableCubit(String uid) : super(SDataTableState.initial()) {
+class DataTableCubit extends Cubit<DataTableState> {
+  DataTableCubit(String uid) : super(DataTableState.initial()) {
     setUid(uid);
-    fetchTableData();
+    fetchData();
   }
   late String uid;
-  SurveyData surveyData = SurveyData();
+  KoboFormRepository? surveyData;
 
-  void safeEmit(SDataTableState state) => !isClosed ? emit(state) : null;
+  void safeEmit(DataTableState state) => !isClosed ? emit(state) : null;
 
   void setUid(String uid) => this.uid = uid;
 
-  void fetchTableData() async {
-    safeEmit(SDataTableState.loading(msg: "Fetching survey..."));
+  void fetchData() async {
+    safeEmit(DataTableState.loading(msg: "Fetching survey..."));
 
     surveyData = await _fetchAsset();
 
-    // safeEmit(SDataTableState.loading(msg: "Fetching data..."));
-
-    // surveyData.data = await _fetchData();
-
-    safeEmit(SDataTableState.success(surveyData));
+    if (surveyData != null) {
+      safeEmit(DataTableState.success(surveyData!));
+    } else {
+      safeEmit(DataTableState.error(error: "Survey data is not available"));
+    }
   }
 
-  Future<bool> fetchMoreData() async {
-    ResponseData newData = await _fetchData(
-      start: surveyData.data!.results.length,
-    );
-    surveyData.data!.results.addAll(newData.results);
-    safeEmit(SDataTableState.success(surveyData));
-    return true;
-  }
-
-  Future<SurveyData> _fetchAsset() async =>
+  Future<dynamic> _fetchAsset() async =>
       await getIt<KoboService>().fetchFormAsset(uid: uid);
-
-  Future<ResponseData> _fetchData({int start = 0}) async =>
-      await getIt<KoboService>().fetchFormData(uid: uid, start: start);
 }
