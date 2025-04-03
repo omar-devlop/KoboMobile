@@ -30,7 +30,7 @@ class TableDataScreen extends StatelessWidget {
                   ),
                 ),
             error: (msg) => Center(child: Text(msg)),
-            success: (tableData) => STableView(surveyData: tableData),
+            success: (tableData) => TableView(surveyData: tableData),
           ),
         );
       },

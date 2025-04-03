@@ -41,7 +41,6 @@ class KoboService {
 
     if (response.statusCode == 200) {
       _user = KoboUser.fromJson(response.data);
-      // print('extraDetails.name: ${_user.extraDetails.name.toString()}');
       return true;
     } else {
       return 'couldNotLoginResponseCode'.tr(

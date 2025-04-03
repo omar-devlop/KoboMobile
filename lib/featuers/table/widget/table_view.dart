@@ -7,15 +7,15 @@ import 'package:kobo/featuers/table/model/kobo_form_data_source.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
-class STableView extends StatefulWidget {
+class TableView extends StatefulWidget {
   final SurveyData surveyData;
-  const STableView({super.key, required this.surveyData});
+  const TableView({super.key, required this.surveyData});
 
   @override
-  State<STableView> createState() => _STableViewState();
+  State<TableView> createState() => _TableViewState();
 }
 
-class _STableViewState extends State<STableView> {
+class _TableViewState extends State<TableView> {
   late KoboFormDataSource koboDataSource;
   late Map<String, double> columnWidths = {};
   late SurveyData surveyData;
