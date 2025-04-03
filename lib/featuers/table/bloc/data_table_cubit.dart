@@ -5,11 +5,11 @@ import 'package:kobo/data/modules/response_data.dart';
 import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/services/kobo_service.dart';
 
-part 's_data_table_state.dart';
-part 's_data_table_cubit.freezed.dart';
+part 'data_table_state.dart';
+part 'data_table_cubit.freezed.dart';
 
-class SDataTableCubit extends Cubit<SDataTableState> {
-  SDataTableCubit(String uid) : super(SDataTableState.initial()) {
+class DataTableCubit extends Cubit<SDataTableState> {
+  DataTableCubit(String uid) : super(SDataTableState.initial()) {
     setUid(uid);
     fetchTableData();
   }

@@ -123,7 +123,7 @@ class KoboFormCard extends StatelessWidget {
                             color: theme.colorScheme.primary,
                             onPressed:
                                 () => context.pushNamed(
-                                  Routes.sTableDataScreen,
+                                  Routes.tableDataScreen,
                                   arguments: kForm,
                                 ),
                             icon: Icon(Icons.table_rows_outlined),

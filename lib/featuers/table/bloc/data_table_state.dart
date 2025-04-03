@@ -1,4 +1,4 @@
-part of 's_data_table_cubit.dart';
+part of 'data_table_cubit.dart';
 
 @freezed
 class SDataTableState with _$SDataTableState {

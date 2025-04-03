@@ -11,9 +11,9 @@ import 'package:kobo/featuers/settings/screen/settings_screen.dart';
 import 'package:kobo/featuers/users/bloc/cubit/users_cubit.dart';
 import 'package:kobo/featuers/users/screen/users_screen.dart';
 import 'package:kobo/featuers/home/bloc/kobo_forms_cubit.dart';
-import 'package:kobo/featuers/table/bloc/s_data_table_cubit.dart';
+import 'package:kobo/featuers/table/bloc/data_table_cubit.dart';
 import 'package:kobo/presentation/screens/empty/empty_screen.dart';
-import 'package:kobo/featuers/table/screen/s_table_data_screen.dart';
+import 'package:kobo/featuers/table/screen/table_data_screen.dart';
 import 'package:kobo/presentation/screens/form/form_screen.dart';
 import 'package:kobo/featuers/home/screen/home_screen.dart';
 
@@ -80,12 +80,12 @@ class AppRouter {
             child: DataScreen(kForm: kForm),
           ),
         );
-      case Routes.sTableDataScreen: // TABLE
+      case Routes.tableDataScreen: // TABLE
         KoboForm kForm = arguments as KoboForm;
         return slideTransitionPage(
           BlocProvider(
-            create: (context) => SDataTableCubit(kForm.uid),
-            child: STableDataScreen(kForm: kForm),
+            create: (context) => DataTableCubit(kForm.uid),
+            child: TableDataScreen(kForm: kForm),
           ),
         );
 

@@ -29,7 +29,7 @@ class FormScreen extends StatelessWidget {
             title: Text('S Table Data'),
             onTap:
                 () => context.pushNamed(
-                  Routes.sTableDataScreen,
+                  Routes.tableDataScreen,
                   arguments: kForm,
                 ),
           ),
