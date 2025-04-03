@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:kobo/core/helpers/constants.dart';
+import 'package:kobo/core/services/kobo_form_repository.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
-import 'package:kobo/data/modules/choices_item.dart';
 import 'package:kobo/data/modules/kobo_user.dart';
 import 'package:kobo/data/modules/response_data.dart';
 import 'package:kobo/data/modules/submission_data.dart';
 import 'package:kobo/data/modules/kobo_form.dart';
-import 'package:kobo/data/modules/survey_data.dart';
 import 'package:kobo/data/modules/survey_item.dart';
 import 'package:kobo/featuers/users/model/account.dart';
 import 'package:kobo/featuers/users/model/account_repository.dart';
@@ -67,58 +66,18 @@ class KoboService {
     return [];
   }
 
-  Future<SurveyData> fetchFormAsset({required String uid}) async {
+  dynamic fetchFormAsset({required String uid}) async {
+    // convert dynamic to KoboFormRepository
     var response = await _dio.get(
       '/api/v2/assets/$uid',
       queryParameters: {'format': 'json'},
     );
 
     if (response.statusCode == 200) {
-      var responseContentSurvey = response.data["content"]["survey"];
-      var responseContentChoices = response.data["content"]["choices"];
-      var responseSummaryLanguages = response.data["summary"]["languages"];
-
-      List<SurveyItem> surveyQuestions = [];
-      List<ChoicesItem> choicesData = [];
-      List<String> surveyLanguages = ["XML Values"];
-
-      if (responseContentSurvey != null) {
-        surveyQuestions =
-            responseContentSurvey
-                .map<SurveyItem>((json) => SurveyItem.fromJson(json))
-                .toList();
-      }
-      if (responseContentChoices != null) {
-        choicesData =
-            responseContentChoices
-                .map<ChoicesItem>((json) => ChoicesItem.fromJson(json))
-                .toList();
-      }
-      if (responseSummaryLanguages != null) {
-        if (responseSummaryLanguages.isEmpty) {
-          surveyLanguages.add("Default Labels");
-        } else {
-          responseSummaryLanguages
-              .where((item) => item is String)
-              .forEach((item) => surveyLanguages.add(item));
-        }
-      }
-      String formName = response.data["name"] ?? '';
-      String uid = response.data["uid"] ?? '';
-      int deploymentSubmissionCount =
-          response.data["deployment__submission_count"] ?? 0;
-
-      return SurveyData(
-        formName: formName,
-        uid: uid,
-        deploymentSubmissionCount: deploymentSubmissionCount,
-        survey: surveyQuestions,
-        choices: choicesData,
-        languages: surveyLanguages,
-      );
+      return await KoboFormRepository.create(response.data);
     }
 
-    return SurveyData();
+    return null;
   }
 
   Future<List<SurveyItem>> fetchFormContent({required String uid}) async {
@@ -174,6 +133,6 @@ class KoboService {
       return responseData;
     }
 
-    return ResponseData(count: 0, results: []);
+    return ResponseData.empty();
   }
 }

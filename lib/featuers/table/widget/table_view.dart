@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kobo/core/helpers/constants.dart';
-import 'package:kobo/core/kobo_utils/safe_index.dart';
-import 'package:kobo/data/modules/survey_data.dart';
+import 'package:kobo/core/services/kobo_form_repository.dart';
 import 'package:kobo/data/modules/survey_item.dart';
 import 'package:kobo/featuers/table/model/kobo_form_data_source.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
 class TableView extends StatefulWidget {
-  final SurveyData surveyData;
-  const TableView({super.key, required this.surveyData});
+  final KoboFormRepository survey;
+  const TableView({super.key, required this.survey});
 
   @override
   State<TableView> createState() => _TableViewState();
@@ -18,10 +17,8 @@ class TableView extends StatefulWidget {
 class _TableViewState extends State<TableView> {
   late KoboFormDataSource koboDataSource;
   late Map<String, double> columnWidths = {};
-  late SurveyData surveyData;
-  List<SurveyItem> formColumns = <SurveyItem>[];
+  late KoboFormRepository survey;
   List<GridColumn> columns = <GridColumn>[];
-  List<String> languages = <String>[];
   int selectedLangIndex = 1;
   final int _rowsPerPage = Constants.limit;
   static const double _dataPagerHeight = 60;
@@ -38,7 +35,6 @@ class _TableViewState extends State<TableView> {
       minimumWidth: minimumWidth,
       columnName: columnName,
       label: Container(
-        // padding: const EdgeInsets.all(16.0),
         alignment: Alignment.center,
         child: Text(columnLabel ?? columnName),
       ),
@@ -56,14 +52,14 @@ class _TableViewState extends State<TableView> {
         columnLabel: 'Validation',
       ),
     );
-    for (var column in formColumns) {
+    for (SurveyItem column in survey.questions) {
       if (column.type.contains('group') || column.type.contains('repeat')) {
         continue;
       }
       columns.add(
         koboGridColumn(
           columnName: column.name,
-          columnLabel: column.labels.getIndexOrFirst(selectedLangIndex),
+          columnLabel: survey.getLabel(column.name, selectedLangIndex),
         ),
       );
     }
@@ -73,48 +69,28 @@ class _TableViewState extends State<TableView> {
   void updateColumns() {
     for (int i = 0; i < columns.length; i++) {
       String columnName = columns[i].columnName;
-      String columnLabel = '';
-      if (columnName == '_validation_status') {
-        columnLabel = 'Validation';
-      } else {
-        SurveyItem? formColumn =
-            formColumns
-                .where((element) => element.name == columnName)
-                .firstOrNull;
-        columnLabel =
-            formColumn == null
-                ? columnName
-                : formColumn.labels.getIndexOrFirst(selectedLangIndex);
-      }
+      String columnLabel = survey.getLabel(columnName, selectedLangIndex);
 
-      GridColumn newCol = koboGridColumn(
+      columns[i] = koboGridColumn(
         columnName: columnName,
         columnLabel: columnLabel,
       );
-      columns.removeAt(i);
-      columns.insert(i, newCol);
     }
   }
 
   @override
   void initState() {
     super.initState();
-    surveyData = widget.surveyData;
-    formColumns = surveyData.survey;
-    languages = surveyData.languages;
+    survey = widget.survey;
     columns = getColumns();
-    koboDataSource = KoboFormDataSource(
-      gridColumns: columns,
-      surveyData: surveyData,
-    );
+    koboDataSource = KoboFormDataSource(gridColumns: columns, survey: survey);
   }
 
   Widget _buildDataGrid() {
     return SfDataGridTheme(
       data: SfDataGridThemeData(
-        // rowHoverColor: Colors.green.shade50,
-        // filterIconColor: theme.primaryColor,
-        // sortIconColor: theme.primaryColor,
+        filterIconColor: Theme.of(context).primaryColor,
+        sortIconColor: Theme.of(context).primaryColor,
       ),
 
       child: SfDataGrid(
@@ -136,29 +112,15 @@ class _TableViewState extends State<TableView> {
         onColumnResizeUpdate: (ColumnResizeUpdateDetails details) {
           int columnIndex = details.columnIndex;
           String columnName = details.column.columnName;
-          int columnLabelIndex = formColumns.indexWhere(
-            (element) => element.name == columnName,
-          );
-          String columnLabel = '';
-          if (columnName == '_validation_status') {
-            columnLabel = 'Validation';
-          } else {
-            columnLabel =
-                columnLabelIndex < 0
-                    ? columnName
-                    : formColumns[columnLabelIndex].labels.getIndexOrFirst(
-                      selectedLangIndex,
-                    );
-          }
+
           columnWidths[columnName] = details.width;
           if (!mounted) return false;
 
-          setState(() {
-            columns[columnIndex] = koboGridColumn(
-              columnName: columnName,
-              columnLabel: columnLabel,
-            );
-          });
+          columns[columnIndex] = koboGridColumn(
+            columnName: columnName,
+            columnLabel: survey.getLabel(columnName, selectedLangIndex),
+          );
+          setState(() {});
           return true;
         },
 
@@ -185,7 +147,7 @@ class _TableViewState extends State<TableView> {
 
   Widget _buildDataPager() {
     double pageCount =
-        (surveyData.deploymentSubmissionCount / _rowsPerPage).ceil().toDouble();
+        (survey.deploymentSubmissionCount / _rowsPerPage).ceil().toDouble();
     pageCount = pageCount < 1 ? 1 : pageCount;
     return SfDataPagerTheme(
       data: SfDataPagerThemeData(
@@ -230,7 +192,7 @@ class _TableViewState extends State<TableView> {
     // ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(' ${surveyData.formName} - S Table Data'),
+        title: Text(' ${survey.formName} - Table Data'),
         actions: [
           PopupMenuButton<int>(
             initialValue: selectedLangIndex,
@@ -268,11 +230,11 @@ class _TableViewState extends State<TableView> {
                 PopupMenuDivider(),
 
                 ...List<PopupMenuEntry<int>>.generate(
-                  languages.length,
+                  survey.languages.length,
                   (i) => CheckedPopupMenuItem<int>(
                     value: i,
                     checked: selectedLangIndex == i,
-                    child: Text(languages.getIndexOrFirst(i)),
+                    child: Text(survey.languages[i]),
                   ),
                 ),
               ];

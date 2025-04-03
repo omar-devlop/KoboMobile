@@ -19,6 +19,7 @@ class FormAssetCubit extends Cubit<FormAssetState> {
     safeEmit(FormAssetState.loading());
     data = await getIt<KoboService>().fetchFormAsset(uid: uid);
     safeEmit(
-        FormAssetState.success(data ??= SurveyData(survey: [], choices: [])));
+      FormAssetState.success(data ??= SurveyData(survey: [], choices: [])),
+    );
   }
 }

@@ -12,47 +12,51 @@ part of 'data_table_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$SDataTableState {
+mixin _$NewDataTableState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function(SurveyData data) success,
+    required TResult Function(KoboFormRepository data) success,
     required TResult Function(String error) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function(SurveyData data)? success,
+    TResult? Function(KoboFormRepository data)? success,
     TResult? Function(String error)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function(SurveyData data)? success,
+    TResult Function(KoboFormRepository data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
@@ -60,49 +64,47 @@ mixin _$SDataTableState {
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SDataTableStateCopyWith<$Res> {
-  factory $SDataTableStateCopyWith(
-    SDataTableState value,
-    $Res Function(SDataTableState) then,
-  ) = _$SDataTableStateCopyWithImpl<$Res, SDataTableState>;
+abstract class $NewDataTableStateCopyWith<$Res> {
+  factory $NewDataTableStateCopyWith(
+          DataTableState value, $Res Function(DataTableState) then) =
+      _$NewDataTableStateCopyWithImpl<$Res, DataTableState>;
 }
 
 /// @nodoc
-class _$SDataTableStateCopyWithImpl<$Res, $Val extends SDataTableState>
-    implements $SDataTableStateCopyWith<$Res> {
-  _$SDataTableStateCopyWithImpl(this._value, this._then);
+class _$NewDataTableStateCopyWithImpl<$Res, $Val extends DataTableState>
+    implements $NewDataTableStateCopyWith<$Res> {
+  _$NewDataTableStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SDataTableState
+  /// Create a copy of NewDataTableState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-    _$InitialImpl value,
-    $Res Function(_$InitialImpl) then,
-  ) = __$$InitialImplCopyWithImpl<$Res>;
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$SDataTableStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$NewDataTableStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-    _$InitialImpl _value,
-    $Res Function(_$InitialImpl) _then,
-  ) : super(_value, _then);
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of SDataTableState
+  /// Create a copy of NewDataTableState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -113,7 +115,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'SDataTableState.initial()';
+    return 'NewDataTableState.initial()';
   }
 
   @override
@@ -130,7 +132,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function(SurveyData data) success,
+    required TResult Function(KoboFormRepository data) success,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -141,7 +143,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function(SurveyData data)? success,
+    TResult? Function(KoboFormRepository data)? success,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -152,7 +154,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function(SurveyData data)? success,
+    TResult Function(KoboFormRepository data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -200,43 +202,40 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements SDataTableState {
+abstract class _Initial implements DataTableState {
   const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
 abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
-    _$LoadingImpl value,
-    $Res Function(_$LoadingImpl) then,
-  ) = __$$LoadingImplCopyWithImpl<$Res>;
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String msg});
 }
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$SDataTableStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$NewDataTableStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
-    _$LoadingImpl _value,
-    $Res Function(_$LoadingImpl) _then,
-  ) : super(_value, _then);
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of SDataTableState
+  /// Create a copy of NewDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? msg = null}) {
-    return _then(
-      _$LoadingImpl(
-        msg:
-            null == msg
-                ? _value.msg
-                : msg // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? msg = null,
+  }) {
+    return _then(_$LoadingImpl(
+      msg: null == msg
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -250,7 +249,7 @@ class _$LoadingImpl implements Loading {
 
   @override
   String toString() {
-    return 'SDataTableState.loading(msg: $msg)';
+    return 'NewDataTableState.loading(msg: $msg)';
   }
 
   @override
@@ -264,7 +263,7 @@ class _$LoadingImpl implements Loading {
   @override
   int get hashCode => Object.hash(runtimeType, msg);
 
-  /// Create a copy of SDataTableState
+  /// Create a copy of NewDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -277,7 +276,7 @@ class _$LoadingImpl implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function(SurveyData data) success,
+    required TResult Function(KoboFormRepository data) success,
     required TResult Function(String error) error,
   }) {
     return loading(msg);
@@ -288,7 +287,7 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function(SurveyData data)? success,
+    TResult? Function(KoboFormRepository data)? success,
     TResult? Function(String error)? error,
   }) {
     return loading?.call(msg);
@@ -299,7 +298,7 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function(SurveyData data)? success,
+    TResult Function(KoboFormRepository data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -347,12 +346,12 @@ class _$LoadingImpl implements Loading {
   }
 }
 
-abstract class Loading implements SDataTableState {
+abstract class Loading implements DataTableState {
   const factory Loading({required final String msg}) = _$LoadingImpl;
 
   String get msg;
 
-  /// Create a copy of SDataTableState
+  /// Create a copy of NewDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
@@ -362,35 +361,33 @@ abstract class Loading implements SDataTableState {
 /// @nodoc
 abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
-    _$SuccessImpl value,
-    $Res Function(_$SuccessImpl) then,
-  ) = __$$SuccessImplCopyWithImpl<$Res>;
+          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
+      __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({SurveyData data});
+  $Res call({KoboFormRepository data});
 }
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$SDataTableStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$NewDataTableStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
-    _$SuccessImpl _value,
-    $Res Function(_$SuccessImpl) _then,
-  ) : super(_value, _then);
+      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of SDataTableState
+  /// Create a copy of NewDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null}) {
-    return _then(
-      _$SuccessImpl(
-        null == data
-            ? _value.data
-            : data // ignore: cast_nullable_to_non_nullable
-                as SurveyData,
-      ),
-    );
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$SuccessImpl(
+      null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as KoboFormRepository,
+    ));
   }
 }
 
@@ -400,11 +397,11 @@ class _$SuccessImpl implements Success {
   const _$SuccessImpl(this.data);
 
   @override
-  final SurveyData data;
+  final KoboFormRepository data;
 
   @override
   String toString() {
-    return 'SDataTableState.success(data: $data)';
+    return 'NewDataTableState.success(data: $data)';
   }
 
   @override
@@ -418,7 +415,7 @@ class _$SuccessImpl implements Success {
   @override
   int get hashCode => Object.hash(runtimeType, data);
 
-  /// Create a copy of SDataTableState
+  /// Create a copy of NewDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -431,7 +428,7 @@ class _$SuccessImpl implements Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function(SurveyData data) success,
+    required TResult Function(KoboFormRepository data) success,
     required TResult Function(String error) error,
   }) {
     return success(data);
@@ -442,7 +439,7 @@ class _$SuccessImpl implements Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function(SurveyData data)? success,
+    TResult? Function(KoboFormRepository data)? success,
     TResult? Function(String error)? error,
   }) {
     return success?.call(data);
@@ -453,7 +450,7 @@ class _$SuccessImpl implements Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function(SurveyData data)? success,
+    TResult Function(KoboFormRepository data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -501,12 +498,12 @@ class _$SuccessImpl implements Success {
   }
 }
 
-abstract class Success implements SDataTableState {
-  const factory Success(final SurveyData data) = _$SuccessImpl;
+abstract class Success implements DataTableState {
+  const factory Success(final KoboFormRepository data) = _$SuccessImpl;
 
-  SurveyData get data;
+  KoboFormRepository get data;
 
-  /// Create a copy of SDataTableState
+  /// Create a copy of NewDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -516,36 +513,33 @@ abstract class Success implements SDataTableState {
 /// @nodoc
 abstract class _$$ErrorImplCopyWith<$Res> {
   factory _$$ErrorImplCopyWith(
-    _$ErrorImpl value,
-    $Res Function(_$ErrorImpl) then,
-  ) = __$$ErrorImplCopyWithImpl<$Res>;
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$SDataTableStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$NewDataTableStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
-    _$ErrorImpl _value,
-    $Res Function(_$ErrorImpl) _then,
-  ) : super(_value, _then);
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of SDataTableState
+  /// Create a copy of NewDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? error = null}) {
-    return _then(
-      _$ErrorImpl(
-        error:
-            null == error
-                ? _value.error
-                : error // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$ErrorImpl(
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -559,7 +553,7 @@ class _$ErrorImpl implements Error {
 
   @override
   String toString() {
-    return 'SDataTableState.error(error: $error)';
+    return 'NewDataTableState.error(error: $error)';
   }
 
   @override
@@ -573,7 +567,7 @@ class _$ErrorImpl implements Error {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  /// Create a copy of SDataTableState
+  /// Create a copy of NewDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -586,7 +580,7 @@ class _$ErrorImpl implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function(SurveyData data) success,
+    required TResult Function(KoboFormRepository data) success,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -597,7 +591,7 @@ class _$ErrorImpl implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function(SurveyData data)? success,
+    TResult? Function(KoboFormRepository data)? success,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -608,7 +602,7 @@ class _$ErrorImpl implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function(SurveyData data)? success,
+    TResult Function(KoboFormRepository data)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -656,12 +650,12 @@ class _$ErrorImpl implements Error {
   }
 }
 
-abstract class Error implements SDataTableState {
+abstract class Error implements DataTableState {
   const factory Error({required final String error}) = _$ErrorImpl;
 
   String get error;
 
-  /// Create a copy of SDataTableState
+  /// Create a copy of NewDataTableState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>

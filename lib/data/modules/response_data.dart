@@ -12,4 +12,8 @@ class ResponseData {
     this.next,
     this.previous,
   });
+
+  static Future<ResponseData> empty() async {
+    return ResponseData(count: 0, results: []);
+  }
 }
