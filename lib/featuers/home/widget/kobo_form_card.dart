@@ -98,7 +98,7 @@ class KoboFormCard extends StatelessWidget {
                           ),
                         Spacer(),
                         IconButton(
-                          color: theme.primaryColor,
+                          color: theme.colorScheme.primary,
                           onPressed:
                               () => context.pushNamed(
                                 Routes.contentScreen,
@@ -109,7 +109,7 @@ class KoboFormCard extends StatelessWidget {
                         ),
                         if (kForm.hasDeployment)
                           IconButton(
-                            color: theme.primaryColor,
+                            color: theme.colorScheme.primary,
                             onPressed:
                                 () => context.pushNamed(
                                   Routes.dataScreen,
@@ -120,7 +120,7 @@ class KoboFormCard extends StatelessWidget {
                           ),
                         if (kForm.hasDeployment)
                           IconButton(
-                            color: theme.primaryColor,
+                            color: theme.colorScheme.primary,
                             onPressed:
                                 () => context.pushNamed(
                                   Routes.sTableDataScreen,

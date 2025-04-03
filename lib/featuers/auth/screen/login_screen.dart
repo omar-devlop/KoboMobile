@@ -128,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: AutofillGroup(
               child: ListView(
                 children: [
