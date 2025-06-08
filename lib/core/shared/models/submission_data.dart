@@ -48,7 +48,7 @@ class SubmissionData {
   });
 
   SubmissionData.fromJson(Map<String, dynamic> json) {
-    id = json['_id'];
+    id = json['_id'] ?? 0;
     formhubUuid = json['formhub/uuid'] ?? "";
     version = json['__version__'].toString();
     metaInstanceID = json['meta/instanceID'] ?? "";

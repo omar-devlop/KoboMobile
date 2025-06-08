@@ -15,14 +15,15 @@ class ChoicesItem {
 
   ChoicesItem.fromJson(Map<String, dynamic> json) {
     name = json['name'] ?? json['\$kuid'];
-    kuid = json['\$kuid'];
+    kuid = json['\$kuid'] ?? "";
 
-    labels = json['label'] is List
-        ? [
-            json['name'] ?? "",
-            ...(json['label'] as List).whereType<String>().cast<String>()
-          ]
-        : [json['name'] ?? ""];
+    labels =
+        json['label'] is List
+            ? [
+              json['name'] ?? "",
+              ...(json['label'] as List).whereType<String>().cast<String>(),
+            ]
+            : [json['name'] ?? ""];
 
     listName = json['list_name'] ?? "";
     autovalue = json['\$autovalue'] ?? "";

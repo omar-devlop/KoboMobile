@@ -234,11 +234,12 @@ class NameQuality {
   });
 
   factory NameQuality.fromJson(Map<String, dynamic> json) => NameQuality(
-    ok: json['ok'],
-    bad: json['bad'],
-    good: json['good'],
-    total: json['total'],
-    firsts: json['firsts'] as Map<String, dynamic>,
+    ok: json['ok'] ?? 0,
+    bad: json['bad'] ?? 0,
+    good: json['good'] ?? 0,
+    total: json['total'] ?? 0,
+    firsts:
+        json['firsts'] != null ? json['firsts'] as Map<String, dynamic> : {},
   );
   static NameQuality empty() =>
       NameQuality(ok: 0, bad: 0, good: 0, total: 0, firsts: {});
@@ -362,7 +363,10 @@ class Settings {
     description =
         json['description'] != null ? json['description'].toString() : '';
     organization = json['organization'];
-    countryCodes = json['country_codes'].cast<String>();
+    countryCodes =
+        json['country_codes'] != null
+            ? json['country_codes'].cast<String>()
+            : [];
   }
 }
 

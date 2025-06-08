@@ -26,8 +26,11 @@ class SurveyItem {
 
   SurveyItem.fromJson(Map<String, dynamic> json) {
     name = json['\$autoname'] ?? json['name'] ?? json['\$kuid'];
-    type = (json['type'].split(' ')[0] as String).toQuestionType();
-    kuid = json['\$kuid'];
+    type =
+        json['type'] != null
+            ? (json['type'].split(' ')[0] as String).toQuestionType()
+            : QuestionType.unknown;
+    kuid = json['\$kuid'] ?? "";
     qpath = json['\$qpath'] ?? "";
     xpath = json['\$xpath'] ?? "";
     autoname = json['\$autoname'] ?? "";

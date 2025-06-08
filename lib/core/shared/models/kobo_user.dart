@@ -153,11 +153,11 @@ class KoboMyProjects {
   });
 
   factory KoboMyProjects.fromJson(Map<String, dynamic> json) => KoboMyProjects(
-    order: json['order'] as Map<String, dynamic>,
+    order: json['order'] != null ? json['order'] as Map<String, dynamic> : {},
     fields:
         json['fields'] != null
             ? (json['fields'] as List<dynamic>).map((e) => e as String).toList()
             : [],
-    filters: json['filters'] as List<dynamic>,
+    filters: json['filters'] != null ? json['filters'] as List<dynamic> : [],
   );
 }
