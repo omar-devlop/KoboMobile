@@ -112,7 +112,7 @@ If you encounter any bugs or have feature requests, please open an issue on the 
 &nbsp;
 ## 📫 Contact
 
-For questions or suggestions, feel free to contact me at [omar.alafa.work@gmail.com] or open a discussion on the GitHub repo.
+For questions or suggestions, feel free to contact me at omar.alafa.work@gmail.com or open a discussion on the GitHub repo.
 &nbsp;
 ## 🙋‍♂️ About Me
 
