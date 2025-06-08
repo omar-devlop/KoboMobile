@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1012322402256",
+    "project_id": "kobo-1ef7c",
+    "storage_bucket": "kobo-1ef7c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012322402256:android:8874c7115412817f6e03d5",
+        "android_client_info": {
+          "package_name": "com.omardevlop.kobomobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPoA8nr11jnLXFD6wDoOJoC0Hw5cGlgUc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

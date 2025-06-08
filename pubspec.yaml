@@ -1,0 +1,66 @@
+name: kobo
+description: "KoboMobile lets you securely log in to your KoboToolbox account, browse forms, view and search submissions, validate data, and manage your field data - all from your Mobile device."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^5.7.0
+  flutter_bloc: ^9.1.1
+  freezed: ^2.5.7
+  freezed_annotation: ^2.4.4
+  get_it: ^8.0.3
+  intl: ^0.19.0
+  pretty_dio_logger: ^1.4.0
+  syncfusion_flutter_datagrid: ^28.2.9
+  syncfusion_flutter_core: ^28.2.9
+  easy_localization: ^3.0.7+1
+  flutter_svg: ^2.0.17
+  url_launcher: ^6.3.1
+  shared_preferences: ^2.5.3
+  flutter_secure_storage: ^9.2.4
+  path_provider: ^2.1.5
+  hydrated_bloc: ^10.0.0
+  dynamic_color: ^1.7.0
+  google_fonts: ^6.2.1
+  cached_network_image: ^3.4.1
+  flutter_cache_manager: ^3.4.1
+  flutter_animate: ^4.5.2
+  open_filex: ^4.7.0
+  animations: ^2.0.11
+  smooth_page_indicator: ^1.2.1
+  font_awesome_flutter: ^10.8.0
+  flutter_screenutil: ^5.9.3
+  pdf: ^3.11.3
+  printing: ^5.14.2
+  firebase_core: ^3.13.0
+  firebase_messaging: ^15.2.5
+  flutter_local_notifications: ^19.1.0
+  permission_handler: ^12.0.0+1
+  rive: ^0.13.20
+  share_plus: ^11.0.0
+  get_time_ago: ^2.3.0
+  barcode_widget: ^2.0.4
+  flutter_map: ^8.1.1
+  latlong2: ^0.9.1
+  skeletonizer: ^1.4.3
+  fl_chart: ^1.0.0
+  flutter_widget_from_html: ^0.16.0
+  rename_app: ^1.6.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.14
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/translations/
+    - assets/svg/
