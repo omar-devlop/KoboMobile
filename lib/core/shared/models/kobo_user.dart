@@ -52,7 +52,10 @@ class KoboUser {
       json['extra_details'] as Map<String, dynamic>,
     ),
     gitRev: json['git_rev'],
-    socialAccounts: json['social_accounts'] as List<dynamic>,
+    socialAccounts:
+        json['social_accounts'] != null
+            ? json['social_accounts'] as List<dynamic>
+            : [],
     validatedPassword:
         json['validated_password'] != null
             ? (json['validated_password'] as bool)
@@ -151,7 +154,10 @@ class KoboMyProjects {
 
   factory KoboMyProjects.fromJson(Map<String, dynamic> json) => KoboMyProjects(
     order: json['order'] as Map<String, dynamic>,
-    fields: (json['fields'] as List<dynamic>).map((e) => e as String).toList(),
+    fields:
+        json['fields'] != null
+            ? (json['fields'] as List<dynamic>).map((e) => e as String).toList()
+            : [],
     filters: json['filters'] as List<dynamic>,
   );
 }
