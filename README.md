@@ -32,27 +32,28 @@
 ## 📱 Screenshots
 
 <div align="center">
-<div>
-<img src="https://github.com/user-attachments/assets/4560bf67-c741-40da-8ee7-5ab580cbc30f" width="30%" />
-<img src="https://github.com/user-attachments/assets/d2c35074-d9f7-4aa6-ae07-1b0cfce89ee0" width="30%" />
-<img src="https://github.com/user-attachments/assets/f0f993ba-60da-4583-b91c-7e8d185bab66" width="30%" />
-<img src="https://github.com/user-attachments/assets/9931c372-cc35-4ac3-8a10-01d3cc6ac73d" width="30%" />
-<img src="https://github.com/user-attachments/assets/bd9bffb2-fdf4-4079-8552-cddf1520b0dc" width="30%" />
-<img src="https://github.com/user-attachments/assets/6d1ec775-c720-42bd-838d-57a0e7b81e87" width="30%" />
-<img src="https://github.com/user-attachments/assets/199d89ba-03d4-4a36-9a37-ed5bca306ed8" width="30%" />
-<img src="https://github.com/user-attachments/assets/c4d93927-7de5-401a-bc62-3aaf8ca3b25b" width="30%" />
-<img src="https://github.com/user-attachments/assets/2b2a1fff-5e8e-4cbe-9cdd-d2450f65715f" width="30%" />
-<img src="https://github.com/user-attachments/assets/7c0982d4-ed66-40ac-a0e1-77bb3a9f640d" width="30%" />
-<img src="https://github.com/user-attachments/assets/95ef1f6b-c9c3-4efe-a3b4-34be75eb9b80" width="30%" />
-<img src="https://github.com/user-attachments/assets/dd80c84b-c0bc-44f5-b31a-d7b127650a94" width="30%" />
-<img src="https://github.com/user-attachments/assets/88aaa28f-84af-41d1-bdc6-f125b68e2285" width="30%" />
-<img src="https://github.com/user-attachments/assets/09b125e0-0bbe-4b51-9acc-54c3254aacd2" width="30%" />
-<img src="https://github.com/user-attachments/assets/8b412371-eb76-4586-9a72-607260a268e6" width="30%" />
-<img src="https://github.com/user-attachments/assets/cee2ac36-0be9-4e2b-a19d-7e4cf37d58b5" width="30%" />
-<img src="https://github.com/user-attachments/assets/f4741105-b7fb-4e94-af2a-ba125274837b" width="30%" />
-<img src="https://github.com/user-attachments/assets/80a283e1-4d34-4f4d-b283-2001d7b98c90" width="30%" />
+  <div>
+    <img src="https://github.com/user-attachments/assets/bee56fc6-261d-4aa8-831c-ddfaa9d9e8a3" width="30%" />
+    <img src="https://github.com/user-attachments/assets/9b4f9642-6fde-48a3-a2a8-f353194e81e9" width="30%" />
+    <img src="https://github.com/user-attachments/assets/96e9eb5e-5ae5-4357-bb40-866af338fa8b" width="30%" />
+    <img src="https://github.com/user-attachments/assets/249abe9b-ffef-421d-8c0e-a82311be7225" width="30%" />
+    <img src="https://github.com/user-attachments/assets/67fae540-2ec9-413b-ad84-785920922a37" width="30%" />
+    <img src="https://github.com/user-attachments/assets/16564538-2e7d-4a9b-a17e-4096e1aaaa1f" width="30%" />
+    <img src="https://github.com/user-attachments/assets/4687489f-13a6-4e66-ac37-2eebc010f6cd" width="30%" />
+    <img src="https://github.com/user-attachments/assets/9c4c96e0-a0ef-4118-9588-48b0c19a429b" width="30%" />
+    <img src="https://github.com/user-attachments/assets/38d36da5-1379-46ca-83f9-11f4b71a85e4" width="30%" />
+    <img src="https://github.com/user-attachments/assets/358c3c50-98c1-4399-b1fb-171346b1632a" width="30%" />
+    <img src="https://github.com/user-attachments/assets/92868413-209b-4982-b84a-93fb6df8100d" width="30%" />
+    <img src="https://github.com/user-attachments/assets/f51f517f-1f7b-49d8-b9d4-780e1009fccf" width="30%" />
+    <img src="https://github.com/user-attachments/assets/7456177c-e4d5-4c14-ab33-9a21c8e8186d" width="30%" />
+    <img src="https://github.com/user-attachments/assets/907edf6d-83b8-473a-9228-c3286e162833" width="30%" />
+    <img src="https://github.com/user-attachments/assets/08ab36f0-71d7-4a09-8b3b-824feca43c92" width="30%" />
+    <img src="https://github.com/user-attachments/assets/f7027ae3-d441-48e5-8071-771641fa2c39" width="30%" />
+    <img src="https://github.com/user-attachments/assets/aa77c851-e587-4b98-be62-380fa22b7328" width="30%" />
+    <img src="https://github.com/user-attachments/assets/5ca020c8-5c86-47af-b551-5392e12ed4a4" width="30%" />
+  </div>
 </div>
-</div>
+
 
 
 
@@ -67,6 +68,8 @@ The latest stable APK releases are available on the [GitHub Releases](https://gi
 - Open the downloaded APK file and follow the on-screen instructions to complete the installation.
 
 > ⚠️ For security and the best experience, always use the latest official release.
+
+
 &nbsp;
 ## 👨‍💻 For Developers & Contributors
 ### Prerequisites
@@ -99,17 +102,20 @@ lib/core/api/api_keys.dart
 and add the following variables with your own values:
 
 ```dart
-final cloudflareApiToken = 'YOUR_CLOUDFLARE_API_TOKEN_HERE';
-final cloudflareAccountId = 'YOUR_CLOUDFLARE_ACCOUNT_ID_HERE';
+const cloudflareApiToken = 'YOUR_CLOUDFLARE_API_TOKEN_HERE';
+const cloudflareAccountId = 'YOUR_CLOUDFLARE_ACCOUNT_ID_HERE';
 ```
+
 &nbsp;
 ## 🐞 Issues & Support
 
 If you encounter any bugs or have feature requests, please open an issue on the GitHub repository.
+
 &nbsp;
 ## 📫 Contact
 
-For questions or suggestions, feel free to contact me at [omar.alafa.work@gmail.com] or open a discussion on the GitHub repo.
+For questions or suggestions, feel free to contact me at omar.alafa.work@gmail.com or open a discussion on the GitHub repo.
+
 &nbsp;
 ## 🙋‍♂️ About Me
 
