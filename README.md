@@ -105,14 +105,17 @@ and add the following variables with your own values:
 const cloudflareApiToken = 'YOUR_CLOUDFLARE_API_TOKEN_HERE';
 const cloudflareAccountId = 'YOUR_CLOUDFLARE_ACCOUNT_ID_HERE';
 ```
+
 &nbsp;
 ## 🐞 Issues & Support
 
 If you encounter any bugs or have feature requests, please open an issue on the GitHub repository.
+
 &nbsp;
 ## 📫 Contact
 
 For questions or suggestions, feel free to contact me at omar.alafa.work@gmail.com or open a discussion on the GitHub repo.
+
 &nbsp;
 ## 🙋‍♂️ About Me
 
