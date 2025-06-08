@@ -68,6 +68,8 @@ The latest stable APK releases are available on the [GitHub Releases](https://gi
 - Open the downloaded APK file and follow the on-screen instructions to complete the installation.
 
 > ⚠️ For security and the best experience, always use the latest official release.
+
+
 &nbsp;
 ## 👨‍💻 For Developers & Contributors
 ### Prerequisites
