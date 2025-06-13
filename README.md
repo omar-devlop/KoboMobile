@@ -1,5 +1,5 @@
 
-![Logo](https://www.kobotoolbox.org/assets/images/common/kobotoolbox_logo_default_for-light-bg.svg)
+![KoboMobile Banner](https://github.com/user-attachments/assets/c9ba77dc-4e30-4dbe-878c-ac72ee9cd7a5)
 
 &nbsp;
 # 📱 KoboMobile
@@ -26,6 +26,12 @@
 - 📚 Multi-language support
 - 🔎 **Deep Search** across all forms by `meta/instanceName` for fast submission lookup  
 - 🚧 A lot more coming soon... stay tuned! 🚀
+
+
+&nbsp;
+## 🎬 Quick Tour
+
+[![Watch the video](https://img.youtube.com/vi/U4rekRtW8Hc/maxresdefault.jpg)](https://youtu.be/U4rekRtW8Hc)
 
 
 &nbsp;
