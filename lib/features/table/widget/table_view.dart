@@ -154,7 +154,7 @@ class _TableViewState extends State<TableView> {
 
   Widget _buildDataPager() {
     double pageCount =
-        (survey.form.deploymentSubmissionCount ?? 0 / _rowsPerPage)
+        ((survey.form.deploymentSubmissionCount ?? 0) / _rowsPerPage)
             .ceil()
             .toDouble();
     pageCount = pageCount < 1 ? 1 : pageCount;
