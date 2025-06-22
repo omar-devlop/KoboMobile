@@ -51,6 +51,7 @@ dependencies:
   fl_chart: ^1.0.0
   flutter_widget_from_html: ^0.16.0
   rename_app: ^1.6.3
+  firebase_analytics: ^11.5.0
 
 dev_dependencies:
   flutter_test:
