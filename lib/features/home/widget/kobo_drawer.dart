@@ -95,6 +95,7 @@ class _KoboDrawerState extends State<KoboDrawer> {
             onTap: () => context.pushNamed(Routes.deepSearchScreen),
           ),
           const Spacer(),
+
           ListTile(
             leading: const Icon(Icons.settings_outlined),
             title: Text(context.tr('settings')),
@@ -128,6 +129,9 @@ class _KoboDrawerState extends State<KoboDrawer> {
             leading: const Icon(Icons.info_outline),
             title: Text(getIt<PackageInfo>().appName),
             subtitle: Text(getIt<PackageInfo>().version),
+            onTap: () {
+              context.pushNamed(Routes.aboutScreen);
+            },
           ),
           const SizedBox(height: 24.0),
         ],

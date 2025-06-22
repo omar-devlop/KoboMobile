@@ -160,5 +160,6 @@
     "noNotifications": "لا توجد إشعارات",
     "deepSearch": "البحث العميق",
     "deepSearchDescription": "يتيح لك البحث  العميق البحث ضمن جميع النماذج في حسابك على KoboToolbox باستخدام حقل @:instanceName 'meta/instanceName'\n\nإنها طريقة سريعة للعثور على إرسال معين ضمن عدة مشاريع",
-    "search_result_message": "نتيجة البحث عن \"{}\" هي {}"
+    "search_result_message": "نتيجة البحث عن \"{}\" هي {}",
+    "joinTelegramGroup": "انضم إلى مجموعة التليجرام"
 }
