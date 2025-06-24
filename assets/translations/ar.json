@@ -161,5 +161,10 @@
     "deepSearch": "البحث العميق",
     "deepSearchDescription": "يتيح لك البحث  العميق البحث ضمن جميع النماذج في حسابك على KoboToolbox باستخدام حقل @:instanceName 'meta/instanceName'\n\nإنها طريقة سريعة للعثور على إرسال معين ضمن عدة مشاريع",
     "search_result_message": "نتيجة البحث عن \"{}\" هي {}",
-    "joinTelegramGroup": "انضم إلى مجموعة التليجرام"
+    "joinTelegramGroup": "انضم إلى مجموعة التليجرام",
+    "checkUpdate": "التحقق من وجود تحديث",
+    "checkingUpdate": "جار التحقق من وجود تحديث...",
+    "upToDate": "تطبيقك محدث لآخر إصدار",
+    "errorGeneral": "حدث خطأ ما. الرجاء المحاولة مرة أخرى.",
+    "rateLimit": "عدد كبير من الطلبات. يرجى الانتظار قليلاً ثم المحاولة مرة أخرى."
 }
