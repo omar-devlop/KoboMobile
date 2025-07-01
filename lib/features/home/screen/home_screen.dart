@@ -14,6 +14,7 @@ import 'package:kobo/features/home/bloc/kobo_forms_cubit.dart';
 import 'package:kobo/features/home/widget/kobo_drawer.dart';
 import 'package:kobo/features/home/widget/kobo_form_card.dart';
 import 'package:kobo/features/notifications/bloc/notifications_cubit.dart';
+import 'package:kobo/main.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -51,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     koboService = getIt<KoboService>();
     koboUser = koboService.user;
     _searchController = TextEditingController();
+    analytics.logLogin();
   }
 
   void onPopInvokedWithResult(bool didPop, dynamic result) {
