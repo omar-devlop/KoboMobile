@@ -2,11 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kobo/core/helpers/extensions/app_theme.dart';
 import 'package:kobo/core/shared/widget/page_background.dart';
 import 'package:kobo/core/shared/widget/confirm_dialog.dart';
 import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
-import 'package:kobo/features/settings/widget/theme_toggle_icon_widget.dart';
 import 'package:kobo/features/users/bloc/cubit/users_cubit.dart';
 import 'package:kobo/features/users/model/account.dart';
 import 'package:kobo/features/users/widget/user_card.dart';
@@ -171,12 +171,16 @@ class UsersScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.max,
           children: [
-            TextButton.icon(
-              icon: const Icon(Icons.language),
-              label: Text(context.tr(context.locale.languageCode)),
-              onPressed: () => context.pushNamed(Routes.languagesScreen),
+            IconButton(
+              icon: const Icon(Icons.settings),
+              color: context.colors.primary,
+              onPressed: () => context.pushNamed(Routes.settingsScreen),
             ),
-            const ThemeToggleIconWidget(),
+            IconButton(
+              icon: const Icon(Icons.info_outline),
+              color: context.colors.primary,
+              onPressed: () => context.pushNamed(Routes.aboutScreen),
+            ),
           ],
         ),
       ),

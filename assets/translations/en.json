@@ -160,5 +160,11 @@
     "noNotifications": "No notifications available",
     "deepSearch": "Deep search",
     "deepSearchDescription": "Deep Search lets you search in all forms in your KoboToolbox account by @:instanceName 'meta/instanceName' field\n\nIt's a fast way to find specific submissions across multiple projects",
-    "search_result_message": "The search result for \"{}\" is {}"
+    "search_result_message": "The search result for \"{}\" is {}",
+    "joinTelegramGroup": "Join Telegram Group",
+    "checkUpdate": "Check for update",
+    "checkingUpdate": "Checking for updates...",
+    "upToDate": "Your app is up to date",
+    "errorGeneral": "Something went wrong. Please try again.",
+    "rateLimit": "Too many requests. Please wait a moment and try again."
 }

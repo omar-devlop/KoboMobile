@@ -5,6 +5,8 @@ import 'package:kobo/core/services/kobo_form_repository.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/core/shared/models/kobo_form.dart';
 import 'package:kobo/core/utils/routing/route_extensions.dart';
+import 'package:kobo/features/about/bloc/git_hub_updater_cubit.dart';
+import 'package:kobo/features/about/screen/about_screen.dart';
 import 'package:kobo/features/attachment/bloc/attachments_cubit.dart';
 import 'package:kobo/features/attachment/screen/attachments_screen.dart';
 
@@ -48,6 +50,11 @@ class AppRouter {
     final args = settings.arguments;
 
     switch (settings.name) {
+      case Routes.aboutScreen:
+        return BlocProvider(
+          create: (context) => GitHubUpdaterCubit(),
+          child: const AboutScreen(),
+        ).scaleFadeRoute();
       case Routes.loginScreen:
         return BlocProvider(
           create: (_) => AuthCubit(),

@@ -1,7 +1,7 @@
 name: kobo
 description: "KoboMobile lets you securely log in to your KoboToolbox account, browse forms, view and search submissions, validate data, and manage your field data - all from your Mobile device."
 publish_to: "none"
-version: 0.1.1
+version: 0.1.2
 
 environment:
   sdk: ^3.7.0
@@ -14,7 +14,7 @@ dependencies:
   freezed: ^2.5.7
   freezed_annotation: ^2.4.4
   get_it: ^8.0.3
-  intl: ^0.19.0
+  intl: ^0.20.2
   pretty_dio_logger: ^1.4.0
   syncfusion_flutter_datagrid: ^28.2.9
   syncfusion_flutter_core: ^28.2.9
@@ -47,10 +47,13 @@ dependencies:
   barcode_widget: ^2.0.4
   flutter_map: ^8.1.1
   latlong2: ^0.9.1
-  skeletonizer: ^1.4.3
+  skeletonizer: ^2.0.1
   fl_chart: ^1.0.0
   flutter_widget_from_html: ^0.16.0
   rename_app: ^1.6.3
+  firebase_analytics: ^11.5.0
+  package_info_plus: ^8.3.0
+  sized_context: ^1.0.0+4
 
 dev_dependencies:
   flutter_test:

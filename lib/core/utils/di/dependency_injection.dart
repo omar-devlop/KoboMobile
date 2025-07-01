@@ -6,6 +6,7 @@ import 'package:kobo/core/utils/networking/dio_factory.dart';
 import 'package:kobo/features/users/model/account_repository.dart';
 import 'package:kobo/core/services/kobo_service.dart';
 import 'package:kobo/core/services/download_manager.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 final getIt = GetIt.instance;
 
@@ -22,6 +23,10 @@ Future<void> setupGetIt() async {
     await service.initService();
     return service;
   });
+
+  getIt.registerSingletonAsync<PackageInfo>(
+    () async => await PackageInfo.fromPlatform(),
+  );
 
   // Register the DownloadManager to handle file downloads & openings
   getIt.registerLazySingleton<DownloadManager>(() => DownloadManager(dio));

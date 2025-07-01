@@ -174,7 +174,9 @@ class _DraggableSheetContentState extends State<_DraggableSheetContent> {
                       children: [
                         Text(
                           widget.title,
-                          style: theme.textTheme.headlineSmall,
+                          style: theme.textTheme.headlineSmall?.copyWith(
+                            color: theme.colorScheme.secondary,
+                          ),
                         ),
                         LabelWidget(
                           title: _submissionData.id.toString(),

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:kobo/core/helpers/extensions/app_theme.dart';
 import 'package:kobo/core/helpers/extensions/build_context_ext.dart';
 import 'package:kobo/core/services/kobo_service.dart';
 import 'package:kobo/core/shared/models/kobo_user.dart';
@@ -7,6 +8,7 @@ import 'package:kobo/core/shared/widget/confirm_dialog.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/core/utils/networking/dio_factory.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class KoboDrawer extends StatefulWidget {
   const KoboDrawer({super.key});
@@ -33,7 +35,7 @@ class _KoboDrawerState extends State<KoboDrawer> {
   }
 
   @override
-  void initState() {
+  initState() {
     super.initState();
     koboService = getIt<KoboService>();
     koboUser = koboService.user;
@@ -41,8 +43,6 @@ class _KoboDrawerState extends State<KoboDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-
     return Drawer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,21 +66,21 @@ class _KoboDrawerState extends State<KoboDrawer> {
                       ),
                       Text(
                         koboUser.username,
-                        style: theme.textTheme.headlineSmall?.copyWith(
+                        style: context.texts.headlineSmall?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: theme.colorScheme.secondary,
+                          color: context.colors.secondary,
                         ),
                       ),
                       Text(
                         koboUser.extraDetails.name,
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.secondary,
+                        style: context.texts.bodySmall?.copyWith(
+                          color: context.colors.secondary,
                         ),
                       ),
                       Text(
                         koboUser.email,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.secondary,
+                        style: context.texts.bodyMedium?.copyWith(
+                          color: context.colors.secondary,
                         ),
                       ),
                     ],
@@ -95,6 +95,7 @@ class _KoboDrawerState extends State<KoboDrawer> {
             onTap: () => context.pushNamed(Routes.deepSearchScreen),
           ),
           const Spacer(),
+
           ListTile(
             leading: const Icon(Icons.settings_outlined),
             title: Text(context.tr('settings')),
@@ -108,8 +109,8 @@ class _KoboDrawerState extends State<KoboDrawer> {
             onTap: () => logout(routeName: Routes.usersScreen),
           ),
           ListTile(
-            iconColor: theme.colorScheme.error,
-            textColor: theme.colorScheme.error,
+            iconColor: context.colors.error,
+            textColor: context.colors.error,
             leading: const Icon(Icons.logout),
             title: Text(context.tr('logout')),
             onTap:
@@ -120,6 +121,17 @@ class _KoboDrawerState extends State<KoboDrawer> {
                   title: context.tr("logout"),
                   confirmIcon: Icons.logout,
                 ),
+          ),
+          const Divider(),
+          ListTile(
+            iconColor: context.colors.primary,
+            textColor: context.colors.primary,
+            leading: const Icon(Icons.info_outline),
+            title: Text(getIt<PackageInfo>().appName),
+            subtitle: Text(getIt<PackageInfo>().version),
+            onTap: () {
+              context.pushNamed(Routes.aboutScreen);
+            },
           ),
           const SizedBox(height: 24.0),
         ],
