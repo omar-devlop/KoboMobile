@@ -19,19 +19,19 @@ mixin _$NotificationsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<dynamic> inAppMessagesList) success,
+    required TResult Function(List<AppMessage> inAppMessagesList) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<dynamic> inAppMessagesList)? success,
+    TResult? Function(List<AppMessage> inAppMessagesList)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<dynamic> inAppMessagesList)? success,
+    TResult Function(List<AppMessage> inAppMessagesList)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,7 +119,7 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<dynamic> inAppMessagesList) success,
+    required TResult Function(List<AppMessage> inAppMessagesList) success,
   }) {
     return loading();
   }
@@ -128,7 +128,7 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<dynamic> inAppMessagesList)? success,
+    TResult? Function(List<AppMessage> inAppMessagesList)? success,
   }) {
     return loading?.call();
   }
@@ -137,7 +137,7 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<dynamic> inAppMessagesList)? success,
+    TResult Function(List<AppMessage> inAppMessagesList)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -188,7 +188,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<dynamic> inAppMessagesList});
+  $Res call({List<AppMessage> inAppMessagesList});
 }
 
 /// @nodoc
@@ -210,7 +210,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
       null == inAppMessagesList
           ? _value._inAppMessagesList
           : inAppMessagesList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<AppMessage>,
     ));
   }
 }
@@ -218,12 +218,12 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  const _$SuccessImpl(final List<dynamic> inAppMessagesList)
+  const _$SuccessImpl(final List<AppMessage> inAppMessagesList)
       : _inAppMessagesList = inAppMessagesList;
 
-  final List<dynamic> _inAppMessagesList;
+  final List<AppMessage> _inAppMessagesList;
   @override
-  List<dynamic> get inAppMessagesList {
+  List<AppMessage> get inAppMessagesList {
     if (_inAppMessagesList is EqualUnmodifiableListView)
       return _inAppMessagesList;
     // ignore: implicit_dynamic_type
@@ -260,7 +260,7 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<dynamic> inAppMessagesList) success,
+    required TResult Function(List<AppMessage> inAppMessagesList) success,
   }) {
     return success(inAppMessagesList);
   }
@@ -269,7 +269,7 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<dynamic> inAppMessagesList)? success,
+    TResult? Function(List<AppMessage> inAppMessagesList)? success,
   }) {
     return success?.call(inAppMessagesList);
   }
@@ -278,7 +278,7 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<dynamic> inAppMessagesList)? success,
+    TResult Function(List<AppMessage> inAppMessagesList)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -320,9 +320,10 @@ class _$SuccessImpl implements Success {
 }
 
 abstract class Success implements NotificationsState {
-  const factory Success(final List<dynamic> inAppMessagesList) = _$SuccessImpl;
+  const factory Success(final List<AppMessage> inAppMessagesList) =
+      _$SuccessImpl;
 
-  List<dynamic> get inAppMessagesList;
+  List<AppMessage> get inAppMessagesList;
 
   /// Create a copy of NotificationsState
   /// with the given fields replaced by the non-null parameter values.

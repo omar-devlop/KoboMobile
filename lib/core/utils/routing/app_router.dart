@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:kobo/core/services/kobo_form_repository.dart';
+import 'package:kobo/core/shared/models/in_app_message.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/core/shared/models/kobo_form.dart';
 import 'package:kobo/core/utils/routing/route_extensions.dart';
@@ -103,7 +104,7 @@ class AppRouter {
         ).scaleFadeRoute();
       case Routes.notificationDetailsScreen:
         final payload = args as List;
-        final inAppMessagesList = payload[0] as List<dynamic>;
+        final inAppMessagesList = payload[0] as List<AppMessage>;
         final initialPage = payload[1] as int;
         return NotificationDetailsScreen(
           inAppMessagesList: inAppMessagesList,

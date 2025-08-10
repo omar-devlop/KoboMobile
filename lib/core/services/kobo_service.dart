@@ -4,6 +4,7 @@ import 'package:kobo/core/enums/validation_type.dart';
 import 'package:kobo/core/helpers/constants.dart';
 import 'package:kobo/core/helpers/extensions/validation_type_ext.dart';
 import 'package:kobo/core/services/kobo_form_repository.dart';
+import 'package:kobo/core/shared/models/in_app_message.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/core/shared/models/kobo_user.dart';
 import 'package:kobo/core/shared/models/response_data.dart';
@@ -57,14 +58,17 @@ class KoboService {
     }
   }
 
-  Future<List<dynamic>> fetchInAppMessages() async {
+  Future<List<AppMessage>> fetchInAppMessages() async {
     try {
       var response = await _dio.get('/help/in_app_messages');
 
       if (response.statusCode == 200) {
-        List<dynamic> inAppMessagesList = response.data["results"];
+        List<dynamic> inAppMessagesList = response.data["results"] ?? [];
 
-        return inAppMessagesList;
+        List<AppMessage> inAppMessages =
+            inAppMessagesList.map((json) => AppMessage.fromJson(json)).toList();
+
+        return inAppMessages;
       } else {
         return [];
       }

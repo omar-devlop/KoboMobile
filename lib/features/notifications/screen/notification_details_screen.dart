@@ -2,9 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:kobo/core/shared/models/in_app_message.dart';
 
 class NotificationDetailsScreen extends StatefulWidget {
-  final List<dynamic> inAppMessagesList;
+  final List<AppMessage> inAppMessagesList;
   final int initialPage;
 
   const NotificationDetailsScreen({
@@ -61,33 +62,32 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
 
           if (mounted) setState(() {});
         },
-        itemBuilder:
-            (context, index) => ListView(
-              padding: const EdgeInsets.all(14.0),
-              children: [
-                Text(
-                  widget.inAppMessagesList[index]['title'],
-                  style: theme.textTheme.headlineSmall,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Divider(),
-                ),
-                HtmlWidget(
-                  widget.inAppMessagesList[index]['html']['body'],
-                  onTapUrl: (url) async {
-                    if (await launchUrl(
-                      Uri.parse(url),
-                      mode: LaunchMode.platformDefault,
-                    )) {
-                      return true;
-                    } else {
-                      return false;
-                    }
-                  },
-                ),
-              ],
-            ),
+        itemBuilder: (context, index) {
+          AppMessage appMessage = widget.inAppMessagesList[index];
+          return ListView(
+            padding: const EdgeInsets.all(14.0),
+            children: [
+              Text(appMessage.title, style: theme.textTheme.headlineSmall),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                child: Divider(),
+              ),
+              HtmlWidget(
+                appMessage.html.body,
+                onTapUrl: (url) async {
+                  if (await launchUrl(
+                    Uri.parse(url),
+                    mode: LaunchMode.platformDefault,
+                  )) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                },
+              ),
+            ],
+          );
+        },
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:kobo/core/helpers/extensions/build_context_ext.dart';
+import 'package:kobo/core/shared/models/in_app_message.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/features/notifications/bloc/notifications_cubit.dart';
 
@@ -42,18 +43,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         )
                         : ListView.builder(
                           itemCount: inAppMessagesList.length,
-                          itemBuilder:
-                              (context, index) => ListTile(
-                                title: Text(inAppMessagesList[index]['title']),
-                                subtitle: HtmlWidget(
-                                  inAppMessagesList[index]['html']["snippet"],
-                                ),
-                                onTap:
-                                    () => context.pushNamed(
-                                      Routes.notificationDetailsScreen,
-                                      arguments: [inAppMessagesList, index],
-                                    ),
-                              ),
+                          itemBuilder: (context, index) {
+                            AppMessage appMessage = inAppMessagesList[index];
+                            return ListTile(
+                              title: Text(appMessage.title),
+                              subtitle: HtmlWidget(appMessage.html.snippet),
+                              onTap:
+                                  () => context.pushNamed(
+                                    Routes.notificationDetailsScreen,
+                                    arguments: [inAppMessagesList, index],
+                                  ),
+                            );
+                          },
                         ),
           );
         },

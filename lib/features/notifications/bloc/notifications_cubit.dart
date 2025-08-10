@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/services/kobo_service.dart';
+import 'package:kobo/core/shared/models/in_app_message.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
 
 part 'notifications_state.dart';
@@ -11,7 +12,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     fetchInAppMessagesList();
   }
 
-  List<dynamic> _inAppMessagesList = [];
+  List<AppMessage> _inAppMessagesList = [];
   void safeEmit(NotificationsState state) => !isClosed ? emit(state) : null;
 
   void fetchInAppMessagesList() async {

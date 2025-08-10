@@ -156,7 +156,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   actions: [
                     BlocBuilder<NotificationsCubit, NotificationsState>(
-                      // TODO: test when messsages from kobo server available and make class for inAppMessages
                       builder: (context, state) {
                         return state.when(
                           loading:
