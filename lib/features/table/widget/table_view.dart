@@ -2,12 +2,16 @@ import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kobo/core/helpers/constants.dart';
+import 'package:kobo/core/helpers/extensions/app_theme.dart';
 import 'package:kobo/core/helpers/extensions/question_type_ext.dart';
 import 'package:kobo/core/services/kobo_form_repository.dart';
+import 'package:kobo/core/services/pdf_service.dart';
 import 'package:kobo/core/shared/models/survey_item.dart';
 import 'package:kobo/core/shared/widget/action_spacing.dart';
 import 'package:kobo/core/shared/widget/language_selector.dart';
+import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/features/table/model/kobo_form_data_source.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -29,6 +33,7 @@ class _TableViewState extends State<TableView> {
   final int _rowsPerPage = Constants.limit;
   static const double _dataPagerHeight = 60;
   bool showLoadingIndicator = true;
+  bool _isPdfProcessing = false;
 
   GridColumn koboGridColumn({
     required String columnName,
@@ -207,6 +212,49 @@ class _TableViewState extends State<TableView> {
           title: Text(context.tr('table'), overflow: TextOverflow.ellipsis),
         ),
         actions: [
+          if (!showLoadingIndicator)
+            _isPdfProcessing
+                ? const IconButton(
+                  onPressed: null,
+                  icon: SizedBox(
+                    width: 15,
+                    height: 15,
+                    child: CircularProgressIndicator(),
+                  ),
+                )
+                : IconButton(
+                  icon: const Icon(FontAwesomeIcons.filePdf),
+                  onPressed: () async {
+                    if (!context.mounted) return;
+                    setState(() {
+                      _isPdfProcessing = true;
+                    });
+                    await survey.fetchWholeData();
+                    if (!context.mounted) return;
+
+                    final pdfBytes = await getIt<PdfService>()
+                        .createSubmissionsTablePdfFile(
+                          submissions: survey.responseData.results,
+                          formName: survey.form.name,
+                          headerColor: context.theme.primaryColor,
+                        );
+                    if (pdfBytes != false) {
+                      await getIt<PdfService>().savePdfFile(
+                        'submissions_report',
+                        pdfBytes,
+                      );
+                    } else {
+                      if (!context.mounted) return;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(context.tr('errorGeneral'))),
+                      );
+                    }
+                    setState(() {
+                      _isPdfProcessing = false;
+                    });
+                  },
+                ),
+
           SurveyLanguageSelector(
             survey: survey,
             selectedLangIndex: selectedLangIndex,
