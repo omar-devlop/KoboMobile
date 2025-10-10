@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.omardevlop.kobomobile"
-    compileSdk = 35
+    compileSdk = 36
     ndkVersion = "27.0.12077973"
 
 
@@ -23,7 +23,7 @@ android {
 
     defaultConfig {
         applicationId = "com.omardevlop.kobomobile"
-        minSdk = 21
+        minSdk = flutter.minSdkVersion
         targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName

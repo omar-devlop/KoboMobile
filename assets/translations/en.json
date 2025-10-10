@@ -166,5 +166,20 @@
     "checkingUpdate": "Checking for updates...",
     "upToDate": "Your app is up to date",
     "errorGeneral": "Something went wrong. Please try again.",
-    "rateLimit": "Too many requests. Please wait a moment and try again."
+    "rateLimit": "Too many requests. Please wait a moment and try again.",
+    "export": "Export",
+    "exportWholeSubmissions": "Export submissions",
+    "exportWholeSubmissionsDescription": "Export submissions as a table",
+    "exportAsPdf": "Export as PDF",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "dateRange": "Date Range",
+    "exportType": "Export Type",
+    "pdf": "PDF",
+    "excel": "Excel",
+    "exportingData": "Exporting Data",
+    "complete": "{} complete",
+    "submissionDateRange": "Submission Date Range",
+    "startBeforeEnd": "Start date must be before end date",
+  "endAfterStart": "End date must be after start date"
 }

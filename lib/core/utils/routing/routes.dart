@@ -19,4 +19,5 @@ class Routes {
   static const String notificationDetailsScreen = '/notificationDetailsScreen';
   static const String deepSearchScreen = '/deepSearchScreen';
   static const String aboutScreen = '/aboutScreen';
+  static const String exportScreen = '/exportScreen';
 }

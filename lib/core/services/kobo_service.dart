@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:kobo/core/enums/validation_type.dart';
@@ -150,15 +152,19 @@ class KoboService {
     required String uid,
     int start = 0,
     Map<String, dynamic>? additionalQuery,
+    int? limit,
   }) async {
     Map<String, dynamic> queryParameters = {
       'format': 'json',
       'start': start,
       'sort': '{"_id":-1}',
-      'limit': Constants.limit, // handle Limits
+      'limit':
+          (limit == null)
+              ? Constants.limit
+              : (limit < 0 ? null : limit), // handle Limits
     };
     if (additionalQuery != null) {
-      queryParameters.addAll(additionalQuery);
+      queryParameters.addAll({'query': jsonEncode(additionalQuery)});
     }
 
     // Remove null query to remove limits to load whole data

@@ -166,12 +166,14 @@ class KoboFormRepository {
   Future<void> fetchData({
     int pageIndex = 0,
     Map<String, dynamic>? additionalQuery,
+    int? limit,
   }) async {
     _additionalQuery = additionalQuery;
     responseData = await getIt<KoboService>().fetchFormData(
       uid: form.uid,
       start: pageIndex * Constants.limit,
       additionalQuery: _additionalQuery,
+      limit: limit,
     );
     handleDataWithQuestions();
     return;

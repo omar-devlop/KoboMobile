@@ -253,6 +253,20 @@ class _FormScreenState extends State<FormScreen> {
                           arguments: widget.kForm,
                         ),
                   ),
+                if (widget.kForm.hasDeployment)
+                  FormSubContainer(
+                    title: context.tr('export'),
+                    bgIcon: Icon(
+                      Icons.file_download,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ).tapScale(
+                    onTap:
+                        () => context.pushNamed(
+                          Routes.exportScreen,
+                          arguments: widget.kForm,
+                        ),
+                  ),
               ]),
             ),
           ),

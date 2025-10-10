@@ -166,5 +166,20 @@
     "checkingUpdate": "جار التحقق من وجود تحديث...",
     "upToDate": "تطبيقك محدث لآخر إصدار",
     "errorGeneral": "حدث خطأ ما. الرجاء المحاولة مرة أخرى.",
-    "rateLimit": "عدد كبير من الطلبات. يرجى الانتظار قليلاً ثم المحاولة مرة أخرى."
+    "rateLimit": "عدد كبير من الطلبات. يرجى الانتظار قليلاً ثم المحاولة مرة أخرى.",
+    "export": "تصدير",
+    "exportWholeSubmissions": "تصدير جميع الإرسالات",
+    "exportWholeSubmissionsDescription": "تصدير جميع الإرسالات لهذا النموذج كجدول",
+    "exportAsPdf": "تصدير ك PDF",
+    "startDate": "تاريخ البداية",
+    "endDate": "تاريخ النهاية",
+    "dateRange": "نطاق التاريخ",
+    "exportType": "نوع التصدير",
+    "pdf": "PDF",
+    "excel": "Excel",
+    "exportingData": "تصدير البيانات",
+    "complete": "{} مكتمل",
+    "submissionDateRange": "نطاق تاريخ الإرسالات",
+     "startBeforeEnd": "يجب أن يكون تاريخ البداية قبل تاريخ النهاية",
+  "endAfterStart": "يجب أن يكون تاريخ النهاية بعد تاريخ البداية"
 }

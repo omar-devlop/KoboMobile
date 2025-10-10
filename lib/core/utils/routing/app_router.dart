@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kobo/core/cubits/kobo_form/k_form_cubit.dart';
 
 import 'package:kobo/core/services/kobo_form_repository.dart';
 import 'package:kobo/core/shared/models/in_app_message.dart';
@@ -17,6 +18,7 @@ import 'package:kobo/features/deep_search/bloc/deep_search_cubit.dart';
 import 'package:kobo/features/deep_search/screen/deep_search_screen.dart';
 import 'package:kobo/features/deployment_links/screen/deployment_links_screen.dart';
 import 'package:kobo/features/empty/screen/empty_screen.dart';
+import 'package:kobo/features/export/screen/export_screen.dart';
 
 import 'package:kobo/features/form/screen/form_screen.dart';
 import 'package:kobo/features/form_users/screen/form_users_screen.dart';
@@ -162,6 +164,13 @@ class AppRouter {
         return BlocProvider(
           create: (_) => DataTableCubit(kForm.uid),
           child: TableDataScreen(kForm: kForm),
+        ).scaleFadeRoute();
+        
+      case Routes.exportScreen:
+        final kForm = args as KoboForm;
+        return BlocProvider(
+          create: (_) => KFormCubit(kForm.uid),
+          child: ExportScreen(kForm: kForm),
         ).scaleFadeRoute();
 
       case Routes.settingsScreen:
