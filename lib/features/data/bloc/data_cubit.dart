@@ -3,15 +3,16 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/services/kobo_form_repository.dart';
-import 'package:kobo/core/utils/di/dependency_injection.dart';
-import 'package:kobo/core/services/kobo_service.dart';
+import 'package:kobo/application/usecases/forms/get_form_asset_legacy.dart';
 
 part 'data_state.dart';
 part 'data_cubit.freezed.dart';
 
 class DataCubit extends Cubit<DataState> {
-  DataCubit(String uid, {bool wholeData = false})
-    : super(const DataState.initial()) {
+  final GetFormAssetLegacy _getFormAsset;
+  DataCubit(String uid, {bool wholeData = false, required GetFormAssetLegacy getFormAsset})
+    : _getFormAsset = getFormAsset,
+      super(const DataState.initial()) {
     setUid(uid);
     wholeData ? fetchWholeData() : fetchData();
   }
@@ -71,5 +72,5 @@ class DataCubit extends Cubit<DataState> {
   }
 
   Future<KoboFormRepository?> _fetchAsset() async =>
-      await getIt<KoboService>().fetchFormAsset(uid: uid);
+      await _getFormAsset(uid: uid);
 }

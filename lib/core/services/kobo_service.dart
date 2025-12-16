@@ -13,7 +13,7 @@ import 'package:kobo/core/shared/models/response_data.dart';
 import 'package:kobo/core/shared/models/submission_data.dart';
 import 'package:kobo/core/shared/models/kobo_form.dart';
 import 'package:kobo/core/shared/models/survey_item.dart';
-import 'package:kobo/features/form/model/submission_stats.dart';
+import 'package:kobo/domain/entities/submission_stats.dart';
 import 'package:kobo/features/users/model/account.dart';
 import 'package:kobo/features/users/model/account_repository.dart';
 

@@ -6,15 +6,14 @@ import 'package:kobo/core/shared/widget/action_spacing.dart';
 import 'package:kobo/core/helpers/extensions.dart';
 import 'package:kobo/core/shared/widget/retry_widget.dart';
 import 'package:kobo/core/shared/widget/shaded_widgets/shaded_forms_list.dart';
-import 'package:kobo/core/utils/di/dependency_injection.dart';
 import 'package:kobo/core/shared/models/kobo_user.dart';
-import 'package:kobo/core/services/kobo_service.dart';
 import 'package:kobo/core/utils/routing/routes.dart';
 import 'package:kobo/features/home/bloc/kobo_forms_cubit.dart';
 import 'package:kobo/features/home/widget/kobo_drawer.dart';
 import 'package:kobo/features/home/widget/kobo_form_card.dart';
 import 'package:kobo/features/notifications/bloc/notifications_cubit.dart';
 import 'package:kobo/main.dart';
+import 'package:kobo/features/users/bloc/current_user_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -30,8 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     BlocProvider.of<NotificationsCubit>(context).fetchInAppMessagesList();
   }
 
-  late KoboService koboService;
-  late KoboUser koboUser;
+  KoboUser? koboUser;
   bool _isSearching = false;
   late TextEditingController _searchController;
   final FocusNode _focusNode = FocusNode();
@@ -49,8 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    koboService = getIt<KoboService>();
-    koboUser = koboService.user;
+    // User is provided by CurrentUserCubit in the route providers
     _searchController = TextEditingController();
     analytics.logLogin();
   }
@@ -151,8 +148,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 )
                 : AppBar(
-                  title: Text(
-                    context.tr('hi_text', args: [koboUser.extraDetails.name]),
+                  title: BlocBuilder<CurrentUserCubit, KoboUser?>(
+                    builder: (context, user) {
+                      final name = user?.extraDetails.name ?? '';
+                      return Text(
+                        context.tr('hi_text', args: [name]),
+                      );
+                    },
                   ),
                   actions: [
                     BlocBuilder<NotificationsCubit, NotificationsState>(

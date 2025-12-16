@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kobo/core/services/kobo_service.dart';
 import 'package:kobo/core/shared/models/in_app_message.dart';
-import 'package:kobo/core/utils/di/dependency_injection.dart';
+import 'package:kobo/domain/usecases/notifications/get_in_app_messages.dart';
 
 part 'notifications_state.dart';
 part 'notifications_cubit.freezed.dart';
 
 class NotificationsCubit extends Cubit<NotificationsState> {
-  NotificationsCubit() : super(const NotificationsState.loading()) {
+  final GetInAppMessages _getInAppMessages;
+  NotificationsCubit(this._getInAppMessages) : super(const NotificationsState.loading()) {
     fetchInAppMessagesList();
   }
 
@@ -17,7 +17,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
 
   void fetchInAppMessagesList() async {
     safeEmit(const NotificationsState.loading());
-    _inAppMessagesList = await getIt<KoboService>().fetchInAppMessages();
+    _inAppMessagesList = await _getInAppMessages();
 
     safeEmit(NotificationsState.success(_inAppMessagesList));
   }

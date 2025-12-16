@@ -4,15 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/helpers/extensions/question_type_ext.dart';
 import 'package:kobo/core/services/kobo_form_repository.dart';
-import 'package:kobo/core/services/kobo_service.dart';
 import 'package:kobo/core/shared/models/survey_item.dart';
-import 'package:kobo/core/utils/di/dependency_injection.dart';
+import 'package:kobo/application/usecases/forms/get_form_asset_legacy.dart';
 
 part 'attachments_state.dart';
 part 'attachments_cubit.freezed.dart';
 
 class AttachmentsCubit extends Cubit<AttachmentsState> {
-  AttachmentsCubit(String uid)
+  final GetFormAssetLegacy _getFormAsset;
+  AttachmentsCubit(String uid, this._getFormAsset)
     : super(const AttachmentsState.loading(msg: '')) {
     setUid(uid);
     initCubit();
@@ -61,7 +61,7 @@ class AttachmentsCubit extends Cubit<AttachmentsState> {
   }
 
   Future<KoboFormRepository?> _fetchAsset() async =>
-      await getIt<KoboService>().fetchFormAsset(uid: uid);
+      await _getFormAsset(uid: uid);
 
   List<SurveyItem> getMediaQuestions() {
     if (survey == null) return [];

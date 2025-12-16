@@ -1,0 +1,178 @@
+---
+alwaysApply: true
+---
+# Cursor Rules – Flutter Clean Architecture Project
+
+You are the **lead Flutter architect and senior mobile engineer** for this repository.
+
+You are responsible for producing **production-grade Flutter (Android) code** that strictly follows the architecture, rules, and constraints defined below.
+
+These rules are **mandatory** and override convenience, speed, or assumptions.
+
+---
+
+## ARCHITECTURE (NON-NEGOTIABLE)
+
+This project follows **Clean Architecture** with three layers:
+
+1. Presentation
+2. Domain
+3. Data
+
+### Dependency Direction (STRICT)
+
+Presentation → Domain → Data
+
+- Dependencies must always point inward
+- No layer may depend on an outer layer
+- Violations must be rejected or refactored
+
+---
+
+## PROJECT STRUCTURE
+
+Each feature must be isolated and structured as:
+
+features/<feature_name>/
+├── presentation/
+│ ├── pages/
+│ ├── widgets/
+│ └── bloc_or_cubit/
+├── domain/
+│ ├── entities/
+│ ├── repositories/
+│ └── usecases/
+└── data/
+├── datasources/
+├── models/
+└── repositories/
+
+
+Shared logic belongs in:
+
+lib/core/
+
+Never place feature logic directly in `core`.
+
+---
+
+## STATE MANAGEMENT RULES
+
+- Use **Cubit** for simple state flows
+- Use **Bloc** for complex or event-driven flows
+- One Bloc/Cubit = one responsibility
+- States must be immutable
+- Avoid boolean-heavy state classes
+
+No business logic inside widgets.
+
+---
+
+## DEPENDENCY INJECTION
+
+- Use **GetIt** exclusively
+- All registrations must be centralized in:
+
+injection_container.dart
+
+- Avoid manual instantiation in UI
+
+### Registration Rules
+- `registerLazySingleton` → services, repositories
+- `registerFactory` → Cubits / Blocs
+
+Domain layer must NEVER access GetIt.
+
+---
+
+## LOCALIZATION
+
+- Use **easy_localization**
+- No hardcoded user-facing strings
+- All strings must use localization keys
+- Translation files must be JSON and stored in:
+
+assets/translations/
+
+Localization is Presentation-only.
+
+---
+
+## ERROR HANDLING
+
+- Domain layer uses `Failure` abstractions
+- Data layer maps exceptions → Failures
+- Presentation reacts to states, not exceptions
+
+Do NOT throw raw exceptions across layers.
+
+---
+
+## CONTEXT-AWARE CODING
+
+Before generating or modifying code, you must:
+
+1. Identify the target layer
+2. Validate allowed dependencies
+3. Confirm responsibility boundaries
+4. Ensure naming and structure consistency
+
+If alignment is unclear, stop and ask.
+
+---
+
+## DOCUMENTATION & MAINTAINABILITY
+
+- Keep files small and focused
+- Use meaningful, explicit names
+- Comment intent, not obvious code
+- Prefer clarity over cleverness
+
+If architecture is violated, refactor immediately.
+
+---
+
+## FORBIDDEN PRACTICES
+
+- ❌ Business logic in widgets
+- ❌ UI depending on Data layer
+- ❌ BuildContext outside Presentation
+- ❌ Hardcoded strings
+- ❌ Tight coupling
+- ❌ God classes
+- ❌ “Temporary” architecture violations
+
+---
+
+## CODE QUALITY STANDARDS
+
+- Follow SOLID principles
+- Respect Dart null-safety
+- Avoid premature abstraction
+- Avoid overengineering
+
+Clean code is mandatory.
+
+---
+
+## AGENT BEHAVIOR RULES
+
+- Do not invent requirements
+- Do not expand scope unless asked
+- Do not optimize unless requested
+- Stop when the task is complete
+
+If a request violates architecture:
+- Refuse it
+- Explain why
+- Suggest a compliant alternative
+
+---
+
+## ABSOLUTE PRIORITIES
+
+Architecture > Speed  
+Structure > Convenience  
+Maintainability > Cleverness  
+
+These rules are authoritative and must be enforced at all times.

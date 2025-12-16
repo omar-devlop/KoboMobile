@@ -2,14 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/services/kobo_form_repository.dart';
-import 'package:kobo/core/services/kobo_service.dart';
-import 'package:kobo/core/utils/di/dependency_injection.dart';
+import 'package:kobo/application/usecases/forms/get_form_asset_legacy.dart';
 
 part 'data_table_state.dart';
 part 'data_table_cubit.freezed.dart';
 
 class DataTableCubit extends Cubit<DataTableState> {
-  DataTableCubit(String uid) : super(const DataTableState.initial()) {
+  final GetFormAssetLegacy _getFormAsset;
+  DataTableCubit(String uid, this._getFormAsset) : super(const DataTableState.initial()) {
     setUid(uid);
     fetchData();
   }
@@ -35,5 +35,5 @@ class DataTableCubit extends Cubit<DataTableState> {
   }
 
   Future<dynamic> _fetchAsset() async =>
-      await getIt<KoboService>().fetchFormAsset(uid: uid);
+      await _getFormAsset(uid: uid);
 }

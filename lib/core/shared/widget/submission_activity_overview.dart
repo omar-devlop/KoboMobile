@@ -6,6 +6,8 @@ import 'package:kobo/core/helpers/help_func.dart';
 import 'package:kobo/core/shared/models/kobo_form.dart';
 import 'package:kobo/core/shared/widget/action_spacing.dart';
 import 'package:kobo/features/form/bloc/submission_stats_cubit.dart';
+import 'package:kobo/core/utils/di/dependency_injection.dart';
+import 'package:kobo/domain/usecases/forms/get_daily_submission_counts.dart';
 import 'package:kobo/features/reports/widget/k_bar_chart.dart';
 import 'package:kobo/features/reports/widget/k_line_chart.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -28,7 +30,10 @@ class _SubmissionActivityOverviewState
     ThemeData theme = Theme.of(context);
 
     return BlocProvider(
-      create: (context) => SubmissionStatsCubit(widget.kForm.uid),
+      create: (context) => SubmissionStatsCubit(
+        widget.kForm.uid,
+        getIt<GetDailySubmissionCounts>(),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Container(

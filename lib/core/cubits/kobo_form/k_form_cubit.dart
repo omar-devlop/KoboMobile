@@ -2,15 +2,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kobo/core/services/kobo_form_repository.dart';
-import 'package:kobo/core/services/kobo_service.dart';
 import 'package:kobo/core/services/pdf_service.dart';
 import 'package:kobo/core/utils/di/dependency_injection.dart';
+import 'package:kobo/application/usecases/forms/get_form_asset_legacy.dart';
 
 part 'k_form_state.dart';
 part 'k_form_cubit.freezed.dart';
 
 class KFormCubit extends Cubit<KFormState> {
-  KFormCubit(String uid) : super(const KFormState.initial()) {
+  final GetFormAssetLegacy _getFormAsset;
+  KFormCubit(String uid, this._getFormAsset) : super(const KFormState.initial()) {
     setUid(uid);
     fetchData();
   }
@@ -51,5 +52,5 @@ class KFormCubit extends Cubit<KFormState> {
   }
 
   Future<dynamic> _fetchAsset() async =>
-      await getIt<KoboService>().fetchFormAsset(uid: uid);
+      await _getFormAsset(uid: uid);
 }

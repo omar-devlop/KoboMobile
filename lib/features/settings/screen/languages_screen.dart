@@ -14,12 +14,14 @@ class LanguagesScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           Locale sLocale = context.supportedLocales[index];
 
-          return RadioListTile(
+          return RadioListTile<Locale>(
             value: sLocale,
             groupValue: context.locale,
             title: Text(context.tr(sLocale.languageCode)),
-            onChanged: (value) {
-              context.setLocale(sLocale);
+            onChanged: (Locale? value) {
+              if (value != null) {
+                context.setLocale(value);
+              }
             },
           );
         },

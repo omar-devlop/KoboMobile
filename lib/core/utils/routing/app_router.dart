@@ -26,6 +26,8 @@ import 'package:kobo/features/form_versions/screen/form_versions_screen.dart';
 
 import 'package:kobo/features/home/bloc/kobo_forms_cubit.dart';
 import 'package:kobo/features/home/screen/home_screen.dart';
+import 'package:kobo/core/utils/di/dependency_injection.dart';
+import 'package:kobo/domain/usecases/forms/get_forms.dart';
 import 'package:kobo/features/notifications/bloc/notifications_cubit.dart';
 import 'package:kobo/features/notifications/screen/notification_details_screen.dart';
 import 'package:kobo/features/notifications/screen/notification_screen.dart';
@@ -33,6 +35,7 @@ import 'package:kobo/features/reports/screen/report_screen.dart';
 
 import 'package:kobo/features/users/bloc/cubit/users_cubit.dart';
 import 'package:kobo/features/users/screen/users_screen.dart';
+import 'package:kobo/features/users/bloc/current_user_cubit.dart';
 
 import 'package:kobo/features/content/bloc/form_content_cubit.dart';
 import 'package:kobo/features/content/screen/content_screen.dart';
@@ -47,6 +50,10 @@ import 'package:kobo/features/table/screen/table_data_screen.dart';
 
 import 'package:kobo/features/settings/screen/settings_screen.dart';
 import 'package:kobo/features/settings/screen/languages_screen.dart';
+import 'package:kobo/domain/usecases/accounts/get_user.dart';
+import 'package:kobo/domain/usecases/notifications/get_in_app_messages.dart';
+import 'package:kobo/application/usecases/forms/get_form_asset_legacy.dart';
+import 'package:kobo/domain/usecases/submissions/get_form_data_page.dart';
 
 class AppRouter {
   Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -72,29 +79,33 @@ class AppRouter {
         final kForm = args as KoboForm;
 
         return BlocProvider(
-          create: (_) => FormContentCubit(kForm.uid),
+          create: (_) => FormContentCubit(kForm.uid, getIt<GetFormAssetLegacy>()),
           child: FormVersionsScreen(kForm: kForm),
         ).scaleFadeRoute();
 
       case Routes.deploymentLinksScreen:
         final kForm = args as KoboForm;
         return BlocProvider(
-          create: (context) => FormContentCubit(kForm.uid),
+          create: (context) => FormContentCubit(kForm.uid, getIt<GetFormAssetLegacy>()),
           child: DeploymentLinksScreen(kForm: kForm),
         ).scaleFadeRoute();
 
       case Routes.homeScreen:
         return MultiBlocProvider(
           providers: [
-            BlocProvider(create: (_) => KoboformsCubit()),
-            BlocProvider(create: (_) => NotificationsCubit()),
+            BlocProvider(create: (_) => KoboformsCubit(getIt<GetForms>())),
+            BlocProvider(create: (_) => NotificationsCubit(getIt<GetInAppMessages>())),
+            BlocProvider(create: (_) => CurrentUserCubit(getIt<GetUser>())..load()),
           ],
           child: const HomeScreen(),
         ).scaleFadeRoute();
 
       case Routes.deepSearchScreen:
         return BlocProvider(
-          create: (context) => DeepSearchCubit(),
+          create: (context) => DeepSearchCubit(
+            getIt<GetForms>(),
+            getIt<GetFormDataPage>(),
+          ),
           child: const DeepSearchScreen(),
         ).scaleFadeRoute();
 
@@ -127,7 +138,7 @@ class AppRouter {
           versionUid = payload[1];
         }
         return BlocProvider(
-          create: (_) => FormContentCubit(kForm.uid, versionUid: versionUid),
+          create: (_) => FormContentCubit(kForm.uid, getIt<GetFormAssetLegacy>(), versionUid: versionUid),
           child: ContentScreen(kForm: kForm),
         ).scaleFadeRoute();
 
@@ -138,13 +149,13 @@ class AppRouter {
       case Routes.dataScreen:
         final kForm = args as KoboForm;
         return BlocProvider(
-          create: (_) => DataCubit(kForm.uid),
+          create: (_) => DataCubit(kForm.uid, getFormAsset: getIt<GetFormAssetLegacy>()),
           child: DataScreen(kForm: kForm),
         ).scaleFadeRoute();
       case Routes.reportsScreen:
         final kForm = args as KoboForm;
         return BlocProvider(
-          create: (_) => DataCubit(kForm.uid, wholeData: true),
+          create: (_) => DataCubit(kForm.uid, wholeData: true, getFormAsset: getIt<GetFormAssetLegacy>()),
           child: ReportScreen(kForm: kForm),
         ).scaleFadeRoute();
 
@@ -162,14 +173,14 @@ class AppRouter {
       case Routes.tableDataScreen:
         final kForm = args as KoboForm;
         return BlocProvider(
-          create: (_) => DataTableCubit(kForm.uid),
+          create: (_) => DataTableCubit(kForm.uid, getIt<GetFormAssetLegacy>()),
           child: TableDataScreen(kForm: kForm),
         ).scaleFadeRoute();
         
       case Routes.exportScreen:
         final kForm = args as KoboForm;
         return BlocProvider(
-          create: (_) => KFormCubit(kForm.uid),
+          create: (_) => KFormCubit(kForm.uid, getIt<GetFormAssetLegacy>()),
           child: ExportScreen(kForm: kForm),
         ).scaleFadeRoute();
 
@@ -183,7 +194,7 @@ class AppRouter {
       case Routes.attachmentsScreen:
         final kForm = args as KoboForm;
         return BlocProvider(
-          create: (context) => AttachmentsCubit(kForm.uid),
+          create: (context) => AttachmentsCubit(kForm.uid, getIt<GetFormAssetLegacy>()),
           child: AttachmentsScreen(kForm: kForm),
         ).scaleFadeRoute();
 

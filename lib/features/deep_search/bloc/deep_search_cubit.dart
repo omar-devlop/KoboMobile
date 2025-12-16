@@ -1,16 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kobo/core/services/kobo_service.dart';
 import 'package:kobo/core/shared/models/kobo_form.dart';
 import 'package:kobo/core/shared/models/response_data.dart';
-import 'package:kobo/core/utils/di/dependency_injection.dart';
+import 'package:kobo/domain/usecases/forms/get_forms.dart';
+import 'package:kobo/domain/usecases/submissions/get_form_data_page.dart';
 
 part 'deep_search_state.dart';
 part 'deep_search_cubit.freezed.dart';
 
 class DeepSearchCubit extends Cubit<DeepSearchState> {
-  DeepSearchCubit() : super(const DeepSearchState.initial());
+  final GetForms _getForms;
+  final GetFormDataPage _getFormDataPage;
+  DeepSearchCubit(this._getForms, this._getFormDataPage) : super(const DeepSearchState.initial());
 
   void safeEmit(DeepSearchState state) => !isClosed ? emit(state) : null;
   List<KoboForm> _forms = [];
@@ -62,12 +64,11 @@ class DeepSearchCubit extends Cubit<DeepSearchState> {
 
   Future<ResponseData?> _searchInForm(KoboForm form, String searchQuery) async {
     try {
-      ResponseData responseData = await getIt<KoboService>().fetchFormData(
+      ResponseData responseData = await _getFormDataPage(
         uid: form.uid,
         additionalQuery: {
           'limit': null,
-          'query':
-              '{"meta/instanceName": {"\$regex": ".*$searchQuery.*","\$options": "i"}}',
+          'query': '{"meta/instanceName": {"\$regex": ".*$searchQuery.*","\$options": "i"}}',
         },
       );
       return responseData;
@@ -79,7 +80,7 @@ class DeepSearchCubit extends Cubit<DeepSearchState> {
   Future<bool> _fetchForms() async {
     safeEmit(DeepSearchState.loading('fetchingForms'.tr()));
     try {
-      _forms = await getIt<KoboService>().fetchForms();
+      _forms = await _getForms();
       _searchResults = {};
       for (KoboForm form in _forms) {
         _searchResults[form.uid] = [];
